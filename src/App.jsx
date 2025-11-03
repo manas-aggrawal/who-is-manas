@@ -348,9 +348,9 @@ const Portfolio = () => {
                 <span className="text-emerald-400 font-mono">const summary = </span> 
                 Experienced Software Engineer with over 3.5 years of expertise in backend engineering building scalable architectures, distributed systems, and high-performance backend services.
               </p>
-              <p>Currently pursuing MS in Computer Science student at Northeastern University (GPA: 3.75).</p>
+              <p>Pursuing MS in Computer Science at Northeastern University (GPA: 3.75).</p>
               <p>
-                Currently Research Apprentice for "Typed Conversational Interfaces" under Prof Chris Martens and also serving as Graduate Teaching Assistant for Software Engineering.
+                Research Apprentice for "Typed Conversational Interfaces" under Prof Chris Martens and also serving as Lead Graduate Teaching Assistant for Software Engineering.
               </p>
               <p>
                 Passionate about system design, clean code, and solving complex engineering challenges.
