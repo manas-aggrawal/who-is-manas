@@ -325,6 +325,9 @@ const Portfolio = () => {
             <a href="mailto:aggrawal.m@northeastern.edu" className="hover:text-emerald-400 transition-colors">
               <Mail className="w-8 h-8" />
             </a>
+            <a href="https://leetcode.com/u/aggrawal_manas/" className="hover:text-emerald-400 transition-colors">
+              <Code2 className="w-8 h-8" />
+            </a>
           </div>
           <div className="text-gray-400 space-y-2">
             <p className="flex items-center justify-center gap-2"><Phone className="w-4 h-4" /> (857) 265-1533</p>
