@@ -306,7 +306,7 @@ const Portfolio = () => {
         <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-8 mt-8 text-center max-w-md mx-auto">
           <p className="text-emerald-400 font-semibold mb-2">🎯 Availability</p>
           <p className="text-sm">
-            Open to <span className="text-cyan-400 font-semibold">Winter 2026 and Summer 2026 internships</span>
+            Open to <span className="text-cyan-400 font-semibold">Winter 2026 internships, Summer 2026 internships and Summer 2026 full-time roles</span>
           </p>
           <p className="text-xs text-gray-400 mt-2">
             Note: If pursuing internships, graduation will be December 2026
