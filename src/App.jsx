@@ -102,14 +102,14 @@ const Portfolio = () => {
       description: "A production-ready NestJS framework with authentication, database, and all the essentials pre-configured. Free to use, fork, and customize!",
       icon: <Terminal className="w-6 h-6" />,
       details: "🔐 JWT Authentication - Access & refresh tokens ready to go" +
-", 🗄️ Prisma ORM - Type-safe database with migrations"
-+", 🐳 Docker - Containerized development environment"
-+", 📝 Swagger - Auto-generated API documentation"
-+", ✅ Validation - Request validation with Joi"
-+", 🎯 CRUD Generator - Scaffold resources instantly"
-+", 🔑 Password Recovery - Forgot password flow included"
-+", 🎨 Code Quality - ESLint & Prettier configured"
-+", 🏗️ Clean Architecture - Modular, scalable structure",
+      ", 🗄️ Prisma ORM - Type-safe database with migrations"
+      +", 🐳 Docker - Containerized development environment"
+      +", 📝 Swagger - Auto-generated API documentation"
+      +", ✅ Validation - Request validation with Joi"
+      +", 🎯 CRUD Generator - Scaffold resources instantly"
+      +", 🔑 Password Recovery - Forgot password flow included"
+      +", 🎨 Code Quality - ESLint & Prettier configured"
+      +", 🏗️ Clean Architecture - Modular, scalable structure",
       link: "https://github.com/manas-aggrawal/nestjs-boilerplate"
     },
     {
@@ -118,12 +118,11 @@ const Portfolio = () => {
       description: "A simple functional programming language compiler implemented in Racket as part of a Programming Languages course (PL CS5400)",
       icon: <Terminal className="w-6 h-6" />,
       details: "TOY is a minimalist functional language that supports:"+
-
-" First-class functions with lexical scoping, "+
-"Local variable bindings, "+
-"Conditional expressions, "+
-"Primitive arithmetic and comparison operations, "+
-"Function application and closures, ",
+      " First-class functions with lexical scoping, "+
+      "Local variable bindings, "+
+      "Conditional expressions, "+
+      "Primitive arithmetic and comparison operations, "+
+      "Function application and closures",
       link: "https://github.com/manas-aggrawal/Toy-Compiler"
     },
     {
