@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, Linkedin, Github, FileCode, Code2, Database, Cloud, Settings, Terminal, ExternalLink, X, Book, Package, TrendingUp } from 'lucide-react';
+import { Download, Mail, Phone, Linkedin, Github, FileCode, Code2, Database, Cloud, Settings, Terminal, ExternalLink, X, Book, Package, TrendingUp } from 'lucide-react';
 
 const Portfolio = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -302,7 +302,16 @@ const Portfolio = () => {
           </div>
         </div>
       )}
-
+        {/* Availability Banner */}
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-8 mt-8 text-center max-w-md mx-auto">
+          <p className="text-emerald-400 font-semibold mb-2">🎯 Availability</p>
+          <p className="text-sm">
+            Open to <span className="text-cyan-400 font-semibold">Winter 2026 and Summer 2026 internships</span>
+          </p>
+          <p className="text-xs text-gray-400 mt-2">
+            Note: If pursuing internships, graduation will be December 2026
+          </p>
+        </div>
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative px-8">
         <div className="text-center z-10">
@@ -329,6 +338,14 @@ const Portfolio = () => {
               <Code2 className="w-8 h-8" />
             </a>
           </div>
+          <a 
+            href="../public/resume.pdf" 
+            download="Manas_Aggrawal_Resume.pdf"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500/20 text-emerald-400 rounded-lg font-mono hover:bg-emerald-500/30 transition-all border border-emerald-500/50 hover:scale-105 transform mb-8"
+          >
+            <Download className="w-5 h-5" />
+            Download Resume
+          </a>
           <div className="text-gray-400 space-y-2">
             <p className="flex items-center justify-center gap-2"><Phone className="w-4 h-4" /> (857) 265-1533</p>
             <p>Boston, MA</p>
@@ -347,12 +364,8 @@ const Portfolio = () => {
               <p className="text-lg">
                 <span className="text-emerald-400 font-mono">const summary = </span> 
                 Experienced Software Engineer with over 3.5 years of expertise in backend engineering building scalable architectures, distributed systems, and high-performance backend services.
-              </p>
-              <p>Pursuing MS in Computer Science at Northeastern University (GPA: 3.75).</p>
-              <p>
-                Research Apprentice for "Typed Conversational Interfaces" under Prof Chris Martens and also serving as Lead Graduate Teaching Assistant for Software Engineering.
-              </p>
-              <p>
+                Pursuing MS in Computer Science at Northeastern University (GPA: 3.75).
+                Research Apprentice for 'Typed Conversational Interfaces' under Prof Chris Martens and also serving as Lead Graduate Teaching Assistant for Software Engineering.
                 Passionate about system design, clean code, and solving complex engineering challenges.
               </p>
             </div>
@@ -460,8 +473,8 @@ const Portfolio = () => {
       </section>
 
       {/* Footer/Contact */}
-      <footer className="py-12 px-8 xl:pr-80 border-t border-gray-800 relative">
-        <div className="max-w-4xl mx-auto w-full text-center">
+      <footer className="py-12 px-8 border-t border-gray-800 relative text-center">
+        <div className="max-w-4xl mx-auto w-full">
           <p className="text-gray-400 mb-4 font-mono">Ready to build something amazing together?</p>
           <a href="mailto:aggrawal.m@northeastern.edu" className="inline-block px-8 py-3 border-2 border-emerald-500 text-emerald-400 rounded-lg font-mono hover:bg-emerald-500/10 transition-all">
             Get In Touch
