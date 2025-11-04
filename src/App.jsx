@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Download, Mail, Phone, Linkedin, Github, FileCode, Code2, Database, Cloud, Settings, Terminal, ExternalLink, X, Book, Package, TrendingUp, User, Briefcase, FolderGit2, Award, Home } from 'lucide-react';
+import { Download, Mail, Phone, Linkedin, Github, FileCode, Code2, Database, Cloud, Settings, Terminal, ExternalLink, X, Book, Package, TrendingUp, User, Briefcase, FolderGit2, Award, Home, SunMediumIcon, BookAIcon, BookImageIcon } from 'lucide-react';
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('about');
@@ -40,6 +40,7 @@ const Portfolio = () => {
     { id: 'experience', label: 'Experience', icon: <Briefcase className="w-4 h-4" /> },
     { id: 'projects', label: 'Projects', icon: <FolderGit2 className="w-4 h-4" /> },
     { id: 'skills', label: 'Skills', icon: <Award className="w-4 h-4" /> },
+    { id: 'contact', label: 'Contact', icon: <Mail className="w-4 h-4" /> },
   ];
 
   const experience = [
@@ -281,6 +282,56 @@ const Portfolio = () => {
           </div>
         );
 
+        case 'contact':
+  return (
+    <div className="space-y-6">
+      <h2 className="text-4xl font-bold text-emerald-400 font-mono">Get In Touch</h2>
+      
+      <div className="bg-gray-800 border border-emerald-500/30 rounded-lg p-8 text-center">
+        <p className="text-xl text-gray-300 mb-8">
+          Let's build something amazing together! 🚀
+        </p>
+        
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
+          <a 
+            href="mailto:aggrawal.m@northeastern.edu"
+            className="flex items-center justify-center gap-3 bg-gray-900/50 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500 hover:scale-105 transition-all group"
+          >
+            <Mail className="w-8 h-8 text-cyan-400 group-hover:text-emerald-400 transition-colors" />
+            <div className="text-left">
+              <p className="text-sm text-gray-400">Email</p>
+              <p className="text-lg text-gray-200 font-mono">aggrawal.m@northeastern.edu</p>
+            </div>
+          </a>
+          
+          <a 
+            href="tel:+18572651533"
+            className="flex items-center justify-center gap-3 bg-gray-900/50 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500 hover:scale-105 transition-all group"
+          >
+            <Phone className="w-8 h-8 text-cyan-400 group-hover:text-emerald-400 transition-colors" />
+            <div className="text-left">
+              <p className="text-sm text-gray-400">Phone</p>
+              <p className="text-lg text-gray-200 font-mono">(857) 265-1533</p>
+            </div>
+          </a>
+        </div>
+
+        <div className="flex gap-6 justify-center mb-8">
+          <a 
+            href="https://www.linkedin.com/in/manasaggrawal07/" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center gap-2 bg-gray-900/50 border border-emerald-500/30 rounded-lg p-6 hover:border-emerald-500 hover:scale-105 transition-all w-32"
+          >
+            <Linkedin className="w-10 h-10 text-emerald-400" />
+            <span className="text-sm text-gray-300">LinkedIn</span>
+          </a>
+        </div>
+
+        <p className="text-gray-400 mb-4">📍 Based in Boston, MA</p>
+      </div>
+    </div>
+  );
       default:
         return null;
     }
@@ -388,6 +439,9 @@ const Portfolio = () => {
           </a>
           <a href="https://leetcode.com/u/aggrawal_manas/" className="hover:text-emerald-400 transition-colors">
             <Code2 className="w-6 h-6" />
+          </a>
+          <a href="https://medium.com/@manasagg7199" className="hover:text-emerald-400 transition-colors">
+            <BookAIcon className="w-6 h-6" />
           </a>
         </div>
 
