@@ -78,9 +78,9 @@ const Portfolio = () => {
     {
       name: "Performance Monitoring Tool",
       tech: "Node.js, TypeScript, AWS X-Ray, OpenTelemetry, npm",
-      description: "Published npm package with 200+ downloads enabling distributed tracing, reducing debugging time by ~60%",
+      description: "Published npm package with distributed tracing and central error tracking reducing debugging time by ~60%",
       icon: <Code2 className="w-6 h-6" />,
-      details: "A comprehensive observability package enabling distributed tracing to Node.js applications. Built on OpenTelemetry standards, it automatically instruments HTTP requests, database queries, and async operations with zero code changes required. Integrates seamlessly with AWS X-Ray, Jaeger, and other tracing backends.",
+      details: "A comprehensive observability package enabling distributed tracing and central error tracking to Node.js applications. Built on OpenTelemetry standards, it automatically instruments HTTP requests, database queries, and async operations with zero code changes required. Integrates seamlessly with AWS X-Ray, Jaeger, and other tracing backends.",
       link: "https://www.npmjs.com/package/nodejs-observability"
     },
     {
@@ -94,9 +94,9 @@ const Portfolio = () => {
     {
       name: "Advanced Image Processor",
       tech: "Java, SwingUI, Design Patterns",
-      description: "Extensible application with SOLID principles supporting 10+ operations",
+      description: "Extensible image processing application with SOLID principles supporting 10+ operations",
       icon: <Terminal className="w-6 h-6" />,
-      details: "Sophisticated image processing application showcasing MVC, Strategy, Factory, and Command patterns. Supports 10+ operations including filters, transformations, and advanced features like seam carving.",
+      details: "Sophisticated image processing application showcasing MVC, Strategy, Factory, and Command patterns. Implemented core image transformations including blurring, sharpening, flipping (horizontal and vertical), RGB splitting, grayscale transformations (value, luma, intensity), histogram generation, color correction, and level adjustment.",
       link: "https://github.com/manas-aggrawal/Advanced-Image-Manipulation-and-Enhancement-Tool"
     },
     {
@@ -127,15 +127,15 @@ const Portfolio = () => {
 
   const featuredItems = [
     {
-      title: "Observability Tool",
-      description: "npm package for distributed tracing",
+      title: "Performance Monitoring Tool",
+      description: "npm package for distributed tracing and error tracking",
       icon: <Package className="w-5 h-5" />,
       link: "https://www.npmjs.com/package/nodejs-observability",
       stats: "200+ downloads"
     },
     {
-      title: "Scalable Systems Case Study",
-      description: "System design deep-dive",
+      title: "Scalable Systems",
+      description: "System design case study based on a real project I worked on",
       icon: <Book className="w-5 h-5" />,
       link: "https://medium.com/@manasagg7199/five-stages-to-scalable-my-system-design-journey-a556b2b43446",
       stats: "Medium Article"
@@ -155,7 +155,7 @@ const Portfolio = () => {
                 Experienced Software Engineer with over 3.5 years of expertise in backend engineering, building scalable architectures, distributed systems, and high-performance services.
               </p>
               <p className="text-gray-300 leading-relaxed mb-4">
-                Currently pursuing MS in Computer Science at Northeastern University (GPA: 3.75), expected graduation <span className="text-cyan-400 font-semibold">April 2026</span>.
+                Currently pursuing MS in Computer Science at Northeastern University (GPA: 3.75).
               </p>
               <p className="text-gray-300 leading-relaxed">
                 Serving as Research Apprentice for "Typed Conversational Interfaces" under Prof Chris Martens and Lead Graduate Teaching Assistant for Software Engineering.
