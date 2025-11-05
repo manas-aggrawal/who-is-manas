@@ -6,7 +6,7 @@ const Portfolio = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [typedText, setTypedText] = useState('');
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const fullText = "Backend Engineer | System Architect";
+  const fullText = "Backend Engineer | System Architect | Problem Solver";
   
   useEffect(() => {
     let index = 0;
@@ -146,23 +146,23 @@ const Portfolio = () => {
     switch(activeSection) {
       case 'about':
         return (
-          <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-emerald-400 font-mono">About Me</h2>
+          <div className="space-y-6 max-w-full overflow-x-hidden">
+            <h2 className="text-2xl lg:text-4xl font-bold text-emerald-400 font-mono">About Me</h2>
             
-            <div className="bg-gray-800 border border-emerald-500/30 rounded-lg p-6">
-              <p className="text-base lg:text-lg text-gray-300 leading-relaxed mb-4">
+            <div className="bg-gray-800 border border-emerald-500/30 rounded-lg p-6 max-w-full">
+              <p className="text-base lg:text-lg text-gray-300 leading-relaxed mb-4 break-words">
                 <span className="text-emerald-400 font-mono">const profile = </span>
                 Experienced Software Engineer with over 3.5 years of expertise in backend engineering, building scalable architectures, distributed systems, and high-performance services.
               </p>
-              <p className="text-gray-300 leading-relaxed mb-4">
+              <p className="text-gray-300 leading-relaxed mb-4 break-words">
                 Currently pursuing MS in Computer Science at Northeastern University (GPA: 3.75).
               </p>
-              <p className="text-gray-300 leading-relaxed">
+              <p className="text-gray-300 leading-relaxed break-words">
                 Serving as Research Apprentice for "Typed Conversational Interfaces" under Prof Chris Martens and Lead Graduate Teaching Assistant for Software Engineering.
               </p>
             </div>
 
-            <div className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6">
+            <div className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6 max-w-full">
               <h3 className="text-lg lg:text-xl font-bold text-cyan-400 mb-4">Featured Work</h3>
               <div className="space-y-3">
                 {featuredItems.map((item, idx) => (
@@ -193,10 +193,10 @@ const Portfolio = () => {
 
       case 'experience':
         return (
-          <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-emerald-400 font-mono">Work Experience</h2>
+          <div className="space-y-6 max-w-full overflow-x-hidden">
+            <h2 className="text-2xl lg:text-4xl font-bold text-emerald-400 font-mono">Work Experience</h2>
             {experience.map((job, idx) => (
-              <div key={idx} className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500 transition-all">
+              <div key={idx} className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500 transition-all max-w-full">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4">
                   <div>
                     <h3 className="text-xl lg:text-2xl font-bold text-cyan-400">{job.title}</h3>
@@ -228,8 +228,8 @@ const Portfolio = () => {
 
       case 'projects':
         return (
-          <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-emerald-400 font-mono">Projects</h2>
+          <div className="space-y-6 max-w-full overflow-x-hidden">
+            <h2 className="text-2xl lg:text-4xl font-bold text-emerald-400 font-mono">Projects</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {projects.map((project, idx) => (
                 <div
@@ -257,8 +257,8 @@ const Portfolio = () => {
 
       case 'skills':
         return (
-          <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-emerald-400 font-mono">Technical Skills</h2>
+          <div className="space-y-6 max-w-full overflow-x-hidden">
+            <h2 className="text-2xl lg:text-4xl font-bold text-emerald-400 font-mono">Technical Skills</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {Object.entries(skills).map(([category, items], idx) => (
                 <div key={idx} className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6">
@@ -284,10 +284,10 @@ const Portfolio = () => {
 
         case 'contact':
   return (
-    <div className="space-y-6">
-      <h2 className="text-3xl lg:text-4xl font-bold text-emerald-400 font-mono">Get In Touch</h2>
+    <div className="space-y-6 max-w-full overflow-x-hidden">
+      <h2 className="text-2xl lg:text-4xl font-bold text-emerald-400 font-mono">Get In Touch</h2>
       
-      <div className="bg-gray-800 border border-emerald-500/30 rounded-lg p-6 lg:p-8 text-center">
+      <div className="bg-gray-800 border border-emerald-500/30 rounded-lg p-6 lg:p-8 text-center max-w-full">
         <p className="text-lg lg:text-xl text-gray-300 mb-6 lg:mb-8">
           Let's build something amazing together! 🚀
         </p>
@@ -338,12 +338,27 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="bg-gray-900 text-gray-100 min-h-screen flex flex-col lg:flex-row">
+    <div className="bg-gray-900 text-gray-100 min-h-screen flex flex-col lg:flex-row overflow-x-hidden w-full max-w-full">
       <style>{`
         body, html {
           margin: 0;
           padding: 0;
           overflow-x: hidden;
+          width: 100%;
+          max-width: 100%;
+        }
+        
+        * {
+          box-sizing: border-box;
+        }
+        
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
         }
         
         @media (max-width: 1024px) {
@@ -398,95 +413,95 @@ const Portfolio = () => {
       {/* Cute Mascot - Owl */}
       <div className="fixed bottom-4 right-4 lg:bottom-6 lg:right-6 z-50 group cursor-pointer">
         <div className="relative">
-          <div className="text-4xl lg:text-5xl animate-bounce hover:scale-110 transition-transform">🦉</div>
-          <div className="absolute -top-16 right-0 bg-gray-800 border border-emerald-500/50 rounded-lg px-4 py-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-            <p className="text-sm text-emerald-400 font-mono">Hoot! I'm Manas's coding buddy 🦉</p>
+          <div className="text-3xl lg:text-5xl animate-bounce hover:scale-110 transition-transform">🦉</div>
+          <div className="absolute -top-12 lg:-top-16 right-0 bg-gray-800 border border-emerald-500/50 rounded-lg px-3 lg:px-4 py-1 lg:py-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+            <p className="text-xs lg:text-sm text-emerald-400 font-mono">Hoot! I'm Manas's coding buddy 🦉</p>
           </div>
         </div>
       </div>
 
       {/* Left Sidebar - Profile */}
-      <aside className="w-full lg:w-80 bg-gray-800/50 border-b lg:border-r lg:border-b-0 border-gray-700 p-4 lg:p-8 flex flex-col items-center lg:sticky lg:top-0 lg:h-screen overflow-y-auto">
-        <div className="text-center mb-4 lg:mb-6 w-full">
+      <aside className="w-full lg:w-80 bg-gray-800/50 border-b lg:border-r lg:border-b-0 border-gray-700 p-3 lg:p-8 flex flex-col items-center lg:sticky lg:top-0 lg:h-screen overflow-y-auto max-w-full">
+        <div className="text-center mb-4 lg:mb-6 w-full max-w-full">
           {/* Profile Picture */}
-          <img src="/profile.png" alt="Manas Aggrawal" className="w-24 h-24 lg:w-40 lg:h-40 rounded-full object-cover mb-2 lg:mb-4 mx-auto border-2 lg:border-4 border-emerald-400" />
+          <img src="/profile.png" alt="Manas Aggrawal" className="w-20 h-20 lg:w-40 lg:h-40 rounded-full object-cover mb-2 lg:mb-4 mx-auto border-2 lg:border-4 border-emerald-400" />
           
-          <h1 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-1 lg:mb-2">
+          <h1 className="text-xl lg:text-3xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-1 lg:mb-2">
             MANAS AGGRAWAL
           </h1>
           
-          <p className="text-xs lg:text-sm font-mono text-gray-400 h-6 lg:h-8 mb-2 lg:mb-4">
+          <p className="text-[10px] lg:text-sm font-mono text-gray-400 h-5 lg:h-8 mb-2 lg:mb-4">
             {typedText}<span className="animate-pulse">|</span>
           </p>
 
           {/* Availability Banner - Prominent */}
-          <div className="bg-emerald-500/20 border-2 border-emerald-500/50 rounded-lg p-3 lg:p-4 mb-4 lg:mb-6 w-full animate-pulse-slow">
-            <p className="text-emerald-400 font-semibold mb-1 lg:mb-2 flex items-center justify-center gap-2 text-sm lg:text-base">
-              <TrendingUp className="w-3 h-3 lg:w-4 lg:h-4" />
+          <div className="bg-emerald-500/20 border-2 border-emerald-500/50 rounded-lg p-2 lg:p-4 mb-4 lg:mb-6 w-full max-w-full animate-pulse-slow">
+            <p className="text-emerald-400 font-semibold mb-1 lg:mb-2 flex items-center justify-center gap-1 lg:gap-2 text-xs lg:text-base">
+              <TrendingUp className="w-3 h-3 lg:w-4 lg:h-4 flex-shrink-0" />
               🎯 Availability
             </p>
-            <p className="text-xs text-gray-300 mb-1 lg:mb-2 leading-relaxed">
+            <p className="text-[9px] leading-tight lg:text-xs text-gray-300 mb-1 lg:mb-2 lg:leading-relaxed break-words">
               Open to <span className="text-cyan-400 font-semibold">Winter 2026 internships, Summer 2026 internships and Summer 2026 full-time roles</span>
             </p>
-            <p className="text-xs text-gray-400">
+            <p className="text-[9px] leading-tight lg:text-xs text-gray-400 break-words">
               Note: If pursuing internships, graduation will be December 2026
             </p>
           </div>
         </div>
 
-        <div className="flex gap-3 lg:gap-4 mb-4 lg:mb-6">
+        <div className="flex gap-2 lg:gap-4 mb-4 lg:mb-6">
           <a href="https://www.linkedin.com/in/manasaggrawal07/" className="hover:text-emerald-400 transition-colors">
-            <Linkedin className="w-5 h-5 lg:w-6 lg:h-6" />
+            <Linkedin className="w-4 h-4 lg:w-6 lg:h-6" />
           </a>
           <a href="https://github.com/manas-aggrawal" className="hover:text-emerald-400 transition-colors">
-            <Github className="w-5 h-5 lg:w-6 lg:h-6" />
+            <Github className="w-4 h-4 lg:w-6 lg:h-6" />
           </a>
           <a href="mailto:aggrawal.m@northeastern.edu" className="hover:text-emerald-400 transition-colors">
-            <Mail className="w-5 h-5 lg:w-6 lg:h-6" />
+            <Mail className="w-4 h-4 lg:w-6 lg:h-6" />
           </a>
           <a href="https://leetcode.com/u/aggrawal_manas/" className="hover:text-emerald-400 transition-colors">
-            <Code2 className="w-5 h-5 lg:w-6 lg:h-6" />
+            <Code2 className="w-4 h-4 lg:w-6 lg:h-6" />
           </a>
           <a href="https://medium.com/@manasagg7199" className="hover:text-emerald-400 transition-colors">
-            <BookAIcon className="w-5 h-5 lg:w-6 lg:h-6" />
+            <BookAIcon className="w-4 h-4 lg:w-6 lg:h-6" />
           </a>
         </div>
 
         <a
           href="/resume.pdf"
           download="Manas_Aggrawal_Resume.pdf"
-          className="w-full flex items-center justify-center gap-2 px-3 lg:px-4 py-2 lg:py-3 bg-emerald-500/20 text-emerald-400 rounded-lg font-mono hover:bg-emerald-500/30 transition-all border border-emerald-500/50 mb-4 lg:mb-6 text-sm lg:text-base"
+          className="w-full max-w-full flex items-center justify-center gap-2 px-3 lg:px-4 py-2 lg:py-3 bg-emerald-500/20 text-emerald-400 rounded-lg font-mono hover:bg-emerald-500/30 transition-all border border-emerald-500/50 mb-4 lg:mb-6 text-xs lg:text-base"
         >
           <Download className="w-4 h-4" />
           Resume
         </a>
 
-        <div className="text-xs lg:text-sm text-gray-400 space-y-1 lg:space-y-2 text-center mb-4 lg:mb-6">
+        <div className="text-[10px] lg:text-sm text-gray-400 space-y-1 lg:space-y-2 text-center mb-4 lg:mb-6">
           <p className="flex items-center justify-center gap-2">
-            <Phone className="w-4 h-4" /> (857) 265-1533
+            <Phone className="w-3 h-3 lg:w-4 lg:h-4" /> (857) 265-1533
           </p>
           <p className="flex items-center justify-center gap-2">
-            <Mail className="w-4 h-4" /> Boston, MA
+            <Mail className="w-3 h-3 lg:w-4 lg:h-4" /> Boston, MA
           </p>
         </div>
 
         <div className="w-full border-t border-gray-700 pt-4 lg:pt-6">
-          <p className="text-xs text-gray-500 text-center font-mono">
+          <p className="text-[10px] lg:text-xs text-gray-500 text-center font-mono">
             © 2025 Manas Aggrawal
           </p>
         </div>
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-h-screen lg:h-screen overflow-hidden">
+      <div className="flex-1 flex flex-col min-h-screen lg:h-screen overflow-hidden w-full max-w-full">
         {/* Top Navigation */}
-        <nav className="bg-gray-800/50 border-b border-gray-700 px-4 lg:px-8 py-3 lg:py-4 sticky top-0 z-40 backdrop-blur overflow-x-auto">
-          <div className="flex gap-3 lg:gap-6 min-w-max lg:min-w-0">
+        <nav className="bg-gray-800/50 border-b border-gray-700 px-2 lg:px-8 py-2 lg:py-4 sticky top-0 z-40 backdrop-blur overflow-x-auto scrollbar-hide w-full">
+          <div className="flex gap-2 lg:gap-6 w-max lg:w-auto">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleSectionChange(item.id)}
-                className={`flex items-center gap-2 px-3 lg:px-4 py-2 rounded-lg font-mono text-xs lg:text-sm transition-all whitespace-nowrap ${
+                className={`flex items-center gap-1 lg:gap-2 px-2 lg:px-4 py-2 rounded-lg font-mono text-[10px] lg:text-sm transition-all whitespace-nowrap flex-shrink-0 ${
                   activeSection === item.id
                     ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/50'
                     : 'text-gray-400 hover:text-emerald-400 hover:bg-gray-700/50'
@@ -500,8 +515,8 @@ const Portfolio = () => {
         </nav>
 
         {/* Content Area */}
-        <main className="flex-1 overflow-y-auto p-4 lg:p-8 relative">
-          <div className={`max-w-5xl mx-auto ${isTransitioning ? 'content-exit' : 'content-enter'}`}>
+        <main className="flex-1 overflow-y-auto p-3 lg:p-8 relative w-full max-w-full">
+          <div className={`max-w-5xl mx-auto w-full ${isTransitioning ? 'content-exit' : 'content-enter'}`}>
             {renderContent()}
           </div>
         </main>
