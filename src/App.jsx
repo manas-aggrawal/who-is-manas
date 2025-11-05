@@ -147,10 +147,10 @@ const Portfolio = () => {
       case 'about':
         return (
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold text-emerald-400 font-mono">About Me</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-emerald-400 font-mono">About Me</h2>
             
             <div className="bg-gray-800 border border-emerald-500/30 rounded-lg p-6">
-              <p className="text-lg text-gray-300 leading-relaxed mb-4">
+              <p className="text-base lg:text-lg text-gray-300 leading-relaxed mb-4">
                 <span className="text-emerald-400 font-mono">const profile = </span>
                 Experienced Software Engineer with over 3.5 years of expertise in backend engineering, building scalable architectures, distributed systems, and high-performance services.
               </p>
@@ -163,7 +163,7 @@ const Portfolio = () => {
             </div>
 
             <div className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6">
-              <h3 className="text-xl font-bold text-cyan-400 mb-4">Featured Work</h3>
+              <h3 className="text-lg lg:text-xl font-bold text-cyan-400 mb-4">Featured Work</h3>
               <div className="space-y-3">
                 {featuredItems.map((item, idx) => (
                   <a
@@ -178,8 +178,8 @@ const Portfolio = () => {
                         {item.icon}
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-bold text-gray-200 mb-1">{item.title}</h4>
-                        <p className="text-sm text-gray-400 mb-1">{item.description}</p>
+                        <h4 className="text-sm lg:text-base font-bold text-gray-200 mb-1">{item.title}</h4>
+                        <p className="text-xs lg:text-sm text-gray-400 mb-1">{item.description}</p>
                         <span className="text-xs text-cyan-400 font-mono">{item.stats}</span>
                       </div>
                       <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-emerald-400 transition-colors" />
@@ -194,15 +194,15 @@ const Portfolio = () => {
       case 'experience':
         return (
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold text-emerald-400 font-mono">Work Experience</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-emerald-400 font-mono">Work Experience</h2>
             {experience.map((job, idx) => (
               <div key={idx} className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500 transition-all">
-                <div className="flex justify-between items-start mb-4">
+                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4">
                   <div>
-                    <h3 className="text-2xl font-bold text-cyan-400">{job.title}</h3>
-                    <p className="text-xl text-gray-300">{job.company}</p>
+                    <h3 className="text-xl lg:text-2xl font-bold text-cyan-400">{job.title}</h3>
+                    <p className="text-lg lg:text-xl text-gray-300">{job.company}</p>
                   </div>
-                  <div className="text-right text-gray-400">
+                  <div className="text-left lg:text-right text-gray-400 mt-2 lg:mt-0">
                     <p className="font-mono text-sm">{job.period}</p>
                     <p className="text-sm">{job.location}</p>
                   </div>
@@ -229,8 +229,8 @@ const Portfolio = () => {
       case 'projects':
         return (
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold text-emerald-400 font-mono">Projects</h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <h2 className="text-3xl lg:text-4xl font-bold text-emerald-400 font-mono">Projects</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {projects.map((project, idx) => (
                 <div
                   key={idx}
@@ -258,8 +258,8 @@ const Portfolio = () => {
       case 'skills':
         return (
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold text-emerald-400 font-mono">Technical Skills</h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <h2 className="text-3xl lg:text-4xl font-bold text-emerald-400 font-mono">Technical Skills</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {Object.entries(skills).map(([category, items], idx) => (
                 <div key={idx} className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6">
                   <h3 className="text-xl font-bold mb-4 text-cyan-400 flex items-center gap-2">
@@ -285,22 +285,22 @@ const Portfolio = () => {
         case 'contact':
   return (
     <div className="space-y-6">
-      <h2 className="text-4xl font-bold text-emerald-400 font-mono">Get In Touch</h2>
+      <h2 className="text-3xl lg:text-4xl font-bold text-emerald-400 font-mono">Get In Touch</h2>
       
-      <div className="bg-gray-800 border border-emerald-500/30 rounded-lg p-8 text-center">
-        <p className="text-xl text-gray-300 mb-8">
+      <div className="bg-gray-800 border border-emerald-500/30 rounded-lg p-6 lg:p-8 text-center">
+        <p className="text-lg lg:text-xl text-gray-300 mb-6 lg:mb-8">
           Let's build something amazing together! 🚀
         </p>
         
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
           <a 
             href="mailto:aggrawal.m@northeastern.edu"
             className="flex items-center justify-center gap-3 bg-gray-900/50 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500 hover:scale-105 transition-all group"
           >
-            <Mail className="w-8 h-8 text-cyan-400 group-hover:text-emerald-400 transition-colors" />
+            <Mail className="w-6 h-6 lg:w-8 lg:h-8 text-cyan-400 group-hover:text-emerald-400 transition-colors" />
             <div className="text-left">
-              <p className="text-sm text-gray-400">Email</p>
-              <p className="text-lg text-gray-200 font-mono">aggrawal.m@northeastern.edu</p>
+              <p className="text-xs lg:text-sm text-gray-400">Email</p>
+              <p className="text-sm lg:text-lg text-gray-200 font-mono break-all">aggrawal.m@northeastern.edu</p>
             </div>
           </a>
           
@@ -308,23 +308,23 @@ const Portfolio = () => {
             href="tel:+18572651533"
             className="flex items-center justify-center gap-3 bg-gray-900/50 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500 hover:scale-105 transition-all group"
           >
-            <Phone className="w-8 h-8 text-cyan-400 group-hover:text-emerald-400 transition-colors" />
+            <Phone className="w-6 h-6 lg:w-8 lg:h-8 text-cyan-400 group-hover:text-emerald-400 transition-colors" />
             <div className="text-left">
-              <p className="text-sm text-gray-400">Phone</p>
-              <p className="text-lg text-gray-200 font-mono">(857) 265-1533</p>
+              <p className="text-xs lg:text-sm text-gray-400">Phone</p>
+              <p className="text-sm lg:text-lg text-gray-200 font-mono">(857) 265-1533</p>
             </div>
           </a>
         </div>
 
-        <div className="flex gap-6 justify-center mb-8">
+        <div className="flex gap-4 lg:gap-6 justify-center mb-6 lg:mb-8 flex-wrap">
           <a 
             href="https://www.linkedin.com/in/manasaggrawal07/" 
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center gap-2 bg-gray-900/50 border border-emerald-500/30 rounded-lg p-6 hover:border-emerald-500 hover:scale-105 transition-all w-32"
+            className="flex flex-col items-center gap-2 bg-gray-900/50 border border-emerald-500/30 rounded-lg p-4 lg:p-6 hover:border-emerald-500 hover:scale-105 transition-all w-28 lg:w-32"
           >
-            <Linkedin className="w-10 h-10 text-emerald-400" />
-            <span className="text-sm text-gray-300">LinkedIn</span>
+            <Linkedin className="w-8 h-8 lg:w-10 lg:h-10 text-emerald-400" />
+            <span className="text-xs lg:text-sm text-gray-300">LinkedIn</span>
           </a>
         </div>
 
@@ -338,13 +338,20 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="bg-gray-900 text-gray-100 min-h-screen flex">
+    <div className="bg-gray-900 text-gray-100 min-h-screen flex flex-col lg:flex-row">
       <style>{`
         body, html {
           margin: 0;
           padding: 0;
-          overflow: hidden;
+          overflow-x: hidden;
         }
+        
+        @media (max-width: 1024px) {
+          body, html {
+            overflow: auto;
+          }
+        }
+        
         @keyframes pulse-slow {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.8; }
@@ -389,9 +396,9 @@ const Portfolio = () => {
       `}</style>
 
       {/* Cute Mascot - Owl */}
-      <div className="fixed bottom-6 right-6 z-50 group cursor-pointer">
+      <div className="fixed bottom-4 right-4 lg:bottom-6 lg:right-6 z-50 group cursor-pointer">
         <div className="relative">
-          <div className="text-5xl animate-bounce hover:scale-110 transition-transform">🦉</div>
+          <div className="text-4xl lg:text-5xl animate-bounce hover:scale-110 transition-transform">🦉</div>
           <div className="absolute -top-16 right-0 bg-gray-800 border border-emerald-500/50 rounded-lg px-4 py-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
             <p className="text-sm text-emerald-400 font-mono">Hoot! I'm Manas's coding buddy 🦉</p>
           </div>
@@ -399,26 +406,26 @@ const Portfolio = () => {
       </div>
 
       {/* Left Sidebar - Profile */}
-      <aside className="w-80 bg-gray-800/50 border-r border-gray-700 p-8 flex flex-col items-center sticky top-0 h-screen overflow-y-auto">
-        <div className="text-center mb-6">
-          {/* Profile Picture Placeholder */}
-          <img src="/profile.png" alt="Manas Aggrawal" className="w-40 h-40 rounded-full object-cover mb-4 mx-auto border-4 border-emerald-400" />
+      <aside className="w-full lg:w-80 bg-gray-800/50 border-b lg:border-r lg:border-b-0 border-gray-700 p-4 lg:p-8 flex flex-col items-center lg:sticky lg:top-0 lg:h-screen overflow-y-auto">
+        <div className="text-center mb-4 lg:mb-6 w-full">
+          {/* Profile Picture */}
+          <img src="/profile.png" alt="Manas Aggrawal" className="w-24 h-24 lg:w-40 lg:h-40 rounded-full object-cover mb-2 lg:mb-4 mx-auto border-2 lg:border-4 border-emerald-400" />
           
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+          <h1 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-1 lg:mb-2">
             MANAS AGGRAWAL
           </h1>
           
-          <p className="text-sm font-mono text-gray-400 h-8 mb-4">
+          <p className="text-xs lg:text-sm font-mono text-gray-400 h-6 lg:h-8 mb-2 lg:mb-4">
             {typedText}<span className="animate-pulse">|</span>
           </p>
 
           {/* Availability Banner - Prominent */}
-          <div className="bg-emerald-500/20 border-2 border-emerald-500/50 rounded-lg p-4 mb-6 w-full animate-pulse-slow">
-            <p className="text-emerald-400 font-semibold mb-2 flex items-center justify-center gap-2">
-              <TrendingUp className="w-4 h-4" />
+          <div className="bg-emerald-500/20 border-2 border-emerald-500/50 rounded-lg p-3 lg:p-4 mb-4 lg:mb-6 w-full animate-pulse-slow">
+            <p className="text-emerald-400 font-semibold mb-1 lg:mb-2 flex items-center justify-center gap-2 text-sm lg:text-base">
+              <TrendingUp className="w-3 h-3 lg:w-4 lg:h-4" />
               🎯 Availability
             </p>
-            <p className="text-xs text-gray-300 mb-2 leading-relaxed">
+            <p className="text-xs text-gray-300 mb-1 lg:mb-2 leading-relaxed">
               Open to <span className="text-cyan-400 font-semibold">Winter 2026 internships, Summer 2026 internships and Summer 2026 full-time roles</span>
             </p>
             <p className="text-xs text-gray-400">
@@ -427,34 +434,34 @@ const Portfolio = () => {
           </div>
         </div>
 
-        <div className="flex gap-4 mb-6">
+        <div className="flex gap-3 lg:gap-4 mb-4 lg:mb-6">
           <a href="https://www.linkedin.com/in/manasaggrawal07/" className="hover:text-emerald-400 transition-colors">
-            <Linkedin className="w-6 h-6" />
+            <Linkedin className="w-5 h-5 lg:w-6 lg:h-6" />
           </a>
           <a href="https://github.com/manas-aggrawal" className="hover:text-emerald-400 transition-colors">
-            <Github className="w-6 h-6" />
+            <Github className="w-5 h-5 lg:w-6 lg:h-6" />
           </a>
           <a href="mailto:aggrawal.m@northeastern.edu" className="hover:text-emerald-400 transition-colors">
-            <Mail className="w-6 h-6" />
+            <Mail className="w-5 h-5 lg:w-6 lg:h-6" />
           </a>
           <a href="https://leetcode.com/u/aggrawal_manas/" className="hover:text-emerald-400 transition-colors">
-            <Code2 className="w-6 h-6" />
+            <Code2 className="w-5 h-5 lg:w-6 lg:h-6" />
           </a>
           <a href="https://medium.com/@manasagg7199" className="hover:text-emerald-400 transition-colors">
-            <BookAIcon className="w-6 h-6" />
+            <BookAIcon className="w-5 h-5 lg:w-6 lg:h-6" />
           </a>
         </div>
 
         <a
           href="/resume.pdf"
           download="Manas_Aggrawal_Resume.pdf"
-          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-emerald-500/20 text-emerald-400 rounded-lg font-mono hover:bg-emerald-500/30 transition-all border border-emerald-500/50 mb-6"
+          className="w-full flex items-center justify-center gap-2 px-3 lg:px-4 py-2 lg:py-3 bg-emerald-500/20 text-emerald-400 rounded-lg font-mono hover:bg-emerald-500/30 transition-all border border-emerald-500/50 mb-4 lg:mb-6 text-sm lg:text-base"
         >
           <Download className="w-4 h-4" />
           Resume
         </a>
 
-        <div className="text-sm text-gray-400 space-y-2 text-center mb-6">
+        <div className="text-xs lg:text-sm text-gray-400 space-y-1 lg:space-y-2 text-center mb-4 lg:mb-6">
           <p className="flex items-center justify-center gap-2">
             <Phone className="w-4 h-4" /> (857) 265-1533
           </p>
@@ -463,7 +470,7 @@ const Portfolio = () => {
           </p>
         </div>
 
-        <div className="w-full border-t border-gray-700 pt-6">
+        <div className="w-full border-t border-gray-700 pt-4 lg:pt-6">
           <p className="text-xs text-gray-500 text-center font-mono">
             © 2025 Manas Aggrawal
           </p>
@@ -471,15 +478,15 @@ const Portfolio = () => {
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col h-screen overflow-hidden">
+      <div className="flex-1 flex flex-col min-h-screen lg:h-screen overflow-hidden">
         {/* Top Navigation */}
-        <nav className="bg-gray-800/50 border-b border-gray-700 px-8 py-4 sticky top-0 z-40 backdrop-blur">
-          <div className="flex gap-6">
+        <nav className="bg-gray-800/50 border-b border-gray-700 px-4 lg:px-8 py-3 lg:py-4 sticky top-0 z-40 backdrop-blur overflow-x-auto">
+          <div className="flex gap-3 lg:gap-6 min-w-max lg:min-w-0">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleSectionChange(item.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-sm transition-all ${
+                className={`flex items-center gap-2 px-3 lg:px-4 py-2 rounded-lg font-mono text-xs lg:text-sm transition-all whitespace-nowrap ${
                   activeSection === item.id
                     ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/50'
                     : 'text-gray-400 hover:text-emerald-400 hover:bg-gray-700/50'
@@ -493,7 +500,7 @@ const Portfolio = () => {
         </nav>
 
         {/* Content Area */}
-        <main className="flex-1 overflow-y-auto p-8 relative">
+        <main className="flex-1 overflow-y-auto p-4 lg:p-8 relative">
           <div className={`max-w-5xl mx-auto ${isTransitioning ? 'content-exit' : 'content-enter'}`}>
             {renderContent()}
           </div>
@@ -502,8 +509,8 @@ const Portfolio = () => {
 
       {/* Modal Popup */}
       {selectedItem && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4" onClick={() => setSelectedItem(null)}>
-          <div className="bg-gray-800 border border-emerald-500/50 rounded-lg max-w-3xl w-full max-h-[80vh] overflow-y-auto p-8 relative" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-2 lg:p-4" onClick={() => setSelectedItem(null)}>
+          <div className="bg-gray-800 border border-emerald-500/50 rounded-lg max-w-3xl w-full max-h-[90vh] lg:max-h-[80vh] overflow-y-auto p-4 lg:p-8 relative" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setSelectedItem(null)}
               className="absolute top-4 right-4 text-gray-400 hover:text-emerald-400 transition-colors"
@@ -511,25 +518,25 @@ const Portfolio = () => {
               <X className="w-6 h-6" />
             </button>
             
-            <div className="flex items-start gap-4 mb-6">
-              <div className="bg-emerald-500/20 p-4 rounded-lg">
+            <div className="flex items-start gap-3 lg:gap-4 mb-4 lg:mb-6">
+              <div className="bg-emerald-500/20 p-3 lg:p-4 rounded-lg">
                 {selectedItem.icon}
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-emerald-400 mb-2">{selectedItem.name || selectedItem.title}</h2>
-                <p className="text-gray-400 font-mono text-sm">{selectedItem.tech || selectedItem.period}</p>
+                <h2 className="text-2xl lg:text-3xl font-bold text-emerald-400 mb-1 lg:mb-2">{selectedItem.name || selectedItem.title}</h2>
+                <p className="text-gray-400 font-mono text-xs lg:text-sm">{selectedItem.tech || selectedItem.period}</p>
               </div>
             </div>
 
             <div className="prose prose-invert max-w-none">
-              <p className="text-gray-300 leading-relaxed mb-4">{selectedItem.details}</p>
+              <p className="text-sm lg:text-base text-gray-300 leading-relaxed mb-4">{selectedItem.details}</p>
               
               {selectedItem.highlights && (
                 <div className="mt-6">
-                  <h3 className="text-xl font-bold text-cyan-400 mb-3">Key Achievements</h3>
+                  <h3 className="text-lg lg:text-xl font-bold text-cyan-400 mb-3">Key Achievements</h3>
                   <ul className="space-y-2">
                     {selectedItem.highlights.map((highlight, i) => (
-                      <li key={i} className="flex items-start text-gray-300">
+                      <li key={i} className="flex items-start text-sm lg:text-base text-gray-300">
                         <span className="text-emerald-400 mr-2">▹</span>
                         <span>{highlight}</span>
                       </li>
@@ -543,7 +550,7 @@ const Portfolio = () => {
                   href={selectedItem.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-all border border-emerald-500/30"
+                  className="inline-flex items-center gap-2 mt-6 px-4 lg:px-6 py-2 lg:py-3 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-all border border-emerald-500/30 text-sm lg:text-base"
                 >
                   View Project <ExternalLink className="w-4 h-4" />
                 </a>
