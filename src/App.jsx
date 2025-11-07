@@ -682,7 +682,7 @@ const Portfolio = () => {
               🎯 Availability
             </p>
             <p className="text-[9px] leading-tight lg:text-xs text-gray-300 mb-1 lg:mb-2 lg:leading-relaxed break-words">
-              Open to <span className="text-cyan-400 font-semibold">Full-time SDE roles Starting May 2026</span>
+              Open to <span className="text-cyan-400 font-semibold">Full-time SDE roles starting May 2026</span>
             </p>
             {/* <p className="text-[9px] leading-tight lg:text-xs text-gray-400 break-words">
               Note: If pursuing internships, graduation will be December 2026
