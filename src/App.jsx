@@ -8,7 +8,7 @@ const Portfolio = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showTranscript, setShowTranscript] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const fullText = "Backend Engineer | System Architect";
+  const fullText = "Backend Engineer | MS CS Student | Research Apprentice | Teaching Assitant";
   
   useEffect(() => {
     let index = 0;
@@ -122,7 +122,7 @@ const Portfolio = () => {
       roles: [
         {
           title: "Teaching Assistant",
-          description: "Graduate Teaching Assistant for Fundamentals of Software Engineering (CS 4530)"
+          description: "Graduate Teaching Assistant for Fundamentals of Software Engineering (CS 4530) for 3 consecutive terms"
         },
         {
           title: "Research",
@@ -649,6 +649,20 @@ const Portfolio = () => {
             hyphens: auto;
           }
         }
+          
+        p, h1, h2, h3, h4, h5, h6, span, li {
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          max-width: 100%;
+        }
+        
+        /* Responsive containers */
+        @media (max-width: 1280px) {
+          .max-w-5xl {
+            max-width: 100%;
+            padding: 0 1rem;
+          }
+        }
       `}</style>
 
       {/* Cute Mascot - Owl */}
@@ -662,7 +676,7 @@ const Portfolio = () => {
       </div>
 
       {/* Left Sidebar - Profile */}
-      <aside className="w-full lg:w-80 bg-gray-800/50 border-b lg:border-r lg:border-b-0 border-gray-700 p-3 lg:p-8 flex flex-col items-center lg:sticky lg:top-0 lg:h-screen overflow-y-auto max-w-full">
+      <aside className="w-full md:w-64 lg:w-80 bg-gray-800/50 border-b md:border-r md:border-b-0 border-gray-700 p-3 md:p-6 lg:p-8 flex flex-col items-center md:sticky md:top-0 md:h-screen overflow-y-auto max-w-full">
         <div className="text-center mb-4 lg:mb-6 w-full max-w-full">
           {/* Profile Picture */}
           <img src="/profile.png" alt="Manas Aggrawal" className="w-20 h-20 lg:w-40 lg:h-40 rounded-full object-cover mb-2 lg:mb-4 mx-auto border-2 lg:border-4 border-emerald-400" />
@@ -684,9 +698,6 @@ const Portfolio = () => {
             <p className="text-[9px] leading-tight lg:text-xs text-gray-300 mb-1 lg:mb-2 lg:leading-relaxed break-words">
               Open to <span className="text-cyan-400 font-semibold">Full-time SDE roles starting May 2026</span>
             </p>
-            {/* <p className="text-[9px] leading-tight lg:text-xs text-gray-400 break-words">
-              Note: If pursuing internships, graduation will be December 2026
-            </p> */}
           </div>
         </div>
 
@@ -738,25 +749,27 @@ const Portfolio = () => {
         {/* Top Navigation */}
         <nav className="bg-gray-800/50 border-b border-gray-700 px-4 lg:px-8 py-3 lg:py-4 sticky top-0 z-40 backdrop-blur w-full">
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex gap-6">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex gap-3 lg:gap-3 flex-wrap">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleSectionChange(item.id)}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg font-mono text-sm transition-all whitespace-nowrap ${
+                className={`flex items-center gap-1 lg:gap-2 px-2 md:px-3 lg:px-4 py-2 rounded-lg font-mono text-xs md:text-sm transition-all whitespace-nowrap ${
                   activeSection === item.id
                     ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/50'
                     : 'text-gray-400 hover:text-emerald-400 hover:bg-gray-700/50'
                 }`}
               >
                 {item.icon}
-                {item.label}
+                <span className="hidden lg:inline">{item.label}</span>
+                <span className="lg:hidden">{item.label.slice(0, 3)}</span>
               </button>
             ))}
           </div>
 
           {/* Mobile - Hamburger Button */}
-          <div className="lg:hidden flex items-center justify-between">
+          <div className="md:hidden flex items-center justify-between">
             <span className="text-emerald-400 font-mono text-sm">
               {navItems.find(item => item.id === activeSection)?.label}
             </span>
@@ -770,7 +783,7 @@ const Portfolio = () => {
 
           {/* Mobile Menu Dropdown */}
           {mobileMenuOpen && (
-            <div className="lg:hidden absolute top-full left-0 right-0 bg-gray-800 border-b border-gray-700 py-2 shadow-lg">
+            <div className="md:hidden absolute top-full left-0 right-0 bg-gray-800 border-b border-gray-700 py-2 shadow-lg">
               {navItems.map((item) => (
                 <button
                   key={item.id}
@@ -793,8 +806,8 @@ const Portfolio = () => {
         </nav>
 
         {/* Content Area */}
-        <main className="flex-1 overflow-y-auto p-3 lg:p-8 relative w-full max-w-full">
-          <div className={`max-w-5xl mx-auto w-full ${isTransitioning ? 'content-exit' : 'content-enter'}`}>
+        <main className="flex-1 overflow-y-auto p-3 md:p-6 lg:p-8 relative w-full max-w-full">
+          <div className={`max-w-5xl mx-auto w-full px-2 md:px-4 ${isTransitioning ? 'content-exit' : 'content-enter'}`}>
             {renderContent()}
           </div>
         </main>
