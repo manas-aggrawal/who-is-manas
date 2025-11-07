@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Download, Mail, Phone, Linkedin, Github, FileCode, Code2, Database, Cloud, Settings, Terminal, ExternalLink, X, Book, Package, TrendingUp, User, Briefcase, FolderGit2, Award, Home, SunMediumIcon, BookAIcon, BookImageIcon } from 'lucide-react';
+import { Download, Mail, Phone, Linkedin, Github, FileCode, Code2, Database, Cloud, Settings, Terminal, ExternalLink, X, Book, Package, TrendingUp, User, Briefcase, FolderGit2, Award, Home, SunMediumIcon, BookAIcon, BookImageIcon, Menu } from 'lucide-react';
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('about');
   const [selectedItem, setSelectedItem] = useState(null);
   const [typedText, setTypedText] = useState('');
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const fullText = "Backend Engineer | System Architect | Problem Solver";
+  const [showTranscript, setShowTranscript] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const fullText = "Backend Engineer | System Architect";
   
   useEffect(() => {
     let index = 0;
@@ -38,8 +40,11 @@ const Portfolio = () => {
   const navItems = [
     { id: 'about', label: 'About', icon: <Home className="w-4 h-4" /> },
     { id: 'experience', label: 'Experience', icon: <Briefcase className="w-4 h-4" /> },
+    { id: 'education', label: 'Education', icon: <Award className="w-4 h-4" /> },
     { id: 'projects', label: 'Projects', icon: <FolderGit2 className="w-4 h-4" /> },
-    { id: 'skills', label: 'Skills', icon: <Award className="w-4 h-4" /> },
+    { id: 'featured', label: 'Featured', icon: <TrendingUp className="w-4 h-4" /> },
+    { id: 'articles', label: 'Articles', icon: <Book className="w-4 h-4" /> },
+    { id: 'skills', label: 'Skills', icon: <Code2 className="w-4 h-4" /> },
     { id: 'contact', label: 'Contact', icon: <Mail className="w-4 h-4" /> },
   ];
 
@@ -71,6 +76,72 @@ const Portfolio = () => {
         "Implemented TDD and Trunk-based development practices using Jest and PyTest, achieving 20% faster release cycles"
       ],
       details: "Backend engineer, Individual contributor, collaborated within cross-functional teams"
+    }
+  ];
+
+  const articles = [
+    {
+      title: "Five Stages to Scalable: My System Design Journey",
+      description: "A deep dive into building scalable systems - from monolith to microservices, exploring architecture decisions, performance optimization, and lessons learned from production systems.",
+      link: "https://medium.com/@manasagg7199/five-stages-to-scalable-my-system-design-journey-a556b2b43446",
+      category: "System Design",
+      platform: "Medium"
+    },
+    {
+      title: "Async/Await: Asynchronous programming in Node.js",
+      description: "",
+      link: "https://medium.com/@manasagg7199/async-await-asynchronous-programming-in-node-js-6367db22c6dd",
+      category: "Asynchronous Programming",
+      platform: "Medium"
+    },
+    {
+      title: "Types and Programming Languages: An Introduction",
+      description: "",
+      link: "https://medium.com/@manasagg7199/types-and-programming-languages-an-introduction-40d1b7650929",
+      category: "Programming Languages",
+      platform: "Medium"
+    },
+    {
+      title: "Intro to Node Js APM using AWS Distro for OpenTelemetry and AWS X-Ray",
+      description: "Application Performance Monitoring tool",
+      link: "https://medium.com/@manasagg7199/intro-to-node-js-apm-using-aws-distro-for-opentelemetry-and-aws-x-ray-ee5b169a381d",
+      category: "Developer tools",
+      platform: "Medium"
+    },
+  ];
+
+  const education = [
+    {
+      school: "Northeastern University",
+      degree: "Masters of Science – Computer Science",
+      period: "Sep 2024 – Apr 2026",
+      location: "Boston, MA",
+      gpa: "3.75",
+      color: "emerald",
+      coursework: "Algorithms, Programming Design Paradigms, Principles of Programming Languages",
+      roles: [
+        {
+          title: "Teaching Assistant",
+          description: "Graduate Teaching Assistant for Fundamentals of Software Engineering (CS 4530)"
+        },
+        {
+          title: "Research",
+          description: "Research Apprentice for \"Typed Conversational Interfaces\" in Programming Languages under Prof Chris Martens"
+        }
+      ],
+      hasTranscript: true,
+      transcriptFile: "/transcript-grad.pdf"  // Add this
+    },
+    {
+      school: "Guru Gobind Singh Indraprastha University",
+      degree: "Bachelor of Technology – Computer Science Engineering",
+      period: "Aug 2016 – Sep 2020",
+      location: "Delhi, India",
+      color: "cyan",
+      coursework: "Data Structure, Networking, Operating Systems, Object-Oriented Design, Machine Learning",
+      roles: [],
+      hasTranscript: true,  // Add this if you want transcript for undergrad too
+      transcriptFile: "/transcript-undergrad.pdf"  // Add this
     }
   ];
 
@@ -210,8 +281,8 @@ const Portfolio = () => {
                 <ul className="space-y-2 text-gray-300 mb-4">
                   {job.highlights.map((highlight, i) => (
                     <li key={i} className="flex items-start">
-                      <span className="text-emerald-400 mr-2">▹</span>
-                      <span className="text-sm">{highlight}</span>
+                      <span className="text-emerald-400 mr-2 flex-shrink-0">▹</span>
+                      <span className="text-sm break-words">{highlight}</span>
                     </li>
                   ))}
                 </ul>
@@ -243,9 +314,9 @@ const Portfolio = () => {
                     </div>
                     <ExternalLink className="w-5 h-5 text-gray-400 hover:text-emerald-400" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-emerald-400">{project.name}</h3>
-                  <p className="text-sm text-gray-400 mb-3 font-mono">{project.tech}</p>
-                  <p className="text-gray-300 text-sm mb-3">{project.description}</p>
+                  <h3 className="text-xl font-bold mb-2 text-emerald-400 break-words">{project.name}</h3>
+                  <p className="text-sm text-gray-400 mb-3 font-mono break-words">{project.tech}</p>
+                  <p className="text-gray-300 text-sm mb-3 break-words">{project.description}</p>
                   <button className="text-emerald-400 hover:text-emerald-300 font-mono text-xs flex items-center gap-1">
                     Read more... <ExternalLink className="w-3 h-3" />
                   </button>
@@ -255,7 +326,169 @@ const Portfolio = () => {
           </div>
         );
 
-      case 'skills':
+      case 'education':
+        return (
+          <div className="space-y-6 max-w-full overflow-x-hidden">
+            <h2 className="text-2xl lg:text-4xl font-bold text-emerald-400 font-mono">Education</h2>
+            
+            {education.map((edu, idx) => (
+              <div key={idx} className={`bg-gray-800 border border-${edu.color}-500/30 rounded-lg p-6 max-w-full`}>
+                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4">
+                  <div>
+                    <h3 className={`text-xl lg:text-2xl font-bold text-${edu.color}-400 break-words`}>{edu.school}</h3>
+                    <p className="text-lg text-gray-300 break-words">{edu.degree}</p>
+                    {edu.gpa && <p className="text-cyan-400 font-semibold">GPA: {edu.gpa}</p>}
+                  </div>
+                  <div className="text-left lg:text-right text-gray-400 mt-2 lg:mt-0">
+                    <p className="font-mono text-sm">{edu.period}</p>
+                    <p className="text-sm">{edu.location}</p>
+                  </div>
+                </div>
+
+                {edu.hasTranscript && (
+                  <button
+                    onClick={() => setShowTranscript(edu.transcriptFile)}
+                    className="mb-4 px-6 py-2 bg-cyan-500/20 text-cyan-400 rounded-lg font-mono hover:bg-cyan-500/30 transition-all border border-cyan-500/50 text-sm flex items-center gap-2"
+                  >
+                    <FileCode className="w-4 h-4" />
+                    View Transcript
+                  </button>
+                )}
+
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="text-lg font-bold text-cyan-400 mb-2">Relevant Coursework</h4>
+                    <p className="text-gray-300 text-sm break-words">{edu.coursework}</p>
+                  </div>
+
+                  {edu.roles.map((role, roleIdx) => (
+                    <div key={roleIdx}>
+                      <h4 className="text-lg font-bold text-cyan-400 mb-2">{role.title}</h4>
+                      <p className="text-gray-300 text-sm break-words">{role.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      case 'featured':
+        return (
+          <div className="space-y-6 max-w-full overflow-x-hidden">
+            <h2 className="text-2xl lg:text-4xl font-bold text-emerald-400 font-mono">Featured Work</h2>
+            <p className="text-gray-400 mb-6">Handpicked projects and articles showcasing my best work</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Featured Project 1 */}
+              <div
+                className="bg-gray-800 border border-emerald-500/30 rounded-lg p-6 hover:scale-105 transition-transform cursor-pointer"
+                onClick={() => setSelectedItem(projects[0])}
+              >
+                <div className="bg-emerald-500/20 p-3 rounded-lg w-fit mb-4">
+                  <Code2 className="w-8 h-8 text-emerald-400" />
+                </div>
+                <span className="text-xs text-cyan-400 font-mono mb-2 block">FEATURED PROJECT</span>
+                <h3 className="text-xl font-bold mb-2 text-emerald-400">{projects[0].name}</h3>
+                <p className="text-sm text-gray-400 mb-3">{projects[0].description}</p>
+                <p className="text-gray-300 text-sm">
+                  200+ downloads • 60% faster debugging • Used by 10+ teams
+                </p>
+              </div>
+
+              {/* Featured Article */}
+              <a
+                href="https://medium.com/@manasagg7199/five-stages-to-scalable-my-system-design-journey-a556b2b43446"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6 hover:scale-105 transition-transform block"
+              >
+                <div className="bg-cyan-500/20 p-3 rounded-lg w-fit mb-4">
+                  <Book className="w-8 h-8 text-cyan-400" />
+                </div>
+                <span className="text-xs text-emerald-400 font-mono mb-2 block">FEATURED ARTICLE</span>
+                <h3 className="text-xl font-bold mb-2 text-cyan-400">Five Stages to Scalable</h3>
+                <p className="text-sm text-gray-400 mb-3">System design journey</p>
+                <p className="text-gray-300 text-sm flex items-center gap-2">
+                  Read on Medium <ExternalLink className="w-4 h-4" />
+                </p>
+              </a>
+
+              {/* Featured Project 2 */}
+              <div
+                className="bg-gray-800 border border-emerald-500/30 rounded-lg p-6 hover:scale-105 transition-transform cursor-pointer"
+                onClick={() => setSelectedItem(projects[1])}
+              >
+                <div className="bg-emerald-500/20 p-3 rounded-lg w-fit mb-4">
+                  <Terminal className="w-8 h-8 text-emerald-400" />
+                </div>
+                <span className="text-xs text-cyan-400 font-mono mb-2 block">FEATURED PROJECT</span>
+                <h3 className="text-xl font-bold mb-2 text-emerald-400">{projects[1].name}</h3>
+                <p className="text-sm text-gray-400 mb-3">{projects[1].description}</p>
+                <p className="text-gray-300 text-sm">
+                  JWT Auth • Docker • Swagger • Clean Architecture
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'articles':
+        return (
+          <div className="space-y-6 max-w-full overflow-x-hidden">
+            <h2 className="text-2xl lg:text-4xl font-bold text-emerald-400 font-mono">Articles & Blog</h2>
+            <p className="text-gray-400 mb-6">Technical writing and insights from my engineering journey</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {articles.map((article, idx) => (
+                
+                  <a key={idx}
+                  href={article.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block bg-gray-800 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500 hover:scale-105 transition-all group"
+                >
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className="bg-cyan-500/20 p-2 rounded-lg flex-shrink-0">
+                      <Book className="w-5 h-5 text-cyan-400" />
+                    </div>
+                    <div className="flex items-center gap-2 text-xs text-gray-500">
+                      <span>{article.platform}</span>
+                      <span>•</span>
+                      <span>{article.category}</span>
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-cyan-400 mb-2 group-hover:text-emerald-400 transition-colors break-words">
+                    {article.title}
+                  </h3>
+                  
+                  <p className="text-sm text-gray-400 mb-4 break-words">
+                    {article.description}
+                  </p>
+                  
+                  <div className="flex items-center gap-2 text-sm text-cyan-400 group-hover:text-emerald-400 transition-colors">
+                    Read on Medium 
+                    <ExternalLink className="w-4 h-4" />
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            {/* View All Button */}
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 text-center mt-6">
+              <p className="text-gray-400 mb-4">More articles coming soon!</p>
+              
+                <a href="https://medium.com/@manasagg7199"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-cyan-400 hover:text-emerald-400 transition-colors"
+              >
+                View all on Medium <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        );
+        case 'skills':
         return (
           <div className="space-y-6 max-w-full overflow-x-hidden">
             <h2 className="text-2xl lg:text-4xl font-bold text-emerald-400 font-mono">Technical Skills</h2>
@@ -271,7 +504,7 @@ const Portfolio = () => {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {items.map((skill, i) => (
-                      <span key={i} className="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm font-mono border border-emerald-500/30">
+                      <span key={i} className="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm font-mono border border-emerald-500/30 whitespace-nowrap">
                         {skill}
                       </span>
                     ))}
@@ -297,8 +530,8 @@ const Portfolio = () => {
             href="mailto:aggrawal.m@northeastern.edu"
             className="flex items-center justify-center gap-3 bg-gray-900/50 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500 hover:scale-105 transition-all group"
           >
-            <Mail className="w-6 h-6 lg:w-8 lg:h-8 text-cyan-400 group-hover:text-emerald-400 transition-colors" />
-            <div className="text-left">
+            <Mail className="w-6 h-6 lg:w-8 lg:h-8 text-cyan-400 group-hover:text-emerald-400 transition-colors flex-shrink-0" />
+            <div className="text-left min-w-0 flex-1">
               <p className="text-xs lg:text-sm text-gray-400">Email</p>
               <p className="text-sm lg:text-lg text-gray-200 font-mono break-all">aggrawal.m@northeastern.edu</p>
             </div>
@@ -308,8 +541,8 @@ const Portfolio = () => {
             href="tel:+18572651533"
             className="flex items-center justify-center gap-3 bg-gray-900/50 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500 hover:scale-105 transition-all group"
           >
-            <Phone className="w-6 h-6 lg:w-8 lg:h-8 text-cyan-400 group-hover:text-emerald-400 transition-colors" />
-            <div className="text-left">
+            <Phone className="w-6 h-6 lg:w-8 lg:h-8 text-cyan-400 group-hover:text-emerald-400 transition-colors flex-shrink-0" />
+            <div className="text-left min-w-0 flex-1">
               <p className="text-xs lg:text-sm text-gray-400">Phone</p>
               <p className="text-sm lg:text-lg text-gray-200 font-mono">(857) 265-1533</p>
             </div>
@@ -408,6 +641,14 @@ const Portfolio = () => {
         .content-exit {
           animation: fadeSlideOut 0.3s ease-in forwards;
         }
+
+        @media (max-width: 640px) {
+          h1, h2, h3, h4, h5, h6, p, span, div {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+          }
+        }
       `}</style>
 
       {/* Cute Mascot - Owl */}
@@ -495,13 +736,15 @@ const Portfolio = () => {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-h-screen lg:h-screen overflow-hidden w-full max-w-full">
         {/* Top Navigation */}
-        <nav className="bg-gray-800/50 border-b border-gray-700 px-2 lg:px-8 py-2 lg:py-4 sticky top-0 z-40 backdrop-blur overflow-x-auto scrollbar-hide w-full">
-          <div className="flex gap-2 lg:gap-6 w-max lg:w-auto">
+        {/* Top Navigation */}
+        <nav className="bg-gray-800/50 border-b border-gray-700 px-4 lg:px-8 py-3 lg:py-4 sticky top-0 z-40 backdrop-blur w-full">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex gap-6">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleSectionChange(item.id)}
-                className={`flex items-center gap-1 lg:gap-2 px-2 lg:px-4 py-2 rounded-lg font-mono text-[10px] lg:text-sm transition-all whitespace-nowrap flex-shrink-0 ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-sm transition-all whitespace-nowrap ${
                   activeSection === item.id
                     ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/50'
                     : 'text-gray-400 hover:text-emerald-400 hover:bg-gray-700/50'
@@ -512,6 +755,42 @@ const Portfolio = () => {
               </button>
             ))}
           </div>
+
+          {/* Mobile - Hamburger Button */}
+          <div className="lg:hidden flex items-center justify-between">
+            <span className="text-emerald-400 font-mono text-sm">
+              {navItems.find(item => item.id === activeSection)?.label}
+            </span>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-gray-400 hover:text-emerald-400 transition-colors p-2"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {/* Mobile Menu Dropdown */}
+          {mobileMenuOpen && (
+            <div className="lg:hidden absolute top-full left-0 right-0 bg-gray-800 border-b border-gray-700 py-2 shadow-lg">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    handleSectionChange(item.id);
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-3 px-4 py-3 font-mono text-sm transition-all ${
+                    activeSection === item.id
+                      ? 'bg-emerald-500/20 text-emerald-400 border-l-4 border-emerald-500'
+                      : 'text-gray-400 hover:text-emerald-400 hover:bg-gray-700/50'
+                  }`}
+                >
+                  {item.icon}
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          )}
         </nav>
 
         {/* Content Area */}
@@ -570,6 +849,42 @@ const Portfolio = () => {
                   View Project <ExternalLink className="w-4 h-4" />
                 </a>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Transcript Modal */}
+      {showTranscript && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-2 lg:p-4" onClick={() => setShowTranscript(null)}>
+          <div className="bg-gray-800 border border-emerald-500/50 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto p-4 lg:p-8 relative" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setShowTranscript(null)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-emerald-400 transition-colors z-10"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            
+            <h2 className="text-2xl lg:text-3xl font-bold text-emerald-400 mb-6">Academic Transcript</h2>
+            
+            <div className="bg-gray-900 rounded-lg p-4 mb-6">
+              <div className="aspect-[8.5/11] bg-gray-700 rounded flex items-center justify-center">
+                <iframe
+                  src={showTranscript}
+                  className="w-full h-full rounded"
+                  title="Academic Transcript"
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-4 justify-center">
+              
+                <a href={showTranscript}
+                download={`Manas_Aggrawal_Transcript_${showTranscript.split('/').pop()}`}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-all border border-emerald-500/50"
+              >
+                <Download className="w-5 h-5" />
+                Download Transcript
+              </a>
             </div>
           </div>
         </div>
