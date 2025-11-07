@@ -114,7 +114,7 @@ const Portfolio = () => {
     {
       school: "Northeastern University",
       degree: "Masters of Science – Computer Science",
-      period: "Sep 2024 – Apr 2026",
+      period: "Sep 2024 – Apr 2026 ",
       location: "Boston, MA",
       gpa: "3.75",
       color: "emerald",
@@ -130,7 +130,7 @@ const Portfolio = () => {
         }
       ],
       hasTranscript: true,
-      transcriptFile: "/transcript-grad.pdf"  // Add this
+      transcriptFile: "/transcript-grad.pdf"  
     },
     {
       school: "Guru Gobind Singh Indraprastha University",
@@ -196,22 +196,22 @@ const Portfolio = () => {
     "Others": ["Git", "Sentry", "OpenTelemetry", "REST APIs", "Agile", "SDLC"]
   };
 
-  const featuredItems = [
-    {
-      title: "Performance Monitoring Tool",
-      description: "npm package for distributed tracing and error tracking",
-      icon: <Package className="w-5 h-5" />,
-      link: "https://www.npmjs.com/package/nodejs-observability",
-      stats: "200+ downloads"
-    },
-    {
-      title: "Scalable Systems",
-      description: "System design case study based on a real project I worked on",
-      icon: <Book className="w-5 h-5" />,
-      link: "https://medium.com/@manasagg7199/five-stages-to-scalable-my-system-design-journey-a556b2b43446",
-      stats: "Medium Article"
-    }
-  ];
+  // const featuredItems = [
+  //   {
+  //     title: "Performance Monitoring Tool",
+  //     description: "npm package for distributed tracing and error tracking",
+  //     icon: <Package className="w-5 h-5" />,
+  //     link: "https://www.npmjs.com/package/nodejs-observability",
+  //     stats: "200+ downloads"
+  //   },
+  //   {
+  //     title: "Scalable Systems",
+  //     description: "System design case study based on a real project I worked on",
+  //     icon: <Book className="w-5 h-5" />,
+  //     link: "https://medium.com/@manasagg7199/five-stages-to-scalable-my-system-design-journey-a556b2b43446",
+  //     stats: "Medium Article"
+  //   }
+  // ];
 
   const renderContent = () => {
     switch(activeSection) {
@@ -233,7 +233,7 @@ const Portfolio = () => {
               </p>
             </div>
 
-            <div className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6 max-w-full">
+            {/* <div className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6 max-w-full">
               <h3 className="text-lg lg:text-xl font-bold text-cyan-400 mb-4">Featured Work</h3>
               <div className="space-y-3">
                 {featuredItems.map((item, idx) => (
@@ -258,7 +258,7 @@ const Portfolio = () => {
                   </a>
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
         );
 
@@ -407,7 +407,7 @@ const Portfolio = () => {
                 </div>
                 <span className="text-xs text-emerald-400 font-mono mb-2 block">FEATURED ARTICLE</span>
                 <h3 className="text-xl font-bold mb-2 text-cyan-400">Five Stages to Scalable</h3>
-                <p className="text-sm text-gray-400 mb-3">System design journey</p>
+                <p className="text-sm text-gray-400 mb-3">A deep dive into building scalable systems - from monolith to microservices, exploring architecture decisions, performance optimization, and lessons learned from production systems.</p>
                 <p className="text-gray-300 text-sm flex items-center gap-2">
                   Read on Medium <ExternalLink className="w-4 h-4" />
                 </p>
