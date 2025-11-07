@@ -736,7 +736,6 @@ const Portfolio = () => {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-h-screen lg:h-screen overflow-hidden w-full max-w-full">
         {/* Top Navigation */}
-        {/* Top Navigation */}
         <nav className="bg-gray-800/50 border-b border-gray-700 px-4 lg:px-8 py-3 lg:py-4 sticky top-0 z-40 backdrop-blur w-full">
           {/* Desktop Navigation */}
           <div className="hidden lg:flex gap-6">
@@ -744,7 +743,7 @@ const Portfolio = () => {
               <button
                 key={item.id}
                 onClick={() => handleSectionChange(item.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-sm transition-all whitespace-nowrap ${
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg font-mono text-sm transition-all whitespace-nowrap ${
                   activeSection === item.id
                     ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/50'
                     : 'text-gray-400 hover:text-emerald-400 hover:bg-gray-700/50'
