@@ -78,6 +78,27 @@ const Portfolio = () => {
       details: "Backend engineer, Individual contributor, collaborated within cross-functional teams"
     }
   ];
+  const combExp = [
+    {
+      title: "Software Engineer",
+      company: "Studio Graphene",
+      period: "Nov 2020 – Jul 2024",
+      location: "Gurgaon, India",
+      highlights: [
+        "Built serverless engineering analytics platform using AWS Lambda to pinpoint bottlenecks like high PR wait times, frequent build failures, and blocked dependencies, reducing cycle time and boosting engineering velocity by 23%",
+        "Built distributed, event-driven microservices using AWS SQS messaging queues for decoupled data ingestion and processing, reducing response latency by ~40%",
+        "Ingested raw data from 10k+ weekly events from third party sources into Elasticsearch and ran aggregation queries to calculate high level metrics",
+        "Built automated retry scripts to fetch failed messages from DynamoDB and reprocess via SQS batch writes, eliminating manual intervention and reducing message failure resolution time from hours to minutes",
+        "Built scalable Node.js/TypeScript REST API backend processing 2M+ API requests daily, designed PostgreSQL schema with partitioning and indexing strategies to handle 500GB+ product catalog data and real-time cross-region inventory sync",
+        "Deployed docker containerized microservices on AWS ECS, built CodePipeline CI/CD workflows, configured CloudWatch alarms, and integrated SES for email notifications on deployment failures and system alerts",
+        "Developed real-time tracking and competitive scoring algorithm using Node.js/PostgreSQL with read replicas and connection pooling to serve 100K+ active users, for oddchecker's betting platform",
+        "Engineered production-ready Python Django backend REST framework which was adopted by 10+ teams",
+        "Implemented Redis caching, cutting repeated Algolia API calls and reducing response latency from ~300ms to ~100ms",
+        "Implemented TDD and Trunk-based development practices using Jest and PyTest, achieving 20% faster release cycles"
+      ],
+      details: "Backend Lead Engineer on multiple projects, maintained tech docs, drove standups, maintained releases, Mentored junior engineers, collaborated within cross-functional teams"
+    },
+  ];
 
   const articles = [
     {
@@ -266,7 +287,8 @@ const Portfolio = () => {
         return (
           <div className="space-y-6 max-w-full overflow-x-hidden">
             <h2 className="text-2xl lg:text-4xl font-bold text-emerald-400 font-mono">Work Experience</h2>
-            {experience.map((job, idx) => (
+            {/* Change combExp to experience here if you need to show it as junior and senior */}
+            {combExp.map((job, idx) => (
               <div key={idx} className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500 transition-all max-w-full">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4">
                   <div>
@@ -719,8 +741,9 @@ const Portfolio = () => {
           </a>
         </div>
 
+        {/* Change resume-comb-exp to resume if you want to show work ex as 2 separate - junior and senior */}
         <a
-          href="/resume.pdf"
+          href="/resume-comb-exp.pdf"
           download="Manas_Aggrawal_Resume.pdf"
           className="w-full max-w-full flex items-center justify-center gap-2 px-3 lg:px-4 py-2 lg:py-3 bg-emerald-500/20 text-emerald-400 rounded-lg font-mono hover:bg-emerald-500/30 transition-all border border-emerald-500/50 mb-4 lg:mb-6 text-xs lg:text-base"
         >
