@@ -685,8 +685,8 @@ const Portfolio = () => {
             MANAS AGGRAWAL
           </h1>
           
-          <p className="text-[10px] lg:text-sm font-mono text-gray-400 h-5 lg:h-8 mb-2 lg:mb-4">
-            {typedText}<span className="animate-pulse">|</span>
+          <p className="text-[9px] md:text-[10px] lg:text-sm font-mono text-gray-400 min-h-[2rem] md:min-h-[2.5rem] lg:h-8 mb-3 md:mb-8 lg:mb-8 leading-tight md:leading-normal">
+          {typedText}<span className="animate-pulse">|</span>
           </p>
 
           {/* Availability Banner - Prominent */}
@@ -748,7 +748,6 @@ const Portfolio = () => {
       <div className="flex-1 flex flex-col min-h-screen lg:h-screen overflow-hidden w-full max-w-full">
         {/* Top Navigation */}
         <nav className="bg-gray-800/50 border-b border-gray-700 px-4 lg:px-8 py-3 lg:py-4 sticky top-0 z-40 backdrop-blur w-full">
-          {/* Desktop Navigation */}
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-3 lg:gap-3 flex-wrap">
             {navItems.map((item) => (
