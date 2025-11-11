@@ -288,7 +288,7 @@ const Portfolio = () => {
           <div className="space-y-6 max-w-full overflow-x-hidden">
             <h2 className="text-2xl lg:text-4xl font-bold text-emerald-400 font-mono">Work Experience</h2>
             {/* Change combExp to experience here if you need to show it as junior and senior */}
-            {combExp.map((job, idx) => (
+            {experience.map((job, idx) => (
               <div key={idx} className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-500 transition-all max-w-full">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4">
                   <div>
@@ -743,7 +743,7 @@ const Portfolio = () => {
 
         {/* Change resume-comb-exp to resume if you want to show work ex as 2 separate - junior and senior */}
         <a
-          href="/resume-comb-exp.pdf"
+          href="/resume.pdf"
           download="Manas_Aggrawal_Resume.pdf"
           className="w-full max-w-full flex items-center justify-center gap-2 px-3 lg:px-4 py-2 lg:py-3 bg-emerald-500/20 text-emerald-400 rounded-lg font-mono hover:bg-emerald-500/30 transition-all border border-emerald-500/50 mb-4 lg:mb-6 text-xs lg:text-base"
         >
