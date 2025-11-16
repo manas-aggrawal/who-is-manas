@@ -217,23 +217,6 @@ const Portfolio = () => {
     "Others": ["Git", "Sentry", "OpenTelemetry", "REST APIs", "Agile", "SDLC"]
   };
 
-  // const featuredItems = [
-  //   {
-  //     title: "Performance Monitoring Tool",
-  //     description: "npm package for distributed tracing and error tracking",
-  //     icon: <Package className="w-5 h-5" />,
-  //     link: "https://www.npmjs.com/package/nodejs-observability",
-  //     stats: "200+ downloads"
-  //   },
-  //   {
-  //     title: "Scalable Systems",
-  //     description: "System design case study based on a real project I worked on",
-  //     icon: <Book className="w-5 h-5" />,
-  //     link: "https://medium.com/@manasagg7199/five-stages-to-scalable-my-system-design-journey-a556b2b43446",
-  //     stats: "Medium Article"
-  //   }
-  // ];
-
   const renderContent = () => {
     switch(activeSection) {
       case 'about':
@@ -253,33 +236,6 @@ const Portfolio = () => {
                 Serving as Research Apprentice for "Typed Conversational Interfaces" under Prof Chris Martens and Lead Graduate Teaching Assistant for Software Engineering.
               </p>
             </div>
-
-            {/* <div className="bg-gray-800 border border-cyan-500/30 rounded-lg p-6 max-w-full">
-              <h3 className="text-lg lg:text-xl font-bold text-cyan-400 mb-4">Featured Work</h3>
-              <div className="space-y-3">
-                {featuredItems.map((item, idx) => (
-                  <a
-                    key={idx}
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block bg-gray-900/50 rounded-lg p-4 hover:bg-gray-900/80 transition-all border border-cyan-500/20 hover:border-cyan-500/50 group"
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="bg-emerald-500/20 p-2 rounded-lg text-emerald-400">
-                        {item.icon}
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="text-sm lg:text-base font-bold text-gray-200 mb-1">{item.title}</h4>
-                        <p className="text-xs lg:text-sm text-gray-400 mb-1">{item.description}</p>
-                        <span className="text-xs text-cyan-400 font-mono">{item.stats}</span>
-                      </div>
-                      <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-emerald-400 transition-colors" />
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div> */}
           </div>
         );
 
@@ -413,7 +369,7 @@ const Portfolio = () => {
                 <h3 className="text-xl font-bold mb-2 text-emerald-400">{projects[0].name}</h3>
                 <p className="text-sm text-gray-400 mb-3">{projects[0].description}</p>
                 <p className="text-gray-300 text-sm">
-                  200+ downloads • 60% faster debugging • Used by 10+ teams
+                  450+ downloads • 60% faster debugging
                 </p>
               </div>
 
