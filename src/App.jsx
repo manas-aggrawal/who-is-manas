@@ -208,7 +208,7 @@ const Portfolio = () => {
           <div className="space-y-6">
             <h2 className="text-3xl lg:text-4xl font-bold text-white">About Me</h2>
             
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all">
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all glow-card cosmic-border">
               <p className="text-base lg:text-lg text-gray-300 leading-relaxed mb-4">
                 Experienced Software Engineer with over 3.5 years of expertise in backend engineering, building scalable architectures, distributed systems, and high-performance services.
               </p>
@@ -227,7 +227,7 @@ const Portfolio = () => {
           <div className="space-y-6">
             <h2 className="text-3xl lg:text-4xl font-bold text-white">Work Experience</h2>
             {experience.map((job, idx) => (
-              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all">
+              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all glow-card cosmic-border">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4">
                   <div>
                     <h3 className="text-xl lg:text-2xl font-bold text-white">{job.title}</h3>
@@ -263,7 +263,7 @@ const Portfolio = () => {
             <h2 className="text-3xl lg:text-4xl font-bold text-white">Education</h2>
             
             {education.map((edu, idx) => (
-              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all">
+              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all glow-card cosmic-border">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4">
                   <div>
                     <h3 className="text-xl lg:text-2xl font-bold text-white">{edu.school}</h3>
@@ -279,7 +279,7 @@ const Portfolio = () => {
                 {edu.hasTranscript && (
                   <button
                     onClick={() => setShowTranscript(edu.transcriptFile)}
-                    className="mb-4 px-6 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors text-sm flex items-center gap-2"
+                    className="mb-4 px-6 py-2 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-lg hover:from-violet-500 hover:to-purple-500 transition-all text-sm flex items-center gap-2 shadow-lg shadow-violet-500/30"
                   >
                     <FileCode className="w-4 h-4" />
                     View Transcript
@@ -335,7 +335,7 @@ const Portfolio = () => {
                   className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10 transition-all block"
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <div className="bg-violet-500/10 p-3 rounded-lg text-violet-400 border border-violet-500/20">
+                    <div className="bg-violet-500/10 p-3 rounded-lg text-violet-400 border border-violet-500/20 shadow-lg shadow-violet-500/20">
                       {proj.icon}
                     </div>
                     <ExternalLink className="w-5 h-5 text-gray-500" />
@@ -362,7 +362,7 @@ const Portfolio = () => {
                   onClick={() => setSelectedItem(project)}
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <div className="bg-violet-500/10 p-3 rounded-lg text-violet-400 border border-violet-500/20">
+                    <div className="bg-violet-500/10 p-3 rounded-lg text-violet-400 border border-violet-500/20 shadow-lg shadow-violet-500/20">
                       {project.icon}
                     </div>
                     <ExternalLink className="w-5 h-5 text-gray-500" />
@@ -395,7 +395,7 @@ const Portfolio = () => {
                   className="block bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10 transition-all"
                 >
                   <div className="flex items-start gap-3 mb-3">
-                    <div className="bg-violet-500/10 p-2 rounded-lg flex-shrink-0 border border-violet-500/20">
+                    <div className="bg-violet-500/10 p-2 rounded-lg flex-shrink-0 border border-violet-500/20 shadow-lg shadow-violet-500/20">
                       <Book className="w-5 h-5 text-violet-400" />
                     </div>
                     <div className="flex items-center gap-2 text-xs text-gray-500">
@@ -423,7 +423,7 @@ const Portfolio = () => {
               ))}
             </div>
 
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 text-center">
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 text-center glow-card cosmic-border">
               <p className="text-gray-400 mb-4">More articles coming soon!</p>
               <a
                 href="https://medium.com/@manasagg7199"
@@ -443,7 +443,7 @@ const Portfolio = () => {
             <h2 className="text-3xl lg:text-4xl font-bold text-white">Technical Skills</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {Object.entries(skills).map(([category, items], idx) => (
-                <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all">
+                <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all glow-card cosmic-border">
                   <h3 className="text-xl font-bold mb-4 text-white flex items-center gap-2">
                     {category === "Languages" && <Code2 className="w-5 h-5 text-violet-400" />}
                     {category === "Database" && <Database className="w-5 h-5 text-violet-400" />}
@@ -469,7 +469,7 @@ const Portfolio = () => {
           <div className="space-y-6">
             <h2 className="text-3xl lg:text-4xl font-bold text-white">Get In Touch</h2>
             
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 lg:p-8 text-center">
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 lg:p-8 text-center glow-card cosmic-border">
               <p className="text-lg lg:text-xl text-gray-300 mb-6 lg:mb-8">
                 Let's build something amazing together! 🚀
               </p>
@@ -521,22 +521,96 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="bg-slate-900 text-gray-100 min-h-screen flex flex-col lg:flex-row">
+    <div className="bg-slate-950 text-gray-100 min-h-screen flex flex-col lg:flex-row relative overflow-hidden">
+      {/* Animated Starfield Background */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="stars-small"></div>
+        <div className="stars-medium"></div>
+        <div className="stars-large"></div>
+      </div>
+
+      {/* Cosmic Gradient Overlay */}
+      <div className="fixed inset-0 bg-gradient-to-br from-violet-900/20 via-transparent to-purple-900/20 pointer-events-none"></div>
+
       <style>{`
         body, html {
           margin: 0;
           padding: 0;
           overflow-x: hidden;
+          background: #020617;
         }
         * {
           box-sizing: border-box;
         }
+
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 1; }
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+
+        .stars-small {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          background: white;
+          box-shadow: 
+            ${Array.from({length: 50}, () => 
+              `${Math.random() * 2000}px ${Math.random() * 1000}px #FFF`
+            ).join(', ')};
+          animation: twinkle 3s infinite;
+        }
+
+        .stars-medium {
+          position: absolute;
+          width: 2px;
+          height: 2px;
+          background: white;
+          box-shadow: 
+            ${Array.from({length: 30}, () => 
+              `${Math.random() * 2000}px ${Math.random() * 1000}px #FFF`
+            ).join(', ')};
+          animation: twinkle 4s infinite 1s;
+        }
+
+        .stars-large {
+          position: absolute;
+          width: 3px;
+          height: 3px;
+          background: white;
+          box-shadow: 
+            ${Array.from({length: 15}, () => 
+              `${Math.random() * 2000}px ${Math.random() * 1000}px rgba(139, 92, 246, 0.8)`
+            ).join(', ')};
+          animation: twinkle 5s infinite 2s;
+        }
+
+        .glow-card {
+          box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+        }
+
+        .glow-card:hover {
+          box-shadow: 0 0 30px rgba(139, 92, 246, 0.3), 0 0 60px rgba(139, 92, 246, 0.1);
+        }
+
+        .cosmic-border {
+          position: relative;
+          background: linear-gradient(145deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%);
+        }
+
+        .float-animation {
+          animation: float 6s ease-in-out infinite;
+        }
       `}</style>
 
       {/* Left Sidebar */}
-      <aside className="w-full md:w-64 lg:w-80 bg-slate-800 border-b md:border-r md:border-b-0 border-slate-700 p-4 md:p-6 lg:p-8 flex flex-col items-center md:sticky md:top-0 md:h-screen overflow-y-auto">
+      <aside className="w-full md:w-64 lg:w-80 bg-slate-900/80 backdrop-blur-md border-b md:border-r md:border-b-0 border-violet-500/20 p-4 md:p-6 lg:p-8 flex flex-col items-center md:sticky md:top-0 md:h-screen overflow-y-auto relative z-10">
         <div className="text-center mb-6 w-full">
-          <img src="/profile.png" alt="Manas Aggrawal" className="w-24 h-24 lg:w-40 lg:h-40 rounded-full object-cover mb-4 mx-auto ring-4 ring-violet-500 ring-offset-4 ring-offset-slate-800" />
+          <img src="/profile.png" alt="Manas Aggrawal" className="w-24 h-24 lg:w-40 lg:h-40 rounded-full object-cover mb-4 mx-auto ring-4 ring-violet-500 ring-offset-4 ring-offset-slate-900 shadow-lg shadow-violet-500/50" />
           
           <h1 className="text-2xl lg:text-3xl font-bold text-white mb-2">
             MANAS AGGRAWAL
@@ -546,8 +620,8 @@ const Portfolio = () => {
             Backend Engineer | Research Apprentice | Teaching Assistant | MS CS Student
           </p>
 
-          <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4 mb-6">
-            <p className="text-violet-400 font-semibold mb-2 text-sm">🎯 Availability</p>
+          <div className="bg-gradient-to-br from-violet-500/20 to-purple-500/10 border border-violet-500/30 rounded-lg p-4 mb-6 glow-card">
+            <p className="text-violet-300 font-semibold mb-2 text-sm">🎯 Availability</p>
             <p className="text-xs text-gray-300 leading-relaxed">
               Open to <span className="font-semibold text-white">Full-time SDE roles starting May 2026</span>
             </p>
@@ -575,7 +649,7 @@ const Portfolio = () => {
         <a
           href="/resume.pdf"
           download="Manas_Aggrawal_Resume.pdf"
-          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors mb-6 font-medium shadow-lg shadow-violet-500/20"
+          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-lg hover:from-violet-500 hover:to-purple-500 transition-all mb-6 font-medium shadow-lg shadow-violet-500/30 hover:shadow-violet-500/50"
         >
           <Download className="w-4 h-4" />
           Download Resume
@@ -599,7 +673,7 @@ const Portfolio = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-h-screen lg:h-screen overflow-hidden">
-        <nav className="bg-slate-800 border-b border-slate-700 px-4 lg:px-8 py-4 sticky top-0 z-40">
+        <nav className="bg-slate-900/90 backdrop-blur-md border-b border-violet-500/20 px-4 lg:px-8 py-4 sticky top-0 z-40 relative">
           <div className="hidden md:flex gap-2 flex-wrap">
             {navItems.map((item) => (
               <button
@@ -607,8 +681,8 @@ const Portfolio = () => {
                 onClick={() => handleSectionChange(item.id)}
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all font-medium ${
                   activeSection === item.id
-                    ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/30'
-                    : 'text-gray-300 hover:bg-slate-700 hover:text-white border border-slate-600'
+                    ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg shadow-violet-500/50'
+                    : 'text-gray-300 hover:bg-slate-800 hover:text-white border border-slate-700 hover:border-violet-500/50'
                 }`}
               >
                 {item.icon}
@@ -662,7 +736,7 @@ const Portfolio = () => {
       {/* Modals */}
       {selectedItem && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" onClick={() => setSelectedItem(null)}>
-          <div className="bg-slate-800 border border-slate-700 rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 lg:p-8 relative shadow-2xl shadow-violet-500/10" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-slate-800/95 backdrop-blur-md border border-violet-500/30 rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 lg:p-8 relative shadow-2xl shadow-violet-500/20" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setSelectedItem(null)}
               className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
@@ -671,7 +745,7 @@ const Portfolio = () => {
             </button>
             
             <div className="flex items-start gap-4 mb-6">
-              <div className="bg-violet-500/10 p-4 rounded-lg border border-violet-500/20">
+              <div className="bg-violet-500/10 p-4 rounded-lg border border-violet-500/20 shadow-lg shadow-violet-500/20">
                 {selectedItem.icon}
               </div>
               <div>
@@ -702,7 +776,7 @@ const Portfolio = () => {
                   href={selectedItem.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors font-medium shadow-lg shadow-violet-500/20"
+                  className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-lg hover:from-violet-500 hover:to-purple-500 transition-all font-medium shadow-lg shadow-violet-500/30"
                 >
                   View Project <ExternalLink className="w-4 h-4" />
                 </a>
@@ -714,7 +788,7 @@ const Portfolio = () => {
 
       {showTranscript && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" onClick={() => setShowTranscript(null)}>
-          <div className="bg-slate-800 border border-slate-700 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 lg:p-8 relative shadow-2xl shadow-violet-500/10" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-slate-800/95 backdrop-blur-md border border-violet-500/30 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 lg:p-8 relative shadow-2xl shadow-violet-500/20" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setShowTranscript(null)}
               className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
@@ -738,7 +812,7 @@ const Portfolio = () => {
               <a
                 href={showTranscript}
                 download={`Manas_Aggrawal_Transcript_${showTranscript.split('/').pop()}`}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors font-medium shadow-lg shadow-violet-500/20"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-lg hover:from-violet-500 hover:to-purple-500 transition-all font-medium shadow-lg shadow-violet-500/30"
               >
                 <Download className="w-5 h-5" />
                 Download Transcript
