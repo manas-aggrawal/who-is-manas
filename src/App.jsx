@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Download, Mail, Phone, Linkedin, Github, FileCode, Code2, Database, Cloud, Terminal, ExternalLink, X, Book, Package, Briefcase, FolderGit2, Award, Home, Menu, BookOpen, GitBranch } from 'lucide-react';
 
 const Portfolio = () => {
@@ -96,7 +96,6 @@ const Portfolio = () => {
       period: "Sep 2024 – Apr 2026 ",
       location: "Boston, MA",
       gpa: "3.75",
-      color: "blue",
       coursework: "Algorithms, Software Design Patterns, Principles of Programming Languages, Programming Languages Research, Mobile App Development, Web Development",
       roles: [
         {
@@ -116,7 +115,6 @@ const Portfolio = () => {
       degree: "Bachelor of Technology – Computer Science Engineering",
       period: "Aug 2016 – Sep 2020",
       location: "Delhi, India",
-      color: "blue",
       coursework: "Data Structure, Networking, Operating Systems, Object-Oriented Design, Machine Learning",
       roles: [],
       hasTranscript: true,
@@ -175,21 +173,49 @@ const Portfolio = () => {
     "Others": ["Git", "Sentry", "OpenTelemetry", "REST APIs", "Agile", "SDLC"]
   };
 
+  const researchWork = {
+    title: "Typed Conversational Interfaces",
+    role: "Research Apprentice",
+    advisor: "Prof Chris Martens",
+    institution: "Northeastern University",
+    period: "Sep 2024 – Present",
+    description: "I'm currently researching on \"Typed Conversational Interfaces\" in Programming Languages under Prof Chris Martens. We're trying to formalize a domain specific programming language, closer to natural language, with type system which will prevent invalid states and guarantee reliable behavior. The motivation behind this is to reduce chatbots' dependency on LLMs for user queries."
+  };
+
+  const openSourceProjects = [
+    {
+      name: "Performance Monitoring Tool",
+      tech: "Node.js, TypeScript, AWS X-Ray, OpenTelemetry, npm",
+      description: "Published npm package with distributed tracing and central error tracking, enabling observability in backend services and reducing debugging time by ~60%",
+      stats: "450+ downloads",
+      link: "https://www.npmjs.com/package/nodejs-observability",
+      icon: <Package className="w-8 h-8" />
+    },
+    {
+      name: "NestJs Backend Framework",
+      tech: "Node.js, NestJS, PostgreSQL, Prisma ORM, Docker",
+      description: "Production-ready NestJS framework with authentication, database, and essentials pre-configured",
+      stats: "Open Source",
+      link: "https://github.com/manas-aggrawal/nestjs-boilerplate",
+      icon: <Terminal className="w-8 h-8" />
+    }
+  ];
+
   const renderContent = () => {
     switch(activeSection) {
       case 'about':
         return (
           <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 border-b border-gray-200 pb-2">About Me</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">About Me</h2>
             
-            <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-              <p className="text-base lg:text-lg text-gray-700 leading-relaxed mb-4">
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all">
+              <p className="text-base lg:text-lg text-gray-300 leading-relaxed mb-4">
                 Experienced Software Engineer with over 3.5 years of expertise in backend engineering, building scalable architectures, distributed systems, and high-performance services.
               </p>
-              <p className="text-gray-700 leading-relaxed mb-4">
+              <p className="text-gray-300 leading-relaxed mb-4">
                 Currently pursuing MS in Computer Science at Northeastern University (GPA: 3.75).
               </p>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-gray-300 leading-relaxed">
                 Serving as Research Apprentice for "Typed Conversational Interfaces" in Programming Languages under Prof Chris Martens and Lead Graduate Teaching Assistant for Software Engineering.
               </p>
             </div>
@@ -199,32 +225,32 @@ const Portfolio = () => {
       case 'experience':
         return (
           <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 border-b border-gray-200 pb-2">Work Experience</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">Work Experience</h2>
             {experience.map((job, idx) => (
-              <div key={idx} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4">
                   <div>
-                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900">{job.title}</h3>
-                    <p className="text-lg text-gray-600">{job.company}</p>
+                    <h3 className="text-xl lg:text-2xl font-bold text-white">{job.title}</h3>
+                    <p className="text-lg text-gray-400">{job.company}</p>
                   </div>
-                  <div className="text-left lg:text-right text-gray-600 mt-2 lg:mt-0">
+                  <div className="text-left lg:text-right text-gray-500 mt-2 lg:mt-0">
                     <p className="text-sm">{job.period}</p>
                     <p className="text-sm">{job.location}</p>
                   </div>
                 </div>
-                <ul className="space-y-2 text-gray-700 mb-4">
+                <ul className="space-y-2 text-gray-300 mb-4">
                   {job.highlights.map((highlight, i) => (
                     <li key={i} className="flex items-start">
-                      <span className="text-gray-900 mr-2 flex-shrink-0">•</span>
+                      <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
                       <span className="text-sm">{highlight}</span>
                     </li>
                   ))}
                 </ul>
                 <button
                   onClick={() => setSelectedItem(job)}
-                  className="text-white hover:text-gray-900 hover:bg-white text-sm flex items-center gap-2 transition-colors underline"
+                  className="text-violet-400 hover:text-violet-300 text-sm flex items-center gap-2 transition-colors font-medium"
                 >
-                  Read more... <ExternalLink className="w-4 h-4" />
+                  Read more <ExternalLink className="w-4 h-4" />
                 </button>
               </div>
             ))}
@@ -234,17 +260,17 @@ const Portfolio = () => {
       case 'education':
         return (
           <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 border-b border-gray-200 pb-2">Education</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">Education</h2>
             
             {education.map((edu, idx) => (
-              <div key={idx} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all">
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4">
                   <div>
-                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900">{edu.school}</h3>
-                    <p className="text-lg text-gray-700">{edu.degree}</p>
-                    {edu.gpa && <p className="text-gray-700 font-semibold">GPA: {edu.gpa}</p>}
+                    <h3 className="text-xl lg:text-2xl font-bold text-white">{edu.school}</h3>
+                    <p className="text-lg text-gray-300">{edu.degree}</p>
+                    {edu.gpa && <p className="text-violet-400 font-semibold">GPA: {edu.gpa}</p>}
                   </div>
-                  <div className="text-left lg:text-right text-gray-600 mt-2 lg:mt-0">
+                  <div className="text-left lg:text-right text-gray-500 mt-2 lg:mt-0">
                     <p className="text-sm">{edu.period}</p>
                     <p className="text-sm">{edu.location}</p>
                   </div>
@@ -253,7 +279,7 @@ const Portfolio = () => {
                 {edu.hasTranscript && (
                   <button
                     onClick={() => setShowTranscript(edu.transcriptFile)}
-                    className="mb-4 px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-white hover:text-gray-900 border border-gray-900 transition-all duration-300 text-sm flex items-center gap-2"
+                    className="mb-4 px-6 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors text-sm flex items-center gap-2"
                   >
                     <FileCode className="w-4 h-4" />
                     View Transcript
@@ -262,14 +288,14 @@ const Portfolio = () => {
 
                 <div className="space-y-4">
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Relevant Coursework</h4>
-                    <p className="text-gray-700 text-sm">{edu.coursework}</p>
+                    <h4 className="text-lg font-semibold text-white mb-2">Relevant Coursework</h4>
+                    <p className="text-gray-300 text-sm">{edu.coursework}</p>
                   </div>
 
                   {edu.roles.map((role, roleIdx) => (
                     <div key={roleIdx}>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-2">{role.title}</h4>
-                      <p className="text-gray-700 text-sm">{role.description}</p>
+                      <h4 className="text-lg font-semibold text-white mb-2">{role.title}</h4>
+                      <p className="text-gray-300 text-sm">{role.description}</p>
                     </div>
                   ))}
                 </div>
@@ -281,15 +307,14 @@ const Portfolio = () => {
       case 'research':
         return (
           <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 border-b border-gray-200 pb-2">Research</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">Research</h2>
             
-            <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-              <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">Typed Conversational Interfaces</h3>
-              <p className="text-gray-600 mb-4">Research Apprentice • Prof Chris Martens • Northeastern University</p>
-              <p className="text-gray-700 leading-relaxed">
-                I'm currently researching on "Typed Conversational Interfaces" in Programming Languages under Prof Chris Martens.
-                We're trying to formalize a domain specific programming language, closer to natural language, with type system which will prevent invalid states and guarantee reliable behavior. 
-                The motivation behind this is to reduce chatbots' dependency on LLMs for user queries.
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all">
+              <h3 className="text-xl lg:text-2xl font-bold text-white mb-2">{researchWork.title}</h3>
+              <p className="text-gray-400 mb-4">{researchWork.role} • {researchWork.advisor} • {researchWork.institution}</p>
+              <p className="text-sm text-gray-500 mb-4">{researchWork.period}</p>
+              <p className="text-gray-300 leading-relaxed">
+                {researchWork.description}
               </p>
             </div>
           </div>
@@ -298,43 +323,29 @@ const Portfolio = () => {
       case 'opensource':
         return (
           <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 border-b border-gray-200 pb-2">Open Source Contributions</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">Open Source Contributions</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <a
-                href="https://www.npmjs.com/package/nodejs-observability"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow block"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="bg-blue-50 p-3 rounded-lg">
-                    <Package className="w-8 h-8 text-blue-600" />
+              {openSourceProjects.map((proj, idx) => (
+                <a
+                  key={idx}
+                  href={proj.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10 transition-all block"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="bg-violet-500/10 p-3 rounded-lg text-violet-400 border border-violet-500/20">
+                      {proj.icon}
+                    </div>
+                    <ExternalLink className="w-5 h-5 text-gray-500" />
                   </div>
-                  <ExternalLink className="w-5 h-5 text-gray-400" />
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-gray-900">Performance Monitoring Tool</h3>
-                <p className="text-sm text-gray-600 mb-3">Node.js, TypeScript, AWS X-Ray, OpenTelemetry, npm</p>
-                <p className="text-gray-700 text-sm mb-3">Published npm package with distributed tracing and central error tracking, enabling observability in backend services and reducing debugging time by ~60%</p>
-                <p className="text-sm text-gray-700 font-semibold">450+ downloads</p>
-              </a>
-
-              <a
-                href="https://github.com/manas-aggrawal/nestjs-boilerplate"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow block"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="bg-blue-50 p-3 rounded-lg">
-                    <Terminal className="w-8 h-8 text-blue-600" />
-                  </div>
-                  <ExternalLink className="w-5 h-5 text-gray-400" />
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-gray-900">NestJs Backend Framework</h3>
-                <p className="text-sm text-gray-600 mb-3">Node.js, NestJS, PostgreSQL, Prisma ORM, Docker</p>
-                <p className="text-gray-700 text-sm">Production-ready NestJS framework with authentication, database, and essentials pre-configured</p>
-              </a>
+                  <h3 className="text-xl font-bold mb-2 text-white">{proj.name}</h3>
+                  <p className="text-sm text-gray-400 mb-3">{proj.tech}</p>
+                  <p className="text-gray-300 text-sm mb-3">{proj.description}</p>
+                  <p className="text-sm text-violet-400 font-semibold">{proj.stats}</p>
+                </a>
+              ))}
             </div>
           </div>
         );
@@ -342,25 +353,25 @@ const Portfolio = () => {
       case 'projects':
         return (
           <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 border-b border-gray-200 pb-2">Projects</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">Projects</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {projects.map((project, idx) => (
                 <div
                   key={idx}
-                  className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                  className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10 transition-all cursor-pointer"
                   onClick={() => setSelectedItem(project)}
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <div className="bg-blue-50 p-3 rounded-lg">
+                    <div className="bg-violet-500/10 p-3 rounded-lg text-violet-400 border border-violet-500/20">
                       {project.icon}
                     </div>
-                    <ExternalLink className="w-5 h-5 text-gray-400" />
+                    <ExternalLink className="w-5 h-5 text-gray-500" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">{project.name}</h3>
-                  <p className="text-sm text-gray-600 mb-3">{project.tech}</p>
-                  <p className="text-gray-700 text-sm mb-3">{project.description}</p>
-                  <button className="text-white hover:text-gray-900 hover:bg-white text-sm flex items-center gap-1 underline">
-                    Read more... <ExternalLink className="w-3 h-3" />
+                  <h3 className="text-xl font-bold mb-2 text-white">{project.name}</h3>
+                  <p className="text-sm text-gray-400 mb-3">{project.tech}</p>
+                  <p className="text-gray-300 text-sm mb-3">{project.description}</p>
+                  <button className="text-violet-400 hover:text-violet-300 text-sm flex items-center gap-1 font-medium">
+                    Read more <ExternalLink className="w-3 h-3" />
                   </button>
                 </div>
               ))}
@@ -371,8 +382,8 @@ const Portfolio = () => {
       case 'articles':
         return (
           <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 border-b border-gray-200 pb-2">Articles & Blog</h2>
-            <p className="text-gray-600">Technical writing and insights from my engineering journey</p>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">Articles & Blog</h2>
+            <p className="text-gray-400">Technical writing and insights from my engineering journey</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {articles.map((article, idx) => (
@@ -381,11 +392,11 @@ const Portfolio = () => {
                   href={article.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
+                  className="block bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 hover:shadow-xl hover:shadow-violet-500/10 transition-all"
                 >
                   <div className="flex items-start gap-3 mb-3">
-                    <div className="bg-blue-50 p-2 rounded-lg flex-shrink-0">
-                      <Book className="w-5 h-5 text-blue-600" />
+                    <div className="bg-violet-500/10 p-2 rounded-lg flex-shrink-0 border border-violet-500/20">
+                      <Book className="w-5 h-5 text-violet-400" />
                     </div>
                     <div className="flex items-center gap-2 text-xs text-gray-500">
                       <span>{article.platform}</span>
@@ -394,17 +405,17 @@ const Portfolio = () => {
                     </div>
                   </div>
                   
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-2 hover:text-violet-400 transition-colors">
                     {article.title}
                   </h3>
                   
                   {article.description && (
-                    <p className="text-sm text-gray-600 mb-4">
+                    <p className="text-sm text-gray-400 mb-4">
                       {article.description}
                     </p>
                   )}
                   
-                  <div className="flex items-center gap-2 text-sm text-blue-600">
+                  <div className="flex items-center gap-2 text-sm text-violet-400 font-medium">
                     Read on Medium 
                     <ExternalLink className="w-4 h-4" />
                   </div>
@@ -412,13 +423,13 @@ const Portfolio = () => {
               ))}
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-lg p-6 text-center shadow-sm">
-              <p className="text-gray-600 mb-4">More articles coming soon!</p>
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 text-center">
+              <p className="text-gray-400 mb-4">More articles coming soon!</p>
               <a
                 href="https://medium.com/@manasagg7199"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors underline"
+                className="inline-flex items-center gap-2 text-violet-400 hover:text-violet-300 transition-colors font-medium"
               >
                 View all on Medium <ExternalLink className="w-4 h-4" />
               </a>
@@ -429,20 +440,20 @@ const Portfolio = () => {
       case 'skills':
         return (
           <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 border-b border-gray-200 pb-2">Technical Skills</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">Technical Skills</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {Object.entries(skills).map(([category, items], idx) => (
-                <div key={idx} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-                  <h3 className="text-xl font-bold mb-4 text-gray-900 flex items-center gap-2">
-                    {category === "Languages" && <Code2 className="w-5 h-5 text-gray-700" />}
-                    {category === "Database" && <Database className="w-5 h-5 text-gray-700" />}
-                    {category === "Cloud & DevOps" && <Cloud className="w-5 h-5 text-gray-700" />}
-                    {category === "Frameworks" && <Terminal className="w-5 h-5 text-gray-700" />}
+                <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all">
+                  <h3 className="text-xl font-bold mb-4 text-white flex items-center gap-2">
+                    {category === "Languages" && <Code2 className="w-5 h-5 text-violet-400" />}
+                    {category === "Database" && <Database className="w-5 h-5 text-violet-400" />}
+                    {category === "Cloud & DevOps" && <Cloud className="w-5 h-5 text-violet-400" />}
+                    {category === "Frameworks" && <Terminal className="w-5 h-5 text-violet-400" />}
                     {category}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {items.map((skill, i) => (
-                      <span key={i} className="px-3 py-1 bg-gray-100 text-gray-900 rounded-full text-sm border border-gray-200">
+                      <span key={i} className="px-3 py-1 bg-slate-700 text-gray-300 rounded-full text-sm border border-slate-600 hover:border-violet-500/50 hover:bg-violet-500/10 transition-all">
                         {skill}
                       </span>
                     ))}
@@ -456,33 +467,33 @@ const Portfolio = () => {
       case 'contact':
         return (
           <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 border-b border-gray-200 pb-2">Get In Touch</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">Get In Touch</h2>
             
-            <div className="bg-white border border-gray-200 rounded-lg p-6 lg:p-8 text-center shadow-sm">
-              <p className="text-lg lg:text-xl text-gray-700 mb-6 lg:mb-8">
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 lg:p-8 text-center">
+              <p className="text-lg lg:text-xl text-gray-300 mb-6 lg:mb-8">
                 Let's build something amazing together! 🚀
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
                 <a 
                   href="mailto:aggrawal.m@northeastern.edu"
-                  className="flex items-center justify-center gap-3 bg-gray-50 border border-gray-200 rounded-lg p-6 hover:bg-blue-50 hover:border-blue-200 transition-colors"
+                  className="flex items-center justify-center gap-3 bg-slate-700/50 border border-slate-600 rounded-xl p-6 hover:border-violet-500/50 hover:bg-slate-700 transition-all"
                 >
-                  <Mail className="w-6 h-6 lg:w-8 lg:h-8 text-blue-600 flex-shrink-0" />
+                  <Mail className="w-6 h-6 lg:w-8 lg:h-8 text-violet-400 flex-shrink-0" />
                   <div className="text-left min-w-0 flex-1">
-                    <p className="text-xs lg:text-sm text-gray-600 group-hover:text-gray-300 transition-colors">Email</p>
-                    <p className="text-sm lg:text-lg text-gray-900 group-hover:text-white transition-colors break-all">aggrawal.m@northeastern.edu</p>
+                    <p className="text-xs lg:text-sm text-gray-500">Email</p>
+                    <p className="text-sm lg:text-lg text-white break-all">aggrawal.m@northeastern.edu</p>
                   </div>
                 </a>
                 
                 <a 
                   href="tel:+18572651533"
-                  className="flex items-center justify-center gap-3 bg-gray-50 border border-gray-200 rounded-lg p-6 hover:bg-blue-50 hover:border-blue-200 transition-colors"
+                  className="flex items-center justify-center gap-3 bg-slate-700/50 border border-slate-600 rounded-xl p-6 hover:border-violet-500/50 hover:bg-slate-700 transition-all"
                 >
-                  <Phone className="w-6 h-6 lg:w-8 lg:h-8 text-blue-600 flex-shrink-0" />
+                  <Phone className="w-6 h-6 lg:w-8 lg:h-8 text-violet-400 flex-shrink-0" />
                   <div className="text-left min-w-0 flex-1">
-                    <p className="text-xs lg:text-sm text-gray-600">Phone</p>
-                    <p className="text-sm lg:text-lg text-gray-900">(857) 265-1533</p>
+                    <p className="text-xs lg:text-sm text-gray-500">Phone</p>
+                    <p className="text-sm lg:text-lg text-white">(857) 265-1533</p>
                   </div>
                 </a>
               </div>
@@ -492,14 +503,14 @@ const Portfolio = () => {
                   href="https://www.linkedin.com/in/manasaggrawal07/" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg p-4 lg:p-6 hover:bg-blue-50 hover:border-blue-200 transition-colors w-28"
+                  className="flex flex-col items-center gap-2 bg-slate-700/50 border border-slate-600 rounded-xl p-4 lg:p-6 hover:border-violet-500/50 hover:bg-slate-700 transition-all w-28"
                 >
-                  <Linkedin className="w-8 h-8 text-blue-600" />
-                  <span className="text-xs text-gray-700">LinkedIn</span>
+                  <Linkedin className="w-8 h-8 text-violet-400" />
+                  <span className="text-xs text-gray-300">LinkedIn</span>
                 </a>
               </div>
 
-              <p className="text-gray-600">📍 Based in Boston, MA</p>
+              <p className="text-gray-400">📍 Based in Boston, MA</p>
             </div>
           </div>
         );
@@ -510,54 +521,53 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="bg-white text-gray-900 min-h-screen flex flex-col lg:flex-row">
+    <div className="bg-slate-900 text-gray-100 min-h-screen flex flex-col lg:flex-row">
       <style>{`
         body, html {
           margin: 0;
           padding: 0;
           overflow-x: hidden;
         }
-        
         * {
           box-sizing: border-box;
         }
       `}</style>
 
-      {/* Left Sidebar - Profile */}
-      <aside className="w-full md:w-64 lg:w-80 bg-gray-50 border-b md:border-r md:border-b-0 border-gray-100 p-4 md:p-6 lg:p-8 flex flex-col items-center md:sticky md:top-0 md:h-screen overflow-y-auto">
+      {/* Left Sidebar */}
+      <aside className="w-full md:w-64 lg:w-80 bg-slate-800 border-b md:border-r md:border-b-0 border-slate-700 p-4 md:p-6 lg:p-8 flex flex-col items-center md:sticky md:top-0 md:h-screen overflow-y-auto">
         <div className="text-center mb-6 w-full">
-          <img src="/profile.png" alt="Manas Aggrawal" className="w-24 h-24 lg:w-40 lg:h-40 rounded-full object-cover mb-4 mx-auto border-4 border-gray-900" />
+          <img src="/profile.png" alt="Manas Aggrawal" className="w-24 h-24 lg:w-40 lg:h-40 rounded-full object-cover mb-4 mx-auto ring-4 ring-violet-500 ring-offset-4 ring-offset-slate-800" />
           
-          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-2xl lg:text-3xl font-bold text-white mb-2">
             MANAS AGGRAWAL
           </h1>
           
-          <p className="text-sm text-gray-600 mb-4">
+          <p className="text-sm text-gray-400 mb-4 leading-relaxed">
             Backend Engineer | Research Apprentice | Teaching Assistant | MS CS Student
           </p>
 
-          <div className="bg-gray-100 border border-gray-300 rounded-lg p-4 mb-6">
-            <p className="text-gray-900 font-semibold mb-2 text-sm">🎯 Availability</p>
-            <p className="text-xs text-gray-700">
-              Open to <span className="font-semibold">Full-time SDE roles starting May 2026</span>
+          <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4 mb-6">
+            <p className="text-violet-400 font-semibold mb-2 text-sm">🎯 Availability</p>
+            <p className="text-xs text-gray-300 leading-relaxed">
+              Open to <span className="font-semibold text-white">Full-time SDE roles starting May 2026</span>
             </p>
           </div>
         </div>
 
         <div className="flex gap-4 mb-6">
-          <a href="https://www.linkedin.com/in/manasaggrawal07/" className="text-gray-600 hover:text-blue-600 transition-colors">
+          <a href="https://www.linkedin.com/in/manasaggrawal07/" className="text-gray-400 hover:text-violet-400 transition-colors">
             <Linkedin className="w-5 h-5" />
           </a>
-          <a href="https://github.com/manas-aggrawal" className="text-gray-600 hover:text-gray-900 transition-colors">
+          <a href="https://github.com/manas-aggrawal" className="text-gray-400 hover:text-white transition-colors">
             <Github className="w-5 h-5" />
           </a>
-          <a href="mailto:aggrawal.m@northeastern.edu" className="text-gray-600 hover:text-gray-900 transition-colors">
+          <a href="mailto:aggrawal.m@northeastern.edu" className="text-gray-400 hover:text-white transition-colors">
             <Mail className="w-5 h-5" />
           </a>
-          <a href="https://leetcode.com/u/aggrawal_manas/" className="text-gray-600 hover:text-gray-900 transition-colors">
+          <a href="https://leetcode.com/u/aggrawal_manas/" className="text-gray-400 hover:text-white transition-colors">
             <Code2 className="w-5 h-5" />
           </a>
-          <a href="https://medium.com/@manasagg7199" className="text-gray-600 hover:text-gray-900 transition-colors">
+          <a href="https://medium.com/@manasagg7199" className="text-gray-400 hover:text-white transition-colors">
             <Book className="w-5 h-5" />
           </a>
         </div>
@@ -565,13 +575,13 @@ const Portfolio = () => {
         <a
           href="/resume.pdf"
           download="Manas_Aggrawal_Resume.pdf"
-          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-900 text-white rounded-lg hover:bg-white hover:text-gray-900 border border-gray-900 transition-all duration-300 mb-6"
+          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors mb-6 font-medium shadow-lg shadow-violet-500/20"
         >
           <Download className="w-4 h-4" />
           Download Resume
         </a>
 
-        <div className="text-sm text-gray-600 space-y-2 text-center mb-6">
+        <div className="text-sm text-gray-400 space-y-2 text-center mb-6">
           <p className="flex items-center justify-center gap-2">
             <Phone className="w-4 h-4" /> (857) 265-1533
           </p>
@@ -580,26 +590,26 @@ const Portfolio = () => {
           </p>
         </div>
 
-        <div className="w-full border-t border-gray-200 pt-6">
+        <div className="w-full border-t border-slate-700 pt-6">
           <p className="text-xs text-gray-500 text-center">
             © 2025 Manas Aggrawal
           </p>
         </div>
       </aside>
 
-      {/* Main Content Area */}
+      {/* Main Content */}
       <div className="flex-1 flex flex-col min-h-screen lg:h-screen overflow-hidden">
-        <nav className="bg-white border-b border-gray-100 px-4 lg:px-8 py-4 sticky top-0 z-40">
-          <div className="hidden md:flex gap-2 lg:gap-4 flex-wrap">
+        <nav className="bg-slate-800 border-b border-slate-700 px-4 lg:px-8 py-4 sticky top-0 z-40">
+          <div className="hidden md:flex gap-2 flex-wrap">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleSectionChange(item.id)}
-                className={`flex items-center gap-1 lg:gap-1 px-2 lg:px-3 py-2 rounded-lg text-xs lg:text-sm transition-all duration-300 ${
-                activeSection === item.id
-                  ? 'bg-white text-gray-900'
-                  : 'bg-gray-900 text-white hover:bg-white hover:text-gray-900 border border-gray-900'
-              }`}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all font-medium ${
+                  activeSection === item.id
+                    ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/30'
+                    : 'text-gray-300 hover:bg-slate-700 hover:text-white border border-slate-600'
+                }`}
               >
                 {item.icon}
                 {item.label}
@@ -608,19 +618,19 @@ const Portfolio = () => {
           </div>
 
           <div className="md:hidden flex items-center justify-between">
-            <span className="text-gray-900 font-semibold text-sm">
+            <span className="text-violet-400 font-semibold text-sm">
               {navItems.find(item => item.id === activeSection)?.label}
             </span>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-gray-900 p-2"
+              className="text-gray-300 p-2"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
 
           {mobileMenuOpen && (
-            <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-100 shadow-sm">
+            <div className="md:hidden absolute top-full left-0 right-0 bg-slate-800 border-b border-slate-700 shadow-xl">
               {navItems.map((item) => (
                 <button
                   key={item.id}
@@ -628,10 +638,10 @@ const Portfolio = () => {
                     handleSectionChange(item.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-all duration-300 ${
+                  className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-all ${
                     activeSection === item.id
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-900 hover:bg-gray-100'
+                      ? 'bg-violet-600/20 text-violet-400 border-l-4 border-violet-500 font-medium'
+                      : 'text-gray-300 hover:bg-slate-700'
                   }`}
                 >
                   {item.icon}
@@ -642,44 +652,44 @@ const Portfolio = () => {
           )}
         </nav>
 
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 bg-white">
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
           <div className={`max-w-5xl mx-auto transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
             {renderContent()}
           </div>
         </main>
       </div>
 
-      {/* Modal Popup */}
+      {/* Modals */}
       {selectedItem && (
-        <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4" onClick={() => setSelectedItem(null)}>
-          <div className="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 lg:p-8 relative shadow-xl" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" onClick={() => setSelectedItem(null)}>
+          <div className="bg-slate-800 border border-slate-700 rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 lg:p-8 relative shadow-2xl shadow-violet-500/10" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setSelectedItem(null)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
             >
               <X className="w-6 h-6" />
             </button>
             
             <div className="flex items-start gap-4 mb-6">
-              <div className="bg-gray-100 p-4 rounded-lg">
+              <div className="bg-violet-500/10 p-4 rounded-lg border border-violet-500/20">
                 {selectedItem.icon}
               </div>
               <div>
-                <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">{selectedItem.name || selectedItem.title}</h2>
-                <p className="text-gray-600 text-sm">{selectedItem.tech || selectedItem.period}</p>
+                <h2 className="text-2xl lg:text-3xl font-bold text-white mb-2">{selectedItem.name || selectedItem.title}</h2>
+                <p className="text-gray-400 text-sm">{selectedItem.tech || selectedItem.period}</p>
               </div>
             </div>
 
             <div>
-              <p className="text-gray-700 leading-relaxed mb-4">{selectedItem.details}</p>
+              <p className="text-gray-300 leading-relaxed mb-4">{selectedItem.details}</p>
               
               {selectedItem.highlights && (
                 <div className="mt-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">Key Achievements</h3>
+                  <h3 className="text-xl font-bold text-white mb-3">Key Achievements</h3>
                   <ul className="space-y-2">
                     {selectedItem.highlights.map((highlight, i) => (
-                      <li key={i} className="flex items-start text-gray-700">
-                        <span className="text-gray-900 mr-2">•</span>
+                      <li key={i} className="flex items-start text-gray-300">
+                        <span className="text-violet-400 mr-2">•</span>
                         <span className="text-sm">{highlight}</span>
                       </li>
                     ))}
@@ -692,7 +702,7 @@ const Portfolio = () => {
                   href={selectedItem.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors font-medium shadow-lg shadow-violet-500/20"
                 >
                   View Project <ExternalLink className="w-4 h-4" />
                 </a>
@@ -702,20 +712,20 @@ const Portfolio = () => {
         </div>
       )}
 
-      {/* Transcript Modal */}
       {showTranscript && (
-        <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4" onClick={() => setShowTranscript(null)}>
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 lg:p-8 relative shadow-xl border border-gray-200" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" onClick={() => setShowTranscript(null)}>
+          <div className="bg-slate-800 border border-slate-700 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 lg:p-8 relative shadow-2xl shadow-violet-500/10" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setShowTranscript(null)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition-colors z-10">
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+            >
               <X className="w-6 h-6" />
             </button>
             
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">Academic Transcript</h2>
+            <h2 className="text-2xl lg:text-3xl font-bold text-white mb-6">Academic Transcript</h2>
             
-            <div className="bg-gray-100 rounded-lg p-4 mb-6">
-              <div className="aspect-[8.5/11] bg-white rounded shadow-inner">
+            <div className="bg-slate-900 rounded-lg p-4 mb-6 border border-slate-700">
+              <div className="aspect-[8.5/11] bg-slate-700 rounded">
                 <iframe
                   src={showTranscript}
                   className="w-full h-full rounded"
@@ -728,7 +738,7 @@ const Portfolio = () => {
               <a
                 href={showTranscript}
                 download={`Manas_Aggrawal_Transcript_${showTranscript.split('/').pop()}`}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors font-medium shadow-lg shadow-violet-500/20"
               >
                 <Download className="w-5 h-5" />
                 Download Transcript
