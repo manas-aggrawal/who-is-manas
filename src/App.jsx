@@ -136,7 +136,7 @@ const Portfolio = () => {
       tech: "Node.js, NestJS, PostgreSQL, Prisma ORM, Docker",
       description: "Production-ready NestJS framework with authentication, database, and essentials pre-configured",
       icon: <Terminal className="w-6 h-6" />,
-      details: "🔐 JWT Authentication • 🗄️ Prisma ORM • 🐳 Docker • 📝 Swagger • ✅ Validation • 🎯 CRUD Generator • 🔑 Password Recovery • 🎨 Code Quality • 🏗️ Clean Architecture",
+      details: "🔐 JWT Authentication • 🗄️ Prisma ORM • 🐳 Docker • 📝 Swagger • ✅ Validation • 🔑 Password Recovery • 🎨 Code Quality • 🏗️ Clean Architecture",
       link: "https://github.com/manas-aggrawal/nestjs-boilerplate"
     },
     {
@@ -194,8 +194,8 @@ const Portfolio = () => {
     {
       name: "NestJs Backend Framework",
       tech: "Node.js, NestJS, PostgreSQL, Prisma ORM, Docker",
-      description: "Production-ready NestJS framework with authentication, database, and essentials pre-configured",
-      stats: "Open Source",
+      description: "Production-ready NestJS framework with Docker support, request/response validation, winston logger, swagger, authentication, database connection, prismaORM and essentials pre-configured",
+      stats: "8 Forks * 27 Stars",
       link: "https://github.com/manas-aggrawal/nestjs-boilerplate",
       icon: <Terminal className="w-8 h-8" />
     }
