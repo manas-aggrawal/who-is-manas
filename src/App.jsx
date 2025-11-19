@@ -209,15 +209,30 @@ const Portfolio = () => {
             <h2 className="text-3xl lg:text-4xl font-bold text-white">About Me</h2>
             
             <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all glow-card cosmic-border">
-              <p className="text-base lg:text-lg text-gray-300 leading-relaxed mb-4">
-                Experienced Software Engineer with over 3.5 years of expertise in backend engineering, building scalable architectures, distributed systems, and high-performance services.
+            <ul>
+               <li className="flex items-start">
+                      <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
+                      <span className="text-sm">Experienced Software Engineer with over 3.5 years of expertise in backend engineering, building scalable architectures, distributed systems, and high-performance services.</span>
+                    </li>
+                     <li className="flex items-start">
+                      <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
+                      <span className="text-sm">Currently pursuing MS in Computer Science at Northeastern University (GPA: 3.75).</span>
+                    </li>
+                     <li className="flex items-start">
+                      <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
+                      <span className="text-sm">Serving as Research Apprentice for "Typed Conversational Interfaces" in Programming Languages under Prof Chris Martens and Lead Graduate Teaching Assistant for Software Engineering.</span>
+                    </li>
+            </ul>
+           
+              {/* <p className="text-base lg:text-lg text-gray-300 leading-relaxed mb-4">
+                
               </p>
               <p className="text-gray-300 leading-relaxed mb-4">
-                Currently pursuing MS in Computer Science at Northeastern University (GPA: 3.75).
+                
               </p>
               <p className="text-gray-300 leading-relaxed">
-                Serving as Research Apprentice for "Typed Conversational Interfaces" in Programming Languages under Prof Chris Martens and Lead Graduate Teaching Assistant for Software Engineering.
-              </p>
+                
+              </p> */}
             </div>
           </div>
         );
