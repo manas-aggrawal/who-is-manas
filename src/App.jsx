@@ -222,42 +222,7 @@ const Portfolio = () => {
           </div>
         );
 
-      case 'experience':
-        return (
-          <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-white">Work Experience</h2>
-            {experience.map((job, idx) => (
-              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all glow-card cosmic-border">
-                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4">
-                  <div>
-                    <h3 className="text-xl lg:text-2xl font-bold text-white">{job.title}</h3>
-                    <p className="text-lg text-gray-400">{job.company}</p>
-                  </div>
-                  <div className="text-left lg:text-right text-gray-500 mt-2 lg:mt-0">
-                    <p className="text-sm">{job.period}</p>
-                    <p className="text-sm">{job.location}</p>
-                  </div>
-                </div>
-                <ul className="space-y-2 text-gray-300 mb-4">
-                  {job.highlights.map((highlight, i) => (
-                    <li key={i} className="flex items-start">
-                      <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
-                      <span className="text-sm">{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  onClick={() => setSelectedItem(job)}
-                  className="text-violet-400 hover:text-violet-300 text-sm flex items-center gap-2 transition-colors font-medium"
-                >
-                  Read more <ExternalLink className="w-4 h-4" />
-                </button>
-              </div>
-            ))}
-          </div>
-        );
-
-      case 'education':
+        case 'education':
         return (
           <div className="space-y-6">
             <h2 className="text-3xl lg:text-4xl font-bold text-white">Education</h2>
@@ -304,23 +269,43 @@ const Portfolio = () => {
           </div>
         );
 
-      case 'research':
+
+      case 'experience':
         return (
           <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-white">Research</h2>
-            
-            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all">
-              <h3 className="text-xl lg:text-2xl font-bold text-white mb-2">{researchWork.title}</h3>
-              <p className="text-gray-400 mb-4">{researchWork.role} • {researchWork.advisor} • {researchWork.institution}</p>
-              <p className="text-sm text-gray-500 mb-4">{researchWork.period}</p>
-              <p className="text-gray-300 leading-relaxed">
-                {researchWork.description}
-              </p>
-            </div>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">Work Experience</h2>
+            {experience.map((job, idx) => (
+              <div key={idx} className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all glow-card cosmic-border">
+                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-4">
+                  <div>
+                    <h3 className="text-xl lg:text-2xl font-bold text-white">{job.title}</h3>
+                    <p className="text-lg text-gray-400">{job.company}</p>
+                  </div>
+                  <div className="text-left lg:text-right text-gray-500 mt-2 lg:mt-0">
+                    <p className="text-sm">{job.period}</p>
+                    <p className="text-sm">{job.location}</p>
+                  </div>
+                </div>
+                <ul className="space-y-2 text-gray-300 mb-4">
+                  {job.highlights.map((highlight, i) => (
+                    <li key={i} className="flex items-start">
+                      <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
+                      <span className="text-sm">{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={() => setSelectedItem(job)}
+                  className="text-violet-400 hover:text-violet-300 text-sm flex items-center gap-2 transition-colors font-medium"
+                >
+                  Read more <ExternalLink className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
           </div>
         );
 
-      case 'opensource':
+        case 'opensource':
         return (
           <div className="space-y-6">
             <h2 className="text-3xl lg:text-4xl font-bold text-white">Open Source Contributions</h2>
@@ -349,7 +334,24 @@ const Portfolio = () => {
             </div>
           </div>
         );
+      
+      case 'research':
+        return (
+          <div className="space-y-6">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">Research</h2>
+            
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all">
+              <h3 className="text-xl lg:text-2xl font-bold text-white mb-2">{researchWork.title}</h3>
+              <p className="text-gray-400 mb-4">{researchWork.role} • {researchWork.advisor} • {researchWork.institution}</p>
+              <p className="text-sm text-gray-500 mb-4">{researchWork.period}</p>
+              <p className="text-gray-300 leading-relaxed">
+                {researchWork.description}
+              </p>
+            </div>
+          </div>
+        );
 
+      
       case 'projects':
         return (
           <div className="space-y-6">
