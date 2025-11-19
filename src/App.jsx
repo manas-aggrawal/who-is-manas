@@ -17,10 +17,10 @@ const Portfolio = () => {
 
   const navItems = [
     { id: 'about', label: 'About', icon: <Home className="w-4 h-4" /> },
-    { id: 'experience', label: 'Experience', icon: <Briefcase className="w-4 h-4" /> },
     { id: 'education', label: 'Education', icon: <Award className="w-4 h-4" /> },
-    { id: 'research', label: 'Research', icon: <BookOpen className="w-4 h-4" /> },
+    { id: 'experience', label: 'Experience', icon: <Briefcase className="w-4 h-4" /> },
     { id: 'opensource', label: 'Open Source', icon: <GitBranch className="w-4 h-4" /> },
+    { id: 'research', label: 'Research', icon: <BookOpen className="w-4 h-4" /> },
     { id: 'projects', label: 'Projects', icon: <FolderGit2 className="w-4 h-4" /> },
     { id: 'articles', label: 'Articles', icon: <Book className="w-4 h-4" /> },
     { id: 'skills', label: 'Skills', icon: <Code2 className="w-4 h-4" /> },
