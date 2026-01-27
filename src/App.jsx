@@ -28,6 +28,18 @@ const Portfolio = () => {
   ];
 
   const experience = [
+
+    {
+      title: "Backend Software Engineer Intern",
+      company: "Hydrow",
+      period: "Jan 2025 – Apr 2025",
+      location: "Boston, MA",
+      highlights: [
+        "Built serverless engineering analytics platform using AWS Lambda to pinpoint bottlenecks like high PR wait times, frequent build failures, and blocked dependencies, reducing cycle time and boosting engineering velocity by 23%"
+      ],
+      details: "Building backend services for Hydrow’s main platform team using NestJs and PostgreSQL"
+    
+    },
     {
       title: "Software Engineer",
       company: "Studio Graphene",
