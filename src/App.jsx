@@ -34,9 +34,7 @@ const Portfolio = () => {
       company: "Hydrow",
       period: "Jan 2025 – Apr 2025",
       location: "Boston, MA",
-      highlights: [
-        "Built serverless engineering analytics platform using AWS Lambda to pinpoint bottlenecks like high PR wait times, frequent build failures, and blocked dependencies, reducing cycle time and boosting engineering velocity by 23%"
-      ],
+      highlights: [],
       details: "Building backend services for Hydrow’s main platform team using NestJs and PostgreSQL"
     
     },
@@ -222,7 +220,11 @@ const Portfolio = () => {
             
             <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:border-violet-500/50 transition-all glow-card cosmic-border">
             <ul>
-               <li className="flex items-start">
+                    <li className="flex items-start">
+                      <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
+                      <span className="text-sm">Currently serving as Backend Engineer Intern at Hydrow</span>
+                    </li>
+                    <li className="flex items-start">
                       <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
                       <span className="text-sm">Experienced Software Engineer with over 3.5 years of expertise in backend engineering, building scalable architectures, distributed systems, and high-performance services.</span>
                     </li>
@@ -232,7 +234,7 @@ const Portfolio = () => {
                     </li>
                      <li className="flex items-start">
                       <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
-                      <span className="text-sm">Serving as Research Apprentice for "Typed Conversational Interfaces" in Programming Languages under Prof Chris Martens and Lead Graduate Teaching Assistant for Software Engineering.</span>
+                      <span className="text-sm">Served as Research Apprentice for "Typed Conversational Interfaces" in Programming Languages under Prof Chris Martens and Lead Graduate Teaching Assistant for Software Engineering at Northeastern University.</span>
                     </li>
             </ul>
            
