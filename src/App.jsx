@@ -34,8 +34,8 @@ const Portfolio = () => {
       company: "Hydrow",
       period: "Jan 2025 – Apr 2025",
       location: "Boston, MA",
-      highlights: [],
-      details: "Building backend services for Hydrow’s main platform team using NestJs, PostgreSQL, message queues and redis"
+      highlights: ["Building backend services for Hydrow’s main platform team using NestJs, PostgreSQL, message queues and redis"],
+      details: ""
     
     },
     {
