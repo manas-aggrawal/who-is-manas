@@ -652,9 +652,11 @@ const Portfolio = () => {
           </p>
 
           <div className="bg-gradient-to-br from-violet-500/20 to-purple-500/10 border border-violet-500/30 rounded-lg p-4 mb-6 glow-card">
-            <p className="text-violet-300 font-semibold mb-2 text-sm">🎯 Availability</p>
+            <p className="text-violet-300 font-semibold mb-2 text-sm">🎯 Looking For</p>
             <p className="text-xs text-gray-300 leading-relaxed">
-              Open to <span className="font-semibold text-white">Full-time SDE roles starting Sep 2026</span>
+              <span className="font-semibold text-white">Full-time SDE roles starting Sep 2026</span>
+              <span>OR</span>
+              <span className="font-semibold text-white">SDE Intern roles starting May/June 2026</span>
             </p>
           </div>
         </div>
