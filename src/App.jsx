@@ -35,7 +35,7 @@ const Portfolio = () => {
       period: "Jan 2025 – Apr 2025",
       location: "Boston, MA",
       highlights: [],
-      details: "Building backend services for Hydrow’s main platform team using NestJs and PostgreSQL"
+      details: "Building backend services for Hydrow’s main platform team using NestJs, PostgreSQL, message queues and redis"
     
     },
     {
@@ -103,7 +103,7 @@ const Portfolio = () => {
     {
       school: "Northeastern University",
       degree: "Masters of Science – Computer Science",
-      period: "Sep 2024 – Apr 2026 ",
+      period: "Sep 2024 – Dec 2026 ",
       location: "Boston, MA",
       gpa: "3.75",
       coursework: "Algorithms, Software Design Patterns, Principles of Programming Languages, Programming Languages Research, Mobile App Development, Web Development",
@@ -188,8 +188,8 @@ const Portfolio = () => {
     role: "Research Apprentice",
     advisor: "Prof Chris Martens",
     institution: "Northeastern University",
-    period: "Sep 2024 – Present",
-    description: "I'm currently researching on \"Typed Conversational Interfaces\" in Programming Languages under Prof Chris Martens. We're trying to formalize a domain specific programming language, closer to natural language, with type system which will prevent invalid states and guarantee reliable behavior. The motivation behind this is to reduce chatbots' dependency on LLMs for user queries."
+    period: "Sep 2024 – Jan 2025",
+    description: "Researched \"Typed Conversational Interfaces\" in Programming Languages under Prof Chris Martens. We're trying to formalize a domain specific programming language, closer to natural language, with type system which will prevent invalid states and guarantee reliable behavior. The motivation behind this is to reduce chatbots' dependency on LLMs for user queries. The paper has been accepted at Plateau'25"
   };
 
   const openSourceProjects = [
