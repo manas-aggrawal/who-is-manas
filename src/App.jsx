@@ -224,14 +224,17 @@ const Portfolio = () => {
                       <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
                       <span className="text-sm">Currently serving as Backend Engineer Intern at Hydrow</span>
                     </li>
+                    <br />
                     <li className="flex items-start">
                       <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
                       <span className="text-sm">Experienced Software Engineer with over 3.5 years of expertise in backend engineering, building scalable architectures, distributed systems, and high-performance services.</span>
                     </li>
+                    <br />
                      <li className="flex items-start">
                       <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
                       <span className="text-sm">Currently pursuing MS in Computer Science at Northeastern University (GPA: 3.75).</span>
                     </li>
+                    <br />
                      <li className="flex items-start">
                       <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
                       <span className="text-sm">Served as Research Apprentice for "Typed Conversational Interfaces" in Programming Languages under Prof Chris Martens and Lead Graduate Teaching Assistant for Software Engineering at Northeastern University.</span>
