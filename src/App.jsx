@@ -105,7 +105,7 @@ const Portfolio = () => {
       degree: "Masters of Science – Computer Science",
       period: "Sep 2024 – Dec 2026 ",
       location: "Boston, MA",
-      gpa: "3.75",
+      gpa: "3.83",
       coursework: "Algorithms, Software Design Patterns, Principles of Programming Languages, Programming Languages Research, Mobile App Development, Web Development",
       roles: [
         {
@@ -222,7 +222,7 @@ const Portfolio = () => {
             <ul>
                     <li className="flex items-start">
                       <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
-                      <span className="text-sm">Currently serving as Backend Engineer Intern at Hydrow</span>
+                      <span className="text-sm">Currently serving as Backend Engineer Intern at Hydrow.</span>
                     </li>
                     <br />
                     <li className="flex items-start">
@@ -232,7 +232,7 @@ const Portfolio = () => {
                     <br />
                      <li className="flex items-start">
                       <span className="text-violet-400 mr-2 flex-shrink-0">•</span>
-                      <span className="text-sm">Currently pursuing MS in Computer Science at Northeastern University (GPA: 3.75).</span>
+                      <span className="text-sm">Pursuing MS in Computer Science at Northeastern University with a GPA of 3.83</span>
                     </li>
                     <br />
                      <li className="flex items-start">
@@ -341,6 +341,7 @@ const Portfolio = () => {
         return (
           <div className="space-y-6">
             <h2 className="text-3xl lg:text-4xl font-bold text-white">Open Source Contributions</h2>
+            <h3 className="text-1xl lg:text-1xl font-bold italic text-white">Both owned and maintained by me</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {openSourceProjects.map((proj, idx) => (
