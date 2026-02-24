@@ -205,7 +205,7 @@ const Portfolio = () => {
       name: "NestJs Backend Framework",
       tech: "Node.js, NestJS, PostgreSQL, Prisma ORM, Docker",
       description: "Production-ready NestJS framework with Docker support, request/response validation, winston logger, swagger, authentication, database connection, prismaORM and essentials pre-configured",
-      stats: "8 Forks * 27 Stars",
+      stats: "10 Forks * 40 Stars",
       link: "https://github.com/manas-aggrawal/nestjs-boilerplate",
       icon: <Terminal className="w-8 h-8" />
     }
