@@ -137,22 +137,22 @@ const Portfolio = () => {
   ];
 
   const projects = [
-    {
-      name: "Performance Monitoring Tool",
-      tech: "Node.js, TypeScript, AWS X-Ray, OpenTelemetry, npm",
-      description: "Published npm package with distributed tracing and central error tracking reducing debugging time by ~60%",
-      icon: <Code2 className="w-6 h-6" />,
-      details: "A comprehensive observability package enabling distributed tracing and central error tracking to Node.js applications. Built on OpenTelemetry standards, it automatically instruments HTTP requests, database queries, and async operations with zero code changes required. Integrates seamlessly with AWS X-Ray, Jaeger, and other tracing backends.",
-      link: "https://www.npmjs.com/package/nodejs-observability"
-    },
-    {
-      name: "NestJs Backend Framework",
-      tech: "Node.js, NestJS, PostgreSQL, Prisma ORM, Docker",
-      description: "Production-ready NestJS framework with authentication, database, and essentials pre-configured",
-      icon: <Terminal className="w-6 h-6" />,
-      details: "🔐 JWT Authentication • 🗄️ Prisma ORM • 🐳 Docker • 📝 Swagger • ✅ Validation • 🔑 Password Recovery • 🎨 Code Quality • 🏗️ Clean Architecture",
-      link: "https://github.com/manas-aggrawal/nestjs-boilerplate"
-    },
+    // {
+    //   name: "Performance Monitoring Tool",
+    //   tech: "Node.js, TypeScript, AWS X-Ray, OpenTelemetry, npm",
+    //   description: "Published npm package with distributed tracing and central error tracking reducing debugging time by ~60%",
+    //   icon: <Code2 className="w-6 h-6" />,
+    //   details: "A comprehensive observability package enabling distributed tracing and central error tracking to Node.js applications. Built on OpenTelemetry standards, it automatically instruments HTTP requests, database queries, and async operations with zero code changes required. Integrates seamlessly with AWS X-Ray, Jaeger, and other tracing backends.",
+    //   link: "https://www.npmjs.com/package/nodejs-observability"
+    // },
+    // {
+    //   name: "NestJs Backend Framework",
+    //   tech: "Node.js, NestJS, PostgreSQL, Prisma ORM, Docker",
+    //   description: "Production-ready NestJS backend boilerplate with all essentials pre-configured",
+    //   icon: <Terminal className="w-6 h-6" />,
+    //   details: "A production-ready open-source boilerplate with JWT authentication, RBAC, validation, logger, database, Prisma ORM, Docker and Swagger OpenAPI Specs. The repository is owned and maintained by me and has over 45 stars and 10 forks.",
+    //   link: "https://github.com/manas-aggrawal/nestjs-boilerplate"
+    // },
     {
       name: "Advanced Image Processor",
       tech: "Java, SwingUI, Design Patterns",
@@ -208,8 +208,8 @@ const Portfolio = () => {
     {
       name: "NestJs Backend Framework",
       tech: "Node.js, NestJS, PostgreSQL, Prisma ORM, Docker",
-      description: "Production-ready NestJS framework with Docker support, request/response validation, winston logger, swagger, authentication, database connection, prismaORM and essentials pre-configured",
-      stats: "10 Forks * 40 Stars",
+      description: "A production-ready boilerplate with all the essentials like JWT authentication, RBAC, validation, logger, database, Prisma ORM, Docker and Swagger OpenAPI Specs pre-configured.",
+      stats: "10 Forks * 45 Stars",
       link: "https://github.com/manas-aggrawal/nestjs-boilerplate",
       icon: <Terminal className="w-8 h-8" />
     }
