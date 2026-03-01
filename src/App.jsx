@@ -34,8 +34,12 @@ const Portfolio = () => {
       company: "Hydrow",
       period: "Jan 2025 – Apr 2025",
       location: "Boston, MA",
-      highlights: ["Building backend services for Hydrow’s main platform team using NestJs, PostgreSQL, message queues and redis"],
-      details: ""
+      highlights: [
+        "Built REST APIs using NestJS, PostgreSQL, and Redis, serving real-time athlete performance data across Hydrow's platform",
+        "Engineered async task queue with bounded concurrency to safely batch-process movement records in parallel, preventing resource exhaustion across shared DB and Redis instances in a multi-container Kubernetes environment",
+        "Debugged infra-level duplicate log issue by tracing the full observability pipeline — Kubernetes containers → S3 → SQS → Axiom — isolating root cause to firmware safety errors rather than application code"
+],
+      details: "Working on backend and infrastructure engineering at Hydrow"
     
     },
     {
