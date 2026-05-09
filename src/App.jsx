@@ -201,7 +201,7 @@ const Portfolio = () => {
       name: "Performance Monitoring Tool",
       tech: "Node.js, TypeScript, AWS X-Ray, OpenTelemetry, npm",
       description: "Published npm package with distributed tracing and central error tracking, enabling observability in backend services and reducing debugging time by ~60%",
-      stats: "450+ downloads",
+      stats: "550+ downloads",
       link: "https://www.npmjs.com/package/nodejs-observability",
       icon: <Package className="w-8 h-8" />
     },
@@ -209,7 +209,7 @@ const Portfolio = () => {
       name: "NestJs Backend Framework",
       tech: "Node.js, NestJS, PostgreSQL, Prisma ORM, Docker",
       description: "A production-ready boilerplate with all the essentials like JWT authentication, RBAC, validation, logger, database, Prisma ORM, Docker and Swagger OpenAPI Specs pre-configured.",
-      stats: "10 Forks * 45 Stars",
+      stats: "11 Forks * 50 Stars",
       link: "https://github.com/manas-aggrawal/nestjs-boilerplate",
       icon: <Terminal className="w-8 h-8" />
     }
@@ -662,9 +662,7 @@ const Portfolio = () => {
           <div className="bg-gradient-to-br from-violet-500/20 to-purple-500/10 border border-violet-500/30 rounded-lg p-4 mb-6 glow-card">
             <p className="text-violet-300 font-semibold mb-2 text-sm">🎯 Looking For</p>
             <p className="text-xs text-gray-300 leading-relaxed">
-              <span className="font-semibold text-white">Full-time SDE roles starting Sep 2026</span><br />
-              <span>OR</span><br />
-              <span className="font-semibold text-white">SDE Intern roles starting May/June 2026</span>
+              <span className="font-semibold text-white">Full-time SDE roles starting Jan 2027</span><br />
             </p>
           </div>
         </div>
