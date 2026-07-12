@@ -294,6 +294,7 @@ const Portfolio = () => {
   }, []);
 
   const primaryNav = sections.filter((s) => s.primary);
+  const onLightSection = ['about', 'opensource', 'research', 'writing'].includes(activeSection);
 
   return (
     <div className="app">
@@ -305,7 +306,7 @@ const Portfolio = () => {
           <button className="brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             Manas Aggrawal<span className="brand-dot">.</span>
           </button>
-          <nav className="nav-links">
+          <nav className={`nav-links ${onLightSection ? 'cap-dark' : 'cap-light'}`}>
             {primaryNav.map((s) => (
               <button key={s.id} onClick={() => goTo(s.id)} className={`navlink ${activeSection === s.id ? 'active' : ''}`}>
                 {s.label.toLowerCase()}
@@ -706,8 +707,16 @@ const Styles = () => (
     .nav .brand { color: var(--orange); }
     .nav .brand-dot { color: var(--orange); }
     /* Floating rounded capsule holding the nav links */
-    .nav-links { display: none; gap: 20px; padding: 11px 22px; background: rgba(22,22,25,.66); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(245,241,234,.13); border-radius: 999px; box-shadow: 0 6px 22px rgba(0,0,0,.28); transition: box-shadow .3s, background .3s; }
-    .nav-solid .nav-links { background: rgba(22,22,25,.82); box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+    .nav-links { display: none; gap: 20px; padding: 11px 22px; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid transparent; border-radius: 999px; transition: background .35s, border-color .35s, box-shadow .35s; }
+    /* Over dark sections → white capsule with dark links */
+    .nav-links.cap-light { background: rgba(244,239,230,.92); border-color: rgba(20,15,10,.16); box-shadow: 0 6px 22px rgba(0,0,0,.2); }
+    .nav-links.cap-light .navlink { color: #514a40; }
+    .nav-links.cap-light .navlink:hover { color: var(--orange); }
+    /* Over light sections → dark capsule with light links */
+    .nav-links.cap-dark { background: rgba(20,20,23,.72); border-color: rgba(245,241,234,.14); box-shadow: 0 6px 22px rgba(0,0,0,.3); }
+    .nav-links.cap-dark .navlink { color: var(--ink-2); }
+    .nav-links.cap-dark .navlink:hover { color: var(--orange); }
+    .nav-links.cap-light .navlink.active, .nav-links.cap-dark .navlink.active { color: var(--orange); }
     .navlink { font-family: var(--font-mono); font-size: 13px; color: var(--ink-2); background: none; border: none; cursor: pointer; padding: 4px 0; position: relative; transition: color .2s; }
     .navlink:hover { color: var(--ink); }
     .navlink.active { color: var(--accent); }
@@ -728,14 +737,15 @@ const Styles = () => (
     .btn-outline.sm { padding: 9px 16px; font-size: 13px; }
 
     /* HERO */
-    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; padding: 112px 0 60px; }
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; padding: 96px 0 48px; }
+    .hero .wrap { max-width: 1360px; width: 100%; }
     .hero-inner { position: relative; z-index: 2; }
-    .hero-title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: .88; letter-spacing: -.03em; margin: 20px 0 0; display: flex; flex-direction: column; }
-    .hero-title span { font-size: clamp(3.2rem, 15vw, 12rem); display: block; }
+    .hero-title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: .9; letter-spacing: -.03em; margin: 14px 0 0; display: flex; flex-direction: column; }
+    .hero-title span { font-size: clamp(2.8rem, 9.5vw, 7.6rem); display: block; }
     .hero-title .line-2 { color: var(--ink); }
     .hero-title .ast { color: var(--accent); font-size: .5em; vertical-align: super; }
-    .hero-sub { max-width: 620px; font-size: clamp(15px, 2vw, 19px); color: var(--ink-2); margin: 28px 0 0; line-height: 1.6; }
-    .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+    .hero-sub { max-width: 600px; font-size: clamp(14.5px, 1.8vw, 18px); color: var(--ink-2); margin: 22px 0 0; line-height: 1.55; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px; }
     .hero-stamp { position: absolute; right: 6%; top: 24%; z-index: 2; }
     .orbit { position: absolute; border-radius: 50%; border: 1px solid var(--line); pointer-events: none; z-index: 1; }
     .orbit-1 { width: 620px; height: 620px; right: -160px; top: -120px; transform: translateY(calc(var(--sy, 0) * 0.06px)); }
