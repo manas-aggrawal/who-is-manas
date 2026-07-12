@@ -97,7 +97,7 @@ const Portfolio = () => {
         {
           title: 'Graduate Research',
           description:
-            'Researching multi-agent LLM architectures for end-to-end SDLC automation, evaluating trade-offs across accuracy and cost efficiency. Previously Research Apprentice on "Typed Conversational Interfaces" under Prof. Chris Martens (accepted at Plateau’25).',
+            'Researching multi-agent LLM architectures for end-to-end SDLC automation, evaluating trade-offs across accuracy and cost efficiency. Previously Research Apprentice on "Typed Conversational Interfaces" under Prof. Chris Martens (accepted at Plateau’26).',
         },
         {
           title: 'Graduate Teaching Assistant',
@@ -222,9 +222,10 @@ const Portfolio = () => {
       role: 'Research Apprentice · Prof. Chris Martens',
       institution: 'Northeastern University',
       period: 'Sep 2024 – Jan 2025',
-      status: 'Accepted at Plateau’25',
+      status: 'Accepted at Plateau’26',
       description:
-        'Formalized a domain-specific language — closer to natural language — with a type system that prevents invalid states and guarantees reliable behavior, aiming to reduce chatbots’ dependency on LLMs for user queries. The work was accepted at Plateau’25.',
+        'Formalized a domain-specific language — closer to natural language — with a type system that prevents invalid states and guarantees reliable behavior, aiming to reduce chatbots’ dependency on LLMs for user queries. The work was accepted at Plateau’26.',
+      paper: '/typed-conversational-interfaces.pdf',
     },
   ];
 
@@ -469,6 +470,16 @@ const Portfolio = () => {
                   <p className="text-[var(--text-2)] text-sm mb-1">{item.role}</p>
                   <p className="meta mb-4">{item.institution} · {item.period}</p>
                   <p className="text-[var(--text-2)] leading-relaxed">{item.description}</p>
+                  {item.paper && (
+                    <div className="flex flex-wrap gap-3 mt-5 pt-5 border-t border-[var(--border)]">
+                      <a href={item.paper} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+                        <FileText className="w-4 h-4" /> View Paper
+                      </a>
+                      <a href={item.paper} download="Typed_Conversational_Interfaces.pdf" className="btn-ghost">
+                        <Download className="w-4 h-4" /> Download PDF
+                      </a>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
