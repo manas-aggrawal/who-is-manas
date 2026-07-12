@@ -1,27 +1,41 @@
 :root {
-  /* Palette — neutral base + single emerald accent */
-  --bg: #08090b;
-  --bg-elev: #0f1113;
-  --bg-elev-2: #16181c;
-  --border: #23262b;
-  --border-strong: #313640;
+  /* Palette — editorial true-black + vivid orange + warm off-white */
+  --bg: #0a0908;
+  --bg-elev: #131110;
+  --bg-elev-2: #1b1917;
+  --line: rgba(245, 241, 234, 0.1);
+  --line-strong: rgba(245, 241, 234, 0.2);
 
-  --text: #f4f5f7;
-  --text-2: #a2a8b3;
-  --text-3: #6b7280;
+  --ink: #f5f1ea;
+  --ink-2: #b0a99f;
+  --ink-3: #726b62;
 
-  --accent: #34d399;
-  --accent-strong: #10b981;
-  --accent-soft: rgba(52, 211, 153, 0.12);
-  --accent-line: rgba(52, 211, 153, 0.28);
+  --orange: #ff5a1f;
+  --orange-2: #ff7a45;
+  --orange-soft: rgba(255, 90, 31, 0.12);
+  --orange-line: rgba(255, 90, 31, 0.35);
+
+  /* Modern green secondary (used on light sections) */
+  --green: #12c07a;
+  --green-deep: #0c9d63;
+  --green-bright: #3ee0a0;
+  --green-soft: rgba(18, 192, 122, 0.14);
+  --green-line: rgba(18, 192, 122, 0.42);
+
+  /* Themeable accent — defaults to orange, overridden per-section */
+  --accent: var(--orange);
+  --accent-2: var(--orange-2);
+  --accent-soft: var(--orange-soft);
+  --accent-line: var(--orange-line);
 
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   font-family: var(--font-sans);
   line-height: 1.6;
   font-weight: 400;
-  color: var(--text);
+  color: var(--ink);
   background-color: var(--bg);
 
   font-synthesis: none;
@@ -32,6 +46,10 @@
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,
@@ -49,23 +67,28 @@ body {
 }
 
 ::selection {
-  background: var(--accent-soft);
-  color: var(--text);
+  background: var(--orange);
+  color: #0a0908;
 }
 
-/* Slim, unobtrusive scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--border-strong) transparent;
+  scrollbar-color: var(--line-strong) transparent;
 }
 *::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
 }
 *::-webkit-scrollbar-thumb {
-  background: var(--border-strong);
-  border-radius: 8px;
+  background: var(--line-strong);
+  border-radius: 9px;
 }
 *::-webkit-scrollbar-track {
   background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
