@@ -184,7 +184,7 @@ const sections = [
   { id: 'education', label: 'Education', primary: true },
   { id: 'writing', label: 'Writing', primary: true },
   { id: 'skills', label: 'Skills', primary: true },
-  { id: 'contact', label: 'Contact', primary: true },
+  { id: 'contact', label: 'Contact', primary: false },
 ];
 
 const socials = [
@@ -303,7 +303,7 @@ const Portfolio = () => {
       <header className={`nav ${scrolled ? 'nav-solid' : ''}`}>
         <div className="wrap nav-inner">
           <button className="brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            MANAS<span className="brand-dot">.</span>
+            Manas Aggrawal<span className="brand-dot">.</span>
           </button>
           <nav className="nav-links">
             {primaryNav.map((s) => (
@@ -345,8 +345,8 @@ const Portfolio = () => {
             <span className="avail-dot" /> Open to full-time SWE roles · January 2027
           </div>
           <h1 className="hero-title">
-            <span className="rise" style={{ animationDelay: '.12s' }}>BACKEND</span>
-            <span className="rise line-2" style={{ animationDelay: '.2s' }}>ENGINEER<span className="ast">✳</span></span>
+            <span className="rise" style={{ animationDelay: '.12s' }}>MANAS</span>
+            <span className="rise line-2" style={{ animationDelay: '.2s' }}>AGGRAWAL<span className="ast">✳</span></span>
           </h1>
           <p className="hero-sub rise" style={{ animationDelay: '.3s' }}>
             I build scalable APIs, distributed systems, and cloud infrastructure that hold up in production —
@@ -625,7 +625,7 @@ const Portfolio = () => {
       {/* FOOTER */}
       <footer className="footer">
         <div className="wrap footer-inner">
-          <span className="brand">MANAS<span className="brand-dot">.</span></span>
+          <span className="brand">Manas Aggrawal<span className="brand-dot">.</span></span>
           <span className="mono-sm dim">© 2026 Manas Aggrawal · Built with React</span>
           <button className="link-orange" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             Back to top <ArrowUpRight className="w-4 h-4" />
@@ -640,7 +640,7 @@ const Portfolio = () => {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="Back to top"
         >
-          <Stamp text="BACK TO TOP ✳ MANAS ✳ " size={104} />
+          <Stamp text="BACK TO TOP ✳ BACK TO TOP ✳ " size={104} />
         </button>
       )}
 
@@ -699,18 +699,21 @@ const Styles = () => (
     .kicker { font-family: var(--font-mono); font-size: 14px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); display: inline-flex; align-items: center; }
 
     /* NAV */
-    .nav { position: sticky; top: 0; z-index: 60; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
-    .nav-solid { background: rgba(10,9,8,.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-    .brand { font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: -.02em; color: var(--ink); background: none; border: none; cursor: pointer; padding: 0; }
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 60; background: transparent; padding: 15px 0; }
+    .nav-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; }
+    .brand { font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: -.02em; color: var(--ink); background: none; border: none; cursor: pointer; padding: 0; justify-self: start; }
     .brand-dot { color: var(--orange); }
-    .nav-links { display: none; gap: 26px; }
+    .nav .brand { color: var(--orange); }
+    .nav .brand-dot { color: var(--orange); }
+    /* Floating rounded capsule holding the nav links */
+    .nav-links { display: none; gap: 20px; padding: 11px 22px; background: rgba(22,22,25,.66); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(245,241,234,.13); border-radius: 999px; box-shadow: 0 6px 22px rgba(0,0,0,.28); transition: box-shadow .3s, background .3s; }
+    .nav-solid .nav-links { background: rgba(22,22,25,.82); box-shadow: 0 10px 30px rgba(0,0,0,.4); }
     .navlink { font-family: var(--font-mono); font-size: 13px; color: var(--ink-2); background: none; border: none; cursor: pointer; padding: 4px 0; position: relative; transition: color .2s; }
     .navlink:hover { color: var(--ink); }
     .navlink.active { color: var(--accent); }
     .navlink.active::after { content: ''; position: absolute; left: 0; bottom: -3px; width: 100%; height: 2px; background: var(--accent); }
-    .nav-right { display: flex; align-items: center; gap: 14px; }
-    .menu-btn { display: inline-flex; background: none; border: none; color: var(--ink); cursor: pointer; padding: 4px; }
+    .nav-right { display: flex; align-items: center; gap: 14px; justify-self: end; }
+    .menu-btn { display: inline-flex; background: none; border: none; color: var(--orange); cursor: pointer; padding: 4px; }
     .mobile-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 16px 24px 22px; background: rgba(10,9,8,.96); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
     .mobile-link { text-align: left; font-family: var(--font-mono); font-size: 14px; color: var(--ink-2); background: none; border: none; padding: 10px 6px; cursor: pointer; border-radius: 8px; }
     .mobile-link.active, .mobile-link:hover { color: var(--accent); background: var(--accent-soft); }
@@ -725,7 +728,7 @@ const Styles = () => (
     .btn-outline.sm { padding: 9px 16px; font-size: 13px; }
 
     /* HERO */
-    .hero { position: relative; min-height: calc(100vh - 68px); display: flex; align-items: center; overflow: hidden; padding: 60px 0; }
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; padding: 112px 0 60px; }
     .hero-inner { position: relative; z-index: 2; }
     .hero-title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: .88; letter-spacing: -.03em; margin: 20px 0 0; display: flex; flex-direction: column; }
     .hero-title span { font-size: clamp(3.2rem, 15vw, 12rem); display: block; }
@@ -911,10 +914,12 @@ const Styles = () => (
       .contact-grid { grid-template-columns: 1.3fr 1fr; }
     }
     @media (min-width: 960px) {
-      .nav-links { display: flex; }
-      .menu-btn { display: none; }
       .grid-3 { grid-template-columns: repeat(3, 1fr); }
       .exp-row { grid-template-columns: 80px 1fr; }
+    }
+    @media (min-width: 1080px) {
+      .nav-links { display: flex; }
+      .menu-btn { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
