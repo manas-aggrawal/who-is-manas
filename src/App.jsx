@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Download, Mail, Phone, Linkedin, Github, ArrowUpRight, ArrowRight,
-  X, FileText, Menu, MapPin, Plus,
+  X, FileText, Menu, MapPin,
 } from 'lucide-react';
+import HydrowCaseStudy from './HydrowCaseStudy.jsx';
+import CareNexusCaseStudy from './CareNexusCaseStudy.jsx';
+import MaseCaseStudy from './MaseCaseStudy.jsx';
 
 /* ------------------------------------------------------------------ data --- */
 
@@ -19,6 +22,7 @@ const experience = [
     company: 'Hydrow',
     period: 'Jan 2026 – Present',
     location: 'Boston, MA',
+    caseStudy: 'hydrow',
     stack: ['NestJS', 'PostgreSQL', 'Redis', 'Kubernetes'],
     highlights: [
       'Built REST APIs using NestJS, PostgreSQL, and Redis, serving real-time athlete performance data across Hydrow’s platform',
@@ -33,6 +37,7 @@ const experience = [
     company: 'canAssist × Northeastern University',
     period: 'May 2026 – Present',
     location: 'Boston, MA',
+    caseStudy: 'carenexus',
     stack: ['NestJS', 'PostgreSQL', 'Redis', 'OpenTelemetry'],
     highlights: [
       'Bootstrapped a NestJS REST backend using my own open-source boilerplate, designed the PostgreSQL schema, optimized performance via Redis caching, and instrumented end-to-end distributed tracing using my published telemetry npm package',
@@ -60,6 +65,42 @@ const experience = [
   },
 ];
 
+// High-level Hydrow features shown as cards on the main page; each deep-links into
+// the corresponding section (id) of the Hydrow case study. Blurbs are verified content.
+const hydrowFeatures = [
+  { id: 'hs-f1', name: 'Strength Progress System', blurb: 'Stats, PRs & HydroMetrics scoring — owned end-to-end, all under 25 ms', flag: true },
+  { id: 'hs-f2', name: 'Badge System', blurb: 'Real-time achievement unlocks, cached in Redis', flag: true },
+  { id: 'hs-f3', name: 'SQL Gap-Filling', blurb: 'Graph prep moved to pure SQL — 0.724 ms, zero main-thread blocking' },
+  { id: 'hs-f4', name: 'Workout History & Backfill', blurb: 'Cursor pagination + a ~123K-record data migration' },
+  { id: 'hs-f5', name: 'Login-Screen Banners', blurb: 'Full CRUD with S3 upload + transactional rollback' },
+  { id: 'hs-f6', name: 'Post-Workout Summary', blurb: 'Sum-of-cables weight display, done right' },
+];
+
+// Care deep-dive feature cards → deep-link into the case study by section id.
+const careFeatures = [
+  { id: 'cn-f1', name: 'System Architecture', blurb: 'Three repos — care-api on Fargate, IaC in-repo', flag: true },
+  { id: 'cn-f2', name: 'Data Model & Schema', blurb: 'Two-table model + shared DTO, PostGIS & GIN indexes' },
+  { id: 'cn-f3', name: 'Resources & Communities', blurb: 'Geolocated resources + recurring groups — save/flag, no join' },
+  { id: 'cn-f4', name: 'Verification & Trust', blurb: 'Like-driven verification + flag-triggered soft-delete', flag: true },
+  { id: 'cn-f6', name: 'Geolocation & Discovery', blurb: 'place_id + coords + address, nearest-first pagination' },
+  { id: 'cn-f7', name: 'NFR Conventions', blurb: 'Repo-wide standards + OpenTelemetry observability' },
+];
+
+// Case-study registry — drives the main-page flagship blocks and the deep-dive overlays.
+const caseStudies = {
+  hydrow: {
+    lead: 'Designed and shipped the backend behind strength progress, gamification, and content delivery — 43 PRs, 20+ REST APIs, every query profiled at production scale.',
+    contrib: '/hydrow/contribution-graph.png',
+    contribAlt: 'GitHub contribution history — 43 PRs, 42 merged',
+    features: hydrowFeatures,
+  },
+  carenexus: {
+    lead: 'Owned the entire care-api backend — data model, APIs, engineering conventions, observability — and drove architecture, API, and product design across three repos for a dementia-care platform, while leading a five-person team through an August 2026 client handoff.',
+    contrib: null,
+    features: careFeatures,
+  },
+};
+
 const openSourceProjects = [
   {
     name: 'NestJS Backend Boilerplate',
@@ -79,42 +120,16 @@ const openSourceProjects = [
   },
 ];
 
-const projects = [
-  {
-    name: 'Advanced Image Processor',
-    tech: 'Java · Swing · Design Patterns',
-    description: 'Extensible image-processing app built on SOLID principles, supporting 10+ operations.',
-    details:
-      'A sophisticated image-processing application showcasing MVC, Strategy, Factory, and Command patterns. Implements blurring, sharpening, flips, RGB splitting, grayscale transforms (value, luma, intensity), histogram generation, color correction, and level adjustment.',
-    link: 'https://github.com/manas-aggrawal/Advanced-Image-Manipulation-and-Enhancement-Tool',
-  },
-  {
-    name: 'Toy Compiler',
-    tech: 'Racket · Parser · AST',
-    description: 'A compiler for a minimal functional programming language (CS5400).',
-    details:
-      'A minimalist functional language supporting first-class functions with lexical scoping, local bindings, conditionals, and closures — parser, AST, and evaluator built from scratch.',
-    link: 'https://github.com/manas-aggrawal/Toy-Compiler',
-  },
-  {
-    name: 'Personal Finance App',
-    tech: 'Android · Kotlin · Firebase · Room',
-    description: 'Student budgeting app with expense tracking and real-time alerts.',
-    details:
-      'A full-featured Android app with MVVM architecture, offline-first functionality, Firebase sync, photo receipts, budget alerts, and MPAndroidChart visualizations.',
-    link: '#',
-  },
-];
-
 const research = [
   {
-    title: 'Multi-Agent LLM Architectures for SDLC Automation',
-    role: 'Graduate Researcher',
-    institution: 'Northeastern University',
+    title: 'MASE — Multi-Agent Software Engineering',
+    role: 'Graduate Researcher · Research Capstone',
+    institution: 'Northeastern University · care-api',
     period: '2026 – Present',
     status: 'Ongoing',
     description:
-      'Investigating multi-agent LLM architectures for automating the software development lifecycle end-to-end — evaluating and comparing designs across accuracy and cost efficiency to understand where agentic systems can reliably replace or augment human workflows.',
+      'A controlled study comparing a single generalist LLM agent against a two-agent system (a Coder paired with a dedicated NFR Enforcement Agent) on a real codebase — measuring CodeRabbit findings and their severity, token usage and cost, and a comparative analysis of where the single vs. two-agent system each outshine.',
+    caseStudy: 'mase',
   },
   {
     title: 'Typed Conversational Interfaces',
@@ -179,7 +194,6 @@ const sections = [
   { id: 'about', label: 'About', primary: true },
   { id: 'experience', label: 'Experience', primary: true },
   { id: 'opensource', label: 'Open Source', primary: true },
-  { id: 'projects', label: 'Projects', primary: true },
   { id: 'research', label: 'Research', primary: true },
   { id: 'education', label: 'Education', primary: true },
   { id: 'writing', label: 'Writing', primary: true },
@@ -251,6 +265,13 @@ const Portfolio = () => {
   const [showTranscript, setShowTranscript] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [view, setView] = useState('home'); // 'home' | 'hydrow' | 'carenexus'
+  const [caseTarget, setCaseTarget] = useState(null); // feature-section id to scroll to
+
+  const openCaseStudy = useCallback((studyId, featureId = null) => {
+    setCaseTarget(featureId);
+    setView(studyId);
+  }, []);
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -294,7 +315,7 @@ const Portfolio = () => {
   }, []);
 
   const primaryNav = sections.filter((s) => s.primary);
-  const onLightSection = ['about', 'opensource', 'research', 'writing'].includes(activeSection);
+  const onLightSection = ['about', 'opensource', 'education', 'skills'].includes(activeSection);
 
   return (
     <div className="app">
@@ -430,28 +451,77 @@ const Portfolio = () => {
         <div className="wrap">
           <SectionHead n="(02)" kicker="Experience" title="Where I've built" />
           <div className="exp-list">
-            {experience.map((job, idx) => (
-              <div key={idx} className="exp-row reveal" onClick={() => setSelectedItem(job)}>
-                <div className="exp-index">0{idx + 1}</div>
-                <div className="exp-main">
-                  <div className="exp-top">
-                    <div>
-                      <h3 className="exp-title">{job.title}</h3>
-                      <p className="exp-company">{job.company}</p>
+            {experience.map((job, idx) => {
+              const cs = job.caseStudy && caseStudies[job.caseStudy];
+              return cs ? (
+                <div key={idx} className="exp-row exp-flagship reveal">
+                  <div className="exp-index">0{idx + 1}</div>
+                  <div className="exp-main">
+                    <div className="exp-top">
+                      <div>
+                        <h3 className="exp-title">{job.title}</h3>
+                        <p className="exp-company">{job.company}</p>
+                      </div>
+                      <div className="exp-meta">
+                        <span>{job.period}</span>
+                        <span className="dim">{job.location}</span>
+                      </div>
                     </div>
-                    <div className="exp-meta">
-                      <span>{job.period}</span>
-                      <span className="dim">{job.location}</span>
+                    <p className="exp-flagship-lead">{cs.lead}</p>
+                    <div className="tags">{job.stack.map((t) => <span key={t} className="tag">{t}</span>)}</div>
+
+                    {cs.contrib && (
+                      <a
+                        className="exp-contrib"
+                        onClick={() => openCaseStudy(job.caseStudy)}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => { if (e.key === 'Enter') openCaseStudy(job.caseStudy); }}
+                      >
+                        <img src={cs.contrib} alt={cs.contribAlt} />
+                      </a>
+                    )}
+
+                    <div className="exp-feat-grid">
+                      {cs.features.map((f) => (
+                        <button key={f.id} className={`exp-feat-card ${f.flag ? 'flag' : ''}`} onClick={() => openCaseStudy(job.caseStudy, f.id)}>
+                          <span className="exp-feat-top">
+                            <span className="exp-feat-name">{f.name}</span>
+                            <ArrowUpRight className="w-4 h-4 exp-feat-arr" />
+                          </span>
+                          <span className="exp-feat-blurb">{f.blurb}</span>
+                        </button>
+                      ))}
                     </div>
+
+                    <button className="link-orange" onClick={() => openCaseStudy(job.caseStudy)}>
+                      Open the full deep-dive <ArrowUpRight className="w-4 h-4" />
+                    </button>
                   </div>
-                  <div className="tags">{job.stack.map((t) => <span key={t} className="tag">{t}</span>)}</div>
-                  <ul className="hl-list">
-                    {job.highlights.slice(0, 2).map((h, i) => (<li key={i}><span className="li-mark">→</span>{h}</li>))}
-                  </ul>
-                  <span className="link-orange">Read more <ArrowUpRight className="w-4 h-4" /></span>
                 </div>
-              </div>
-            ))}
+              ) : (
+                <div key={idx} className="exp-row reveal" onClick={() => setSelectedItem(job)}>
+                  <div className="exp-index">0{idx + 1}</div>
+                  <div className="exp-main">
+                    <div className="exp-top">
+                      <div>
+                        <h3 className="exp-title">{job.title}</h3>
+                        <p className="exp-company">{job.company}</p>
+                      </div>
+                      <div className="exp-meta">
+                        <span>{job.period}</span>
+                        <span className="dim">{job.location}</span>
+                      </div>
+                    </div>
+                    <div className="tags">{job.stack.map((t) => <span key={t} className="tag">{t}</span>)}</div>
+                    <ul className="hl-list">
+                      {job.highlights.slice(0, 2).map((h, i) => (<li key={i}><span className="li-mark">→</span>{h}</li>))}
+                    </ul>
+                    <span className="link-orange">Read more <ArrowUpRight className="w-4 h-4" /></span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -480,31 +550,10 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* PROJECTS */}
-      <section id="projects" className="section">
-        <div className="wrap">
-          <SectionHead n="(04)" kicker="Projects" title="Things I've made" />
-          <div className="grid-3">
-            {projects.map((p, idx) => (
-              <div key={idx} className="card proj-card reveal" onClick={() => setSelectedItem(p)}>
-                <div className="card-top">
-                  <span className="card-idx">0{idx + 1}</span>
-                  <Plus className="w-5 h-5 arr" />
-                </div>
-                <h3 className="card-title sm">{p.name}</h3>
-                <p className="mono-sm dim">{p.tech}</p>
-                <p className="card-desc">{p.description}</p>
-                <span className="link-orange">Details <ArrowUpRight className="w-4 h-4" /></span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* RESEARCH */}
-      <section id="research" className="section light">
+      <section id="research" className="section">
         <div className="wrap">
-          <SectionHead n="(05)" kicker="Research" title="Ideas I'm chasing" />
+          <SectionHead n="(04)" kicker="Research" title="Ideas I'm chasing" />
           <div className="stack-list">
             {research.map((r, idx) => (
               <div key={idx} className="card res-card reveal">
@@ -521,6 +570,13 @@ const Portfolio = () => {
                     <a href={r.paper} download="Typed_Conversational_Interfaces.pdf" className="btn-outline sm"><Download className="w-4 h-4" /> Download PDF</a>
                   </div>
                 )}
+                {r.caseStudy && (
+                  <div className="res-actions">
+                    <button className="btn-outline sm" onClick={() => openCaseStudy(r.caseStudy)}>
+                      See the research deep-dive <ArrowUpRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -528,9 +584,9 @@ const Portfolio = () => {
       </section>
 
       {/* EDUCATION */}
-      <section id="education" className="section">
+      <section id="education" className="section light">
         <div className="wrap">
-          <SectionHead n="(06)" kicker="Education" title="Foundations" />
+          <SectionHead n="(05)" kicker="Education" title="Foundations" />
           <div className="stack-list">
             {education.map((edu, idx) => (
               <div key={idx} className="card reveal">
@@ -559,9 +615,9 @@ const Portfolio = () => {
       </section>
 
       {/* WRITING */}
-      <section id="writing" className="section light">
+      <section id="writing" className="section">
         <div className="wrap">
-          <SectionHead n="(07)" kicker="Writing" title="Words on systems" />
+          <SectionHead n="(06)" kicker="Writing" title="Words on systems" />
           <div className="grid-2">
             {articles.map((a, idx) => (
               <a key={idx} href={a.link} target="_blank" rel="noopener noreferrer" className="card art-card reveal">
@@ -579,9 +635,9 @@ const Portfolio = () => {
       </section>
 
       {/* SKILLS */}
-      <section id="skills" className="section">
+      <section id="skills" className="section light">
         <div className="wrap">
-          <SectionHead n="(08)" kicker="Skills" title="The toolbox" />
+          <SectionHead n="(07)" kicker="Skills" title="The toolbox" />
           <div className="skills-grid">
             {Object.entries(skills).map(([cat, items]) => (
               <div key={cat} className="skill-block reveal">
@@ -596,7 +652,7 @@ const Portfolio = () => {
       {/* CONTACT */}
       <section id="contact" className="section contact">
         <div className="wrap">
-          <SectionHead n="(09)" kicker="Contact" title="Let's build something" />
+          <SectionHead n="(08)" kicker="Contact" title="Let's build something" />
           <div className="contact-grid">
             <div className="reveal">
               <p className="contact-lead">
@@ -681,6 +737,11 @@ const Portfolio = () => {
           </div>
         </div>
       )}
+
+      {/* CASE STUDY DEEP-DIVES (full-screen overlays) */}
+      {view === 'hydrow' && <HydrowCaseStudy target={caseTarget} onBack={() => setView('home')} />}
+      {view === 'carenexus' && <CareNexusCaseStudy target={caseTarget} onBack={() => setView('home')} />}
+      {view === 'mase' && <MaseCaseStudy target={caseTarget} onBack={() => setView('home')} />}
     </div>
   );
 };
@@ -803,6 +864,25 @@ const Styles = () => (
     .tag-lg:hover { border-color: var(--accent); color: var(--ink); }
     .hl-list { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-direction: column; gap: 10px; }
     .hl-list li { font-size: 14px; }
+    .exp-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+
+    /* HYDROW FLAGSHIP EXPERIENCE BLOCK */
+    .exp-flagship { cursor: default; }
+    .exp-flagship:hover .exp-title { color: var(--ink); }
+    .exp-flagship-lead { color: var(--ink-2); font-size: 15px; line-height: 1.6; margin: 14px 0 0; max-width: 720px; }
+    .exp-flagship .tags { margin: 16px 0 22px; }
+    .exp-contrib { display: block; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; cursor: pointer; transition: border-color .2s; background: #0d1117; }
+    .exp-contrib:hover { border-color: var(--accent-line); }
+    .exp-contrib img { width: 100%; height: auto; display: block; }
+    .exp-feat-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 22px 0; }
+    .exp-feat-card { text-align: left; background: var(--bg-elev); border: 1px solid var(--line); border-radius: 14px; padding: 18px; cursor: pointer; transition: border-color .2s, transform .2s, background .2s; display: flex; flex-direction: column; gap: 8px; }
+    .exp-feat-card:hover { border-color: var(--accent-line); transform: translateY(-2px); background: var(--bg-elev-2); }
+    .exp-feat-card.flag { border-color: var(--accent-line); }
+    .exp-feat-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .exp-feat-name { font-family: var(--font-display); font-weight: 600; font-size: 1.02rem; color: var(--ink); letter-spacing: -.01em; }
+    .exp-feat-arr { color: var(--ink-3); flex-shrink: 0; transition: color .2s, transform .2s; }
+    .exp-feat-card:hover .exp-feat-arr { color: var(--accent); transform: translate(2px, -2px); }
+    .exp-feat-blurb { color: var(--ink-2); font-size: 13.5px; line-height: 1.5; }
     .link-orange { display: inline-flex; align-items: center; gap: 7px; color: var(--accent); font-weight: 500; font-size: 14px; background: none; border: none; cursor: pointer; padding: 0; transition: gap .2s; }
     .link-orange:hover { gap: 11px; }
     .link-orange-static { color: var(--accent); font-family: var(--font-mono); font-size: 13px; }
@@ -922,6 +1002,7 @@ const Styles = () => (
       .about-grid { grid-template-columns: 300px 1fr; gap: 56px; }
       .skill-block { grid-template-columns: 200px 1fr; align-items: start; }
       .contact-grid { grid-template-columns: 1.3fr 1fr; }
+      .exp-feat-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (min-width: 960px) {
       .grid-3 { grid-template-columns: repeat(3, 1fr); }
