@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 660" font-family="ui-monospace, 'SF Mono', Menlo, monospace">
+  <defs>
+    <marker id="arrG" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L8 4 L0 8 z" fill="#12A150" opacity="0.7"/>
+    </marker>
+    <marker id="arrK" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L8 4 L0 8 z" fill="#8b8173"/>
+    </marker>
+  </defs>
+
+  <!-- backdrop -->
+  <rect x="0" y="0" width="940" height="660" fill="#f6f1e7"/>
+
+  <!-- ============ relationship lines (behind cards) ============ -->
+  <!-- owns: user -> content (green dashed, routed around the edges) -->
+  <polyline points="30,250 16,250 16,22 820,22 820,40" fill="none" stroke="#12A150" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.75" marker-end="url(#arrG)"/>
+  <polyline points="30,440 16,440 16,644 820,644 820,630" fill="none" stroke="#12A150" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.75" marker-end="url(#arrG)"/>
+
+  <!-- casts: user -> interaction (green solid) -->
+  <line x1="240" y1="300" x2="380" y2="112" stroke="#12A150" stroke-width="1.4" opacity="0.6" marker-end="url(#arrG)"/>
+  <line x1="240" y1="345" x2="380" y2="322" stroke="#12A150" stroke-width="1.4" opacity="0.6" marker-end="url(#arrG)"/>
+  <line x1="240" y1="390" x2="380" y2="532" stroke="#12A150" stroke-width="1.4" opacity="0.6" marker-end="url(#arrG)"/>
+
+  <!-- receives: content -> interaction (gray solid) -->
+  <line x1="720" y1="140" x2="570" y2="112" stroke="#8b8173" stroke-width="1.2" opacity="0.7" marker-end="url(#arrK)"/>
+  <line x1="720" y1="200" x2="570" y2="346" stroke="#8b8173" stroke-width="1.2" opacity="0.7" marker-end="url(#arrK)"/>
+  <line x1="720" y1="250" x2="570" y2="556" stroke="#8b8173" stroke-width="1.2" opacity="0.7" marker-end="url(#arrK)"/>
+  <line x1="720" y1="440" x2="570" y2="370" stroke="#8b8173" stroke-width="1.2" opacity="0.7" marker-end="url(#arrK)"/>
+  <line x1="720" y1="490" x2="570" y2="580" stroke="#8b8173" stroke-width="1.2" opacity="0.7" marker-end="url(#arrK)"/>
+
+  <!-- ============ legend (top-left, free area above USERS) ============ -->
+  <text x="32" y="46" font-size="10" letter-spacing="1.5" fill="#8b8173">RELATIONSHIPS</text>
+  <line x1="32" y1="66" x2="58" y2="66" stroke="#12A150" stroke-width="1.6" opacity="0.7"/>
+  <text x="66" y="70" font-size="11" fill="#4b453c">casts &#160;<tspan fill="#8b8173">user &#8594; interaction</tspan></text>
+  <line x1="32" y1="88" x2="58" y2="88" stroke="#8b8173" stroke-width="1.4" opacity="0.8"/>
+  <text x="66" y="92" font-size="11" fill="#4b453c">receives &#160;<tspan fill="#8b8173">content &#8594; interaction</tspan></text>
+  <line x1="32" y1="110" x2="58" y2="110" stroke="#12A150" stroke-width="1.6" stroke-dasharray="5 4" opacity="0.75"/>
+  <text x="66" y="114" font-size="11" fill="#4b453c">owns &#160;<tspan fill="#8b8173">user &#8594; content</tspan></text>
+
+  <!-- ============ USERS ============ -->
+  <rect x="30" y="230" width="210" height="230" rx="12" fill="#ffffff" stroke="rgba(20,15,10,0.14)" stroke-width="1.5"/>
+  <text x="46" y="262" font-size="14" font-weight="700" fill="#12A150">USERS</text>
+  <line x1="46" y1="276" x2="224" y2="276" stroke="rgba(20,15,10,0.1)"/>
+  <g font-size="11.5" fill="#4b453c">
+    <text x="46" y="300">id <tspan fill="#12A150">&#183; PK</tspan></text>
+    <text x="46" y="324">email <tspan fill="#12A150">&#183; uniq</tspan></text>
+    <text x="46" y="348">role <tspan fill="#8b8173">&#183; USER / ADMIN</tspan></text>
+    <text x="46" y="372">personas[]</text>
+    <text x="46" y="396">condition?</text>
+    <text x="46" y="420">deleted_at?</text>
+  </g>
+
+  <!-- ============ RESOURCES ============ -->
+  <rect x="720" y="40" width="200" height="280" rx="12" fill="#ffffff" stroke="rgba(20,15,10,0.14)" stroke-width="1.5"/>
+  <text x="736" y="72" font-size="14" font-weight="700" fill="#12A150">RESOURCES</text>
+  <line x1="736" y1="86" x2="904" y2="86" stroke="rgba(20,15,10,0.1)"/>
+  <g font-size="11.5" fill="#4b453c">
+    <text x="736" y="112">id <tspan fill="#12A150">&#183; PK</tspan></text>
+    <text x="736" y="136">category <tspan fill="#8b8173">&#183; single</tspan></text>
+    <text x="736" y="160">location <tspan fill="#8b8173">&#183; geog</tspan></text>
+    <text x="736" y="184">place_id</text>
+    <text x="736" y="208">like_count</text>
+    <text x="736" y="232">flag_count</text>
+    <text x="736" y="256">save_count</text>
+    <text x="736" y="280">verification_state</text>
+    <text x="736" y="304">deleted_at?</text>
+  </g>
+
+  <!-- ============ COMMUNITIES ============ -->
+  <rect x="720" y="360" width="200" height="270" rx="12" fill="#ffffff" stroke="rgba(20,15,10,0.14)" stroke-width="1.5"/>
+  <text x="736" y="392" font-size="14" font-weight="700" fill="#12A150">COMMUNITIES</text>
+  <line x1="736" y1="406" x2="904" y2="406" stroke="rgba(20,15,10,0.1)"/>
+  <g font-size="11.5" fill="#4b453c">
+    <text x="736" y="432">id <tspan fill="#12A150">&#183; PK</tspan></text>
+    <text x="736" y="456">categories[] <tspan fill="#8b8173">&#183; multi</tspan></text>
+    <text x="736" y="480">location?</text>
+    <text x="736" y="504">event_link?</text>
+    <text x="736" y="528">date_time <tspan fill="#8b8173">&#183; text</tspan></text>
+    <text x="736" y="552">flag_count</text>
+    <text x="736" y="576">save_count</text>
+    <text x="736" y="600">deleted_at?</text>
+  </g>
+
+  <!-- ============ LIKES ============ -->
+  <rect x="380" y="40" width="190" height="140" rx="12" fill="#ffffff" stroke="rgba(20,15,10,0.14)" stroke-width="1.5"/>
+  <text x="396" y="72" font-size="14" font-weight="700" fill="#12A150">LIKES</text>
+  <line x1="396" y1="86" x2="554" y2="86" stroke="rgba(20,15,10,0.1)"/>
+  <g font-size="11.5" fill="#4b453c">
+    <text x="396" y="112">user_id <tspan fill="#12A150">&#183; FK</tspan></text>
+    <text x="396" y="136">resource_id <tspan fill="#12A150">&#183; FK</tspan></text>
+  </g>
+  <text x="396" y="164" font-size="10" font-style="italic" fill="#8b8173">unique (user, resource)</text>
+
+  <!-- ============ SAVES ============ -->
+  <rect x="380" y="250" width="190" height="170" rx="12" fill="#ffffff" stroke="rgba(20,15,10,0.14)" stroke-width="1.5"/>
+  <text x="396" y="282" font-size="14" font-weight="700" fill="#12A150">SAVES</text>
+  <line x1="396" y1="296" x2="554" y2="296" stroke="rgba(20,15,10,0.1)"/>
+  <g font-size="11.5" fill="#4b453c">
+    <text x="396" y="322">user_id <tspan fill="#12A150">&#183; FK</tspan></text>
+    <text x="396" y="346">resource_id? <tspan fill="#12A150">&#183; FK</tspan></text>
+    <text x="396" y="370">community_id? <tspan fill="#12A150">&#183; FK</tspan></text>
+  </g>
+  <text x="396" y="398" font-size="10" font-style="italic" fill="#8b8173">exactly one target &#183; XOR</text>
+
+  <!-- ============ FLAGS ============ -->
+  <rect x="380" y="460" width="190" height="170" rx="12" fill="#ffffff" stroke="rgba(20,15,10,0.14)" stroke-width="1.5"/>
+  <text x="396" y="492" font-size="14" font-weight="700" fill="#12A150">FLAGS</text>
+  <line x1="396" y1="506" x2="554" y2="506" stroke="rgba(20,15,10,0.1)"/>
+  <g font-size="11.5" fill="#4b453c">
+    <text x="396" y="532">user_id <tspan fill="#12A150">&#183; FK</tspan></text>
+    <text x="396" y="556">resource_id? <tspan fill="#12A150">&#183; FK</tspan></text>
+    <text x="396" y="580">community_id? <tspan fill="#12A150">&#183; FK</tspan></text>
+    <text x="396" y="604">reason?</text>
+  </g>
+</svg>
