@@ -128,7 +128,7 @@ const research = [
     period: '2026 – Present',
     status: 'Ongoing',
     description:
-      'A controlled study comparing a single generalist LLM agent against a two-agent system (a Coder paired with a dedicated NFR Enforcement Agent) on a real codebase — measuring CodeRabbit findings and their severity, token usage and cost, and a comparative analysis of where the single vs. two-agent system each outshine.',
+      'A controlled, model-matched study (Claude Opus 4.8) comparing a single generalist LLM coding agent against a two-agent loop — a Coder paired with a dedicated NFR-Enforcement reviewer — across ten real issues on a production NestJS backend. The in-loop review halves genuine defects and removes the high-severity data-loss migrations the single agent ships. The headline result is methodological: the obvious metric (raw reviewer-comment count) fails in both directions, so trustworthy evaluation needs severity weighting, a validity filter, and a functional-correctness cross-check.',
     caseStudy: 'mase',
   },
   {
@@ -371,8 +371,8 @@ const Portfolio = () => {
             <span className="rise line-2" style={{ animationDelay: '.2s' }}>AGGRAWAL<span className="ast">✳</span></span>
           </h1>
           <p className="hero-sub rise" style={{ animationDelay: '.3s' }}>
-            I build scalable APIs, distributed systems, and cloud infrastructure that hold up in production —
-            from 2M-requests/day backends to the open-source tools other teams ship on.
+            In the age of agentic AI, I've moved past just writing code — I learn systems deeply
+            and ship backends that scale securely, standing up production-grade APIs faster than ever.
           </p>
           <div className="hero-cta rise" style={{ animationDelay: '.4s' }}>
             <Magnetic>
