@@ -20,7 +20,7 @@ const experience = [
   {
     title: 'Software Engineer Intern',
     company: 'Hydrow',
-    period: 'Jan 2026 – Present',
+    period: 'Jan 2026 – Aug 2026',
     location: 'Boston, MA',
     caseStudy: 'hydrow',
     stack: ['NestJS', 'PostgreSQL', 'Redis', 'Kubernetes'],
@@ -74,6 +74,9 @@ const hydrowFeatures = [
   { id: 'hs-f4', name: 'Workout History & Backfill', blurb: 'Cursor pagination + a ~123K-record data migration' },
   { id: 'hs-f5', name: 'Login-Screen Banners', blurb: 'Full CRUD with S3 upload + transactional rollback' },
   { id: 'hs-f6', name: 'Post-Workout Summary', blurb: 'Sum-of-cables weight display, done right' },
+  { id: 'hs-f7', name: 'Recommendation Engine', blurb: '3-pass pipeline with accessory & difficulty SQL filters' },
+  { id: 'hs-f8', name: 'Tiles & Experiments', blurb: 'Template-Method tiles + master/leaf A/B promo targeting' },
+  { id: 'hs-f9', name: 'AI-Assisted Workflow', blurb: 'A Claude Code SDLC flow with persistent PR-review memory', flag: true },
 ];
 
 // Care deep-dive feature cards → deep-link into the case study by section id.
@@ -89,9 +92,16 @@ const careFeatures = [
 // Case-study registry — drives the main-page flagship blocks and the deep-dive overlays.
 const caseStudies = {
   hydrow: {
-    lead: 'Designed and shipped the backend behind strength progress, gamification, and content delivery — 43 PRs, 20+ REST APIs, every query profiled at production scale.',
+    lead: 'Designed and shipped the backend behind strength progress, gamification, content delivery, home-screen tiles and A/B experiments — 59 PRs across 7 product areas, every query profiled at production scale.',
+    summary: [
+      'Owned several product features end-to-end — schema, APIs, tests, and rollout — including the strength-fitness app’s progress graphs, keeping every user-facing endpoint under 25 ms on the production database.',
+      'Improved query performance from an event-loop-blocking JS loop to a 0.7 ms SQL query by moving data-heavy work into the database using window functions, grouped subqueries, and join-based filters.',
+      'Cut hot-path latency from seconds (2,288 ms and 1,646 ms) to near-zero by moving real-time checks behind materialized views and Redis caching.',
+      'Restored data correctness across ~123K historical records by running a bounded, dry-run-verified backfill migration, and kept large-table reads scale-safe with cursor-based pagination.',
+      'Built an AI-assisted development workflow on Claude Code that automates the coding, testing, and self-review stages of the SDLC while keeping me in the loop for planning and final review, backed by a persistent knowledge base of accumulated review standards.',
+    ],
     contrib: '/hydrow/contribution-graph.png',
-    contribAlt: 'GitHub contribution history — 43 PRs, 42 merged',
+    contribAlt: 'GitHub profile — 160 contributions, 59 PRs, 56 merged',
     features: hydrowFeatures,
   },
   carenexus: {
@@ -420,8 +430,8 @@ const Portfolio = () => {
             <div className="about-body">
               <p className="lead reveal">
                 Backend software engineer with <b>3.5+ years</b> shipping scalable APIs, distributed systems, and
-                cloud infrastructure — currently interning at <b>Hydrow</b> while finishing my MS in Computer Science
-                at <b>Northeastern</b>.
+                cloud infrastructure — most recently interned as a backend engineer at <b>Hydrow</b> while finishing
+                my MS in Computer Science at <b>Northeastern</b>.
               </p>
               <ul className="about-list reveal">
                 {[
@@ -468,6 +478,11 @@ const Portfolio = () => {
                       </div>
                     </div>
                     <p className="exp-flagship-lead">{cs.lead}</p>
+                    {cs.summary && (
+                      <ul className="hl-list">
+                        {cs.summary.map((h, i) => (<li key={i}><span className="li-mark">→</span>{h}</li>))}
+                      </ul>
+                    )}
                     <div className="tags">{job.stack.map((t) => <span key={t} className="tag">{t}</span>)}</div>
 
                     {cs.contrib && (

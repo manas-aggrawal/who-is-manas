@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import {
   ArrowLeft, ArrowUpRight, ArrowRight, Image as ImageIcon,
-  LineChart, Trophy, Zap, Scale, History,
+  LineChart, Trophy, Zap, Scale, History, Filter, LayoutGrid, Bot,
 } from 'lucide-react';
 import CaseStudyStyles from './CaseStudyStyles.jsx';
 
@@ -14,15 +14,15 @@ import CaseStudyStyles from './CaseStudyStyles.jsx';
 
 const overview = {
   role: 'Backend Engineer Intern',
-  period: 'Jan 2026 – Jul 2026',
+  period: 'Jan 2026 – Aug 2026',
   location: 'Boston, MA',
   repo: 'TrueRowing/data-api-v2',
-  stack: ['Node.js', 'TypeScript', 'NestJS', 'PostgreSQL', 'Redis', 'AWS S3', 'TypeORM'],
+  stack: ['Node.js', 'TypeScript', 'NestJS', 'PostgreSQL', 'Redis', 'AWS S3', 'TypeORM', 'Zod'],
 };
 
 // VERIFIED headline + production-scale numbers (safe to display as-is).
 const scaleMetrics = [
-  { value: '43', unit: '', label: 'Pull requests · 42 merged' },
+  { value: '59', unit: '', label: 'Pull requests · 56 merged' },
   { value: '20', unit: '+', label: 'Production REST APIs' },
   { value: '6,500', unit: '+', label: 'Published workout videos' },
   { value: '360', unit: '+', label: 'Strength movements' },
@@ -173,10 +173,10 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
         <div className="wrap">
           <VisualSlot
             src="/hydrow/contribution-graph.png"
-            alt="GitHub contribution graph — 127 contributions over the Hydrow internship"
-            label="GitHub contribution graph — Jan–Jul 2026"
-            caption="43 PRs · 42 merged"
-            aspect="1100 / 200"
+            alt="GitHub profile — 160 contributions over the Hydrow internship"
+            label="GitHub contribution graph — Jan–Aug 2026"
+            caption="59 PRs · 56 merged · ~6,000+ lines across 7 product areas"
+            aspect="1100 / 620"
           />
         </div>
       </section>
@@ -308,6 +308,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
                 { k: 'Variety Streak', v: 'multiple modalities (row / strength / on-the-mat) across consecutive weeks' },
                 { k: 'X Workout Days', v: 'configurable N distinct days, with optional workout-type restriction for themed monthly challenges' },
                 { k: 'Def-5 completion caching', v: 'Redis cache (1-hr TTL) so fast-badge-checks resolve before background processing finishes' },
+                { k: 'Badge-definition schema API', v: 'a GET /schema endpoint that derives draft-07 JSON Schema straight from each checker’s Zod schema (toJSONSchema()), with x-entity metadata — so hyadmin renders a form for any of the 21 badge types with zero frontend changes' },
               ]} />
 
               <span className="mono-label orange reveal">Verified performance</span>
@@ -516,11 +517,135 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
         </div>
       </section>
 
+      {/* ============================ FEATURE 7 ============================ */}
+      <section id="hs-f7" className="hs-section hs-feature">
+        <div className="wrap">
+          <div className="hs-feature-head reveal">
+            <span className="hs-fnum">07</span>
+            <span className="hs-pill"><Filter className="w-3.5 h-3.5" /> Recommendation engine</span>
+          </div>
+          <h2 className="hs-h2 reveal">Strength Recommendation Engine — accessory & difficulty filtering</h2>
+          <p className="hs-oneliner reveal" style={{ maxWidth: 760 }}>
+            A 3-pass recommendation pipeline that only ever suggests workouts a rower can actually do —
+            with the equipment they own, at a difficulty that fits.
+          </p>
+
+          <div className="hs-two-col">
+            <div>
+              <span className="mono-label orange reveal">Why it matters</span>
+              <p className="hs-para reveal">
+                A recommendation is worthless if it needs a bar the rower doesn’t have, or sits at the wrong
+                difficulty. The engine has to respect owned equipment — including transitive ownership — and
+                map each rower’s Svexa experience estimate to the right difficulty tier, then progressively
+                relax those constraints so it never runs dry.
+              </p>
+              <span className="mono-label orange reveal">What I built</span>
+              <BuiltList items={[
+                { k: 'Progressive-relaxation pipeline', v: 'Pass 1 — unwatched at primary difficulty, oldest-first; Pass 2 — unwatched at the adjacent tier; Pass 3 — previously-watched, least-recently-completed' },
+                { k: 'Accessory filter', v: 'a NOT EXISTS subquery excluding videos tagged with accessories the rower doesn’t own, with transitive ownership (bar → pigtails via requiresOneOf)' },
+                { k: 'Difficulty filter', v: 'a second NOT EXISTS keyed on difficulty tags derived from the rower’s Svexa experience estimate' },
+                { k: 'Smart-reco de-duplication', v: 'recently-done picks pushed to the bottom of the DoneThenRandom ordering so the same recommendation stops resurfacing' },
+              ]} />
+            </div>
+            <div>
+              <span className="mono-label orange reveal">The engineering story</span>
+              <p className="hs-para reveal">
+                The win here is expressing the whole eligibility model in SQL rather than post-filtering in
+                JavaScript — the two NOT EXISTS clauses and tag-key joins do the equipment and difficulty
+                gating in the database, so each pass returns a ready-to-serve candidate set. The same
+                accessory logic was then reused to gate the workout-video library, so browsing only shows
+                videos a rower has the gear for.
+              </p>
+              <div className="tags reveal" style={{ marginTop: 18 }}>
+                {['NestJS', 'PostgreSQL', 'NOT EXISTS subqueries', 'Tag joins'].map((t) => <span key={t} className="tag">{t}</span>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ FEATURE 8 ============================ */}
+      <section id="hs-f8" className="hs-section hs-feature">
+        <div className="wrap">
+          <div className="hs-feature-head reveal">
+            <span className="hs-fnum">08</span>
+            <span className="hs-pill"><LayoutGrid className="w-3.5 h-3.5" /> Patterns at scale</span>
+          </div>
+          <h2 className="hs-h2 reveal">Home-screen tiles & a pluggable experiment framework</h2>
+          <p className="hs-oneliner reveal" style={{ maxWidth: 760 }}>
+            Built the tile managers behind the home screen and the A/B framework that decides which content
+            each cohort sees — leaning on design patterns to keep it extensible.
+          </p>
+
+          <div className="hs-two-col">
+            <div>
+              <span className="mono-label orange reveal">Tiles — Template Method</span>
+              <BuiltList items={[
+                { k: 'AbstractPersonalRecordTileManager', v: 'a base class owning the shared query flow (status join, visibility filtering, pagination, ordering); subclasses implement three hooks — instance-key SQL, query filters, tile creation' },
+                { k: 'HMI PR tile + Strength PR tile', v: 'both extend the same base, so a new PR tile type is a subclass, not a copy — the existing Strength tile was refactored onto it' },
+                { k: 'Featured Program tile', v: 'collapsed a 3-pass JavaScript approach into a single SQL query with a LEFT JOIN grouped subquery; programs completed over six months ago recycle back in' },
+              ]} />
+            </div>
+            <div>
+              <span className="mono-label orange reveal">Experiments — Master/Leaf + fail-open</span>
+              <BuiltList items={[
+                { k: 'Promo tile master/leaf architecture', v: 'an enabled “master” tile resolves an A/B experiment to a disabled “leaf” tile holding the actual promo content — different cohorts see different promos' },
+                { k: 'Cohort targeting', v: 'churn score + behavioral segment with most-specific-wins scoring (segment +2 > churn range +1 > catch-all 0)' },
+                { k: 'Rower data model', v: 'added churn_score (numeric(4,3)) and behavioral_segment columns with a dual-auth update endpoint and a nullable-update DTO (absent = keep, null = clear, value = set), synced downstream to Iterable + SFDC' },
+                { k: 'Fail-open on the critical path', v: 'experiment allocations exposed on the rower profile for Amplitude return an empty array on experiment-service errors rather than failing the profile request' },
+              ]} />
+              <div className="tags reveal" style={{ marginTop: 18 }}>
+                {['NestJS', 'PostgreSQL', 'Zod', 'Iterable', 'SFDC', 'Amplitude'].map((t) => <span key={t} className="tag">{t}</span>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ FEATURE 9 ============================ */}
+      <section id="hs-f9" className="hs-section hs-feature">
+        <div className="wrap">
+          <div className="hs-feature-head reveal">
+            <span className="hs-fnum">09</span>
+            <span className="hs-pill flag"><Bot className="w-3.5 h-3.5" /> AI-assisted engineering</span>
+          </div>
+          <h2 className="hs-h2 reveal">An AI-assisted development workflow that learns from every review</h2>
+          <p className="hs-oneliner reveal" style={{ maxWidth: 780 }}>
+            Beyond shipping features, I built a structured Claude Code workflow around the team’s SDLC — a
+            persistent knowledge system that turns every PR review into a rule the next ticket already knows.
+          </p>
+
+          <div className="hs-two-col">
+            <div>
+              <span className="mono-label orange reveal">The /start-jira-work flow</span>
+              <BuiltList items={[
+                { k: 'Plan (with me)', v: 'read the Jira ticket, load prior work, check for conflicts, propose a plan I approve before any code' },
+                { k: 'Execute (autonomous)', v: 'branch → implement → write tests → build-check, with model routing — scaffold, tests, then core logic on the strongest model' },
+                { k: 'Review (autonomous)', v: 'self-review against an accumulated NFR checklist, run e2e tests, fix within a bounded number of iterations' },
+                { k: 'Present & record', v: 'summary + diff for my approval, then /submit-pr, then update the work log and review standards' },
+              ]} />
+            </div>
+            <div>
+              <span className="mono-label orange reveal">The persistent knowledge system</span>
+              <BuiltList items={[
+                { k: 'pr-review-standards.md', v: 'an NFR checklist grown from real reviewer feedback (e.g. “DB ops before external calls — fail fast”, “single SQL over multi-pass JS”) that the agent self-reviews against before every submit' },
+                { k: 'work-log.md + issue summaries', v: 'a running index of completed tickets and per-ticket implementation notes, fed back in as context for future work' },
+                { k: 'Custom slash commands', v: '/start-jira-work, /run-e2e, /submit-pr, /pr-feedback and /record-work automate the repetitive parts of the loop' },
+                { k: 'The payoff', v: 'feedback from one PR becomes a standing rule — so the same mistake doesn’t come back on the next one' },
+              ]} />
+              <div className="tags reveal" style={{ marginTop: 18 }}>
+                {['Claude Code', 'Custom skills', 'Jira', 'e2e tests', 'CI'].map((t) => <span key={t} className="tag">{t}</span>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ============================ LEARNINGS ============================ */}
       <section className="hs-section hs-feature">
         <div className="wrap">
           <div className="hs-feature-head reveal">
-            <span className="hs-fnum">07</span>
+            <span className="hs-fnum">10</span>
             <span className="hs-pill">Learnings</span>
           </div>
           <h2 className="hs-h2 reveal">What I took away</h2>
@@ -531,6 +656,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
               'Service boundaries',
               'Defensive coding',
               'Test depth',
+              'AI as a force multiplier',
             ].map((t) => <span key={t} className="hs-learn">{t}</span>)}
           </div>
         </div>
