@@ -75,7 +75,7 @@ const hydrowFeatures = [
   { id: 'hs-f5', name: 'Login-Screen Banners', blurb: 'Full CRUD with S3 upload + transactional rollback' },
   { id: 'hs-f6', name: 'Post-Workout Summary', blurb: 'Sum-of-cables weight display, done right' },
   { id: 'hs-f7', name: 'Recommendation Engine', blurb: '3-pass pipeline with accessory & difficulty SQL filters' },
-  { id: 'hs-f8', name: 'Tiles & Experiments', blurb: 'Template-Method tiles + master/leaf A/B promo targeting' },
+  { id: 'hs-f8', name: 'A/B Experiment Framework', blurb: 'Pluggable experiments — master/leaf tiles + cohort targeting' },
   { id: 'hs-f9', name: 'AI-Assisted Workflow', blurb: 'A Claude Code SDLC flow with persistent PR-review memory', flag: true },
 ];
 
@@ -94,10 +94,13 @@ const caseStudies = {
   hydrow: {
     lead: 'Designed and shipped the backend behind strength progress, gamification, content delivery, home-screen tiles and A/B experiments — 59 PRs across 7 product areas, every query profiled at production scale.',
     summary: [
-      'Owned several product features end-to-end — schema, APIs, tests, and rollout — including the strength-fitness app’s progress graphs, keeping every user-facing endpoint under 25 ms on the production database.',
-      'Improved query performance from an event-loop-blocking JS loop to a 0.7 ms SQL query by moving data-heavy work into the database using window functions, grouped subqueries, and join-based filters.',
-      'Cut hot-path latency from seconds (2,288 ms and 1,646 ms) to near-zero by moving real-time checks behind materialized views and Redis caching.',
-      'Restored data correctness across ~123K historical records by running a bounded, dry-run-verified backfill migration, and kept large-table reads scale-safe with cursor-based pagination.',
+      'Owned several product features end-to-end — schema, APIs, tests, and rollout — including the strength-fitness app’s progress graphs, keeping every user-facing endpoint under 25 ms at production scale.',
+      'Drove large latency wins by pushing data-heavy work into SQL and caching hot paths — one graph computation went from an event-loop-blocking loop to 0.7 ms, and real-time checks from ~2,000 ms to near-zero with materialized views and Redis.',
+      'Built the strength recommendation engine — a multi-pass SQL pipeline that only suggests workouts a user has the equipment and difficulty for, relaxing constraints step by step so it never runs out of options.',
+      'Shipped the real-time gamification system — 5+ badge checkers plus a schema API that generates admin forms for all 21 badge types straight from their validation schemas, with no frontend changes.',
+      'Designed a pluggable A/B experiment framework — a master/leaf tile mechanism that serves different user groups different content, targeted by churn score and behavioral segment.',
+      'Delivered a full image-banner CRUD backend on S3, ordering the storage and database writes with rollback so a failed write never leaves an orphaned file.',
+      'Restored data correctness across ~123K historical records with a bounded, dry-run-verified backfill migration, and kept large-table reads scale-safe with cursor-based pagination.',
       'Built an AI-assisted development workflow on Claude Code that automates the coding, testing, and self-review stages of the SDLC while keeping me in the loop for planning and final review, backed by a persistent knowledge base of accumulated review standards.',
     ],
     contrib: '/hydrow/contribution-graph.png',
@@ -113,20 +116,20 @@ const caseStudies = {
 
 const openSourceProjects = [
   {
-    name: 'NestJS Backend Boilerplate',
-    tech: 'Node.js · TypeScript · NestJS · Prisma · Docker · Zod · Biome · Winston',
-    description:
-      'A production-ready backend boilerplate with JWT auth, RBAC, validation, structured logging, Prisma ORM, Docker, and Swagger/OpenAPI specs pre-configured — the starting point for real projects.',
-    stat: '51', statLabel: 'stars', stat2: '11', stat2Label: 'forks',
-    link: 'https://github.com/manas-aggrawal/nestjs-boilerplate',
-  },
-  {
     name: 'Telemetry npm Package',
     tech: 'Node.js · TypeScript · OpenTelemetry · AWS X-Ray · CloudWatch · Jaeger · Prometheus',
     description:
       'A published npm package enabling end-to-end distributed tracing across APIs, DB queries, and async tasks — reducing mean debugging time by ~60% in backend services.',
     stat: '1,000', statLabel: 'downloads', stat2: null,
     link: 'https://www.npmjs.com/package/nodejs-observability',
+  },
+  {
+    name: 'NestJS Backend Boilerplate',
+    tech: 'Node.js · TypeScript · NestJS · Prisma · Docker · Zod · Biome · Winston',
+    description:
+      'A production-ready backend boilerplate with JWT auth, RBAC, validation, structured logging, Prisma ORM, Docker, and Swagger/OpenAPI specs pre-configured — the starting point for real projects.',
+    stat: '51', statLabel: 'stars', stat2: '11', stat2Label: 'forks',
+    link: 'https://github.com/manas-aggrawal/nestjs-boilerplate',
   },
 ];
 
@@ -160,7 +163,7 @@ const education = [
     period: 'Sep 2024 – Dec 2026',
     status: 'Expected Dec 2026',
     location: 'Boston, MA',
-    gpa: '3.83 / 4.0',
+    gpa: '3.86 / 4.0',
     coursework:
       'Algorithms, System Design, Software Design Patterns, Principles of Programming Languages, Mobile App Development, Web Development',
     roles: [
