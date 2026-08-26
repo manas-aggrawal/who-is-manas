@@ -20,7 +20,7 @@ const experience = [
   {
     title: 'Software Engineer Intern',
     company: 'Hydrow',
-    period: 'Jan 2026 – Present',
+    period: 'Jan 2026 – Aug 2026',
     location: 'Boston, MA',
     caseStudy: 'hydrow',
     stack: ['NestJS', 'PostgreSQL', 'Redis', 'Kubernetes'],
@@ -74,6 +74,9 @@ const hydrowFeatures = [
   { id: 'hs-f4', name: 'Workout History & Backfill', blurb: 'Cursor pagination + a ~123K-record data migration' },
   { id: 'hs-f5', name: 'Login-Screen Banners', blurb: 'Full CRUD with S3 upload + transactional rollback' },
   { id: 'hs-f6', name: 'Post-Workout Summary', blurb: 'Sum-of-cables weight display, done right' },
+  { id: 'hs-f7', name: 'Recommendation Engine', blurb: '3-pass pipeline with accessory & difficulty SQL filters' },
+  { id: 'hs-f8', name: 'A/B Experiment Framework', blurb: 'Pluggable experiments — master/leaf tiles + cohort targeting' },
+  { id: 'hs-f9', name: 'AI-Assisted Workflow', blurb: 'A Claude Code SDLC flow with persistent PR-review memory', flag: true },
 ];
 
 // Care deep-dive feature cards → deep-link into the case study by section id.
@@ -89,9 +92,19 @@ const careFeatures = [
 // Case-study registry — drives the main-page flagship blocks and the deep-dive overlays.
 const caseStudies = {
   hydrow: {
-    lead: 'Designed and shipped the backend behind strength progress, gamification, and content delivery — 43 PRs, 20+ REST APIs, every query profiled at production scale.',
+    lead: 'Designed and shipped the backend behind strength progress, gamification, content delivery, home-screen tiles and A/B experiments — 59 PRs across 7 product areas, every query profiled at production scale.',
+    summary: [
+      'Owned several product features end-to-end — schema, APIs, tests, and rollout — including the strength-fitness app’s progress graphs, keeping every user-facing endpoint under 25 ms at production scale.',
+      'Drove large latency wins by pushing data-heavy work into SQL and caching hot paths — one graph computation went from an event-loop-blocking loop to 0.7 ms, and real-time checks from ~2,000 ms to near-zero with materialized views and Redis.',
+      'Built the strength recommendation engine — a multi-pass SQL pipeline that only suggests workouts a user has the equipment and difficulty for, relaxing constraints step by step so it never runs out of options.',
+      'Shipped the real-time gamification system — 5+ badge checkers plus a schema API that generates admin forms for all 21 badge types straight from their validation schemas, with no frontend changes.',
+      'Designed a pluggable A/B experiment framework — a master/leaf tile mechanism that serves different user groups different content, targeted by churn score and behavioral segment.',
+      'Delivered a full image-banner CRUD backend on S3, ordering the storage and database writes with rollback so a failed write never leaves an orphaned file.',
+      'Restored data correctness across ~123K historical records with a bounded, dry-run-verified backfill migration, and kept large-table reads scale-safe with cursor-based pagination.',
+      'Built an AI-assisted development workflow on Claude Code that automates the coding, testing, and self-review stages of the SDLC while keeping me in the loop for planning and final review, backed by a persistent knowledge base of accumulated review standards.',
+    ],
     contrib: '/hydrow/contribution-graph.png',
-    contribAlt: 'GitHub contribution history — 43 PRs, 42 merged',
+    contribAlt: 'GitHub profile — 160 contributions, 59 PRs, 56 merged',
     features: hydrowFeatures,
   },
   carenexus: {
@@ -103,20 +116,20 @@ const caseStudies = {
 
 const openSourceProjects = [
   {
-    name: 'NestJS Backend Boilerplate',
-    tech: 'Node.js · TypeScript · NestJS · Prisma · Docker · Zod · Biome · Winston',
-    description:
-      'A production-ready backend boilerplate with JWT auth, RBAC, validation, structured logging, Prisma ORM, Docker, and Swagger/OpenAPI specs pre-configured — the starting point for real projects.',
-    stat: '51', statLabel: 'stars', stat2: '11', stat2Label: 'forks',
-    link: 'https://github.com/manas-aggrawal/nestjs-boilerplate',
-  },
-  {
     name: 'Telemetry npm Package',
     tech: 'Node.js · TypeScript · OpenTelemetry · AWS X-Ray · CloudWatch · Jaeger · Prometheus',
     description:
       'A published npm package enabling end-to-end distributed tracing across APIs, DB queries, and async tasks — reducing mean debugging time by ~60% in backend services.',
     stat: '1,000', statLabel: 'downloads', stat2: null,
     link: 'https://www.npmjs.com/package/nodejs-observability',
+  },
+  {
+    name: 'NestJS Backend Boilerplate',
+    tech: 'Node.js · TypeScript · NestJS · Prisma · Docker · Zod · Biome · Winston',
+    description:
+      'A production-ready backend boilerplate with JWT auth, RBAC, validation, structured logging, Prisma ORM, Docker, and Swagger/OpenAPI specs pre-configured — the starting point for real projects.',
+    stat: '51', statLabel: 'stars', stat2: '11', stat2Label: 'forks',
+    link: 'https://github.com/manas-aggrawal/nestjs-boilerplate',
   },
 ];
 
@@ -150,7 +163,7 @@ const education = [
     period: 'Sep 2024 – Dec 2026',
     status: 'Expected Dec 2026',
     location: 'Boston, MA',
-    gpa: '3.83 / 4.0',
+    gpa: '3.86 / 4.0',
     coursework:
       'Algorithms, System Design, Software Design Patterns, Principles of Programming Languages, Mobile App Development, Web Development',
     roles: [
@@ -420,8 +433,8 @@ const Portfolio = () => {
             <div className="about-body">
               <p className="lead reveal">
                 Backend software engineer with <b>3.5+ years</b> shipping scalable APIs, distributed systems, and
-                cloud infrastructure — currently interning at <b>Hydrow</b> while finishing my MS in Computer Science
-                at <b>Northeastern</b>.
+                cloud infrastructure — most recently interned as a backend engineer at <b>Hydrow</b> while finishing
+                my MS in Computer Science at <b>Northeastern</b>.
               </p>
               <ul className="about-list reveal">
                 {[
@@ -468,6 +481,11 @@ const Portfolio = () => {
                       </div>
                     </div>
                     <p className="exp-flagship-lead">{cs.lead}</p>
+                    {cs.summary && (
+                      <ul className="hl-list">
+                        {cs.summary.map((h, i) => (<li key={i}><span className="li-mark">→</span>{h}</li>))}
+                      </ul>
+                    )}
                     <div className="tags">{job.stack.map((t) => <span key={t} className="tag">{t}</span>)}</div>
 
                     {cs.contrib && (

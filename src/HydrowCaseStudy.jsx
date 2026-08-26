@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import {
   ArrowLeft, ArrowUpRight, ArrowRight, Image as ImageIcon,
-  LineChart, Trophy, Zap, Scale, History,
+  LineChart, Trophy, Zap, Scale, History, Filter, LayoutGrid, Bot,
 } from 'lucide-react';
 import CaseStudyStyles from './CaseStudyStyles.jsx';
 
@@ -14,15 +14,15 @@ import CaseStudyStyles from './CaseStudyStyles.jsx';
 
 const overview = {
   role: 'Backend Engineer Intern',
-  period: 'Jan 2026 – Jul 2026',
+  period: 'Jan 2026 – Aug 2026',
   location: 'Boston, MA',
   repo: 'TrueRowing/data-api-v2',
-  stack: ['Node.js', 'TypeScript', 'NestJS', 'PostgreSQL', 'Redis', 'AWS S3', 'TypeORM'],
+  stack: ['Node.js', 'TypeScript', 'NestJS', 'PostgreSQL', 'Redis', 'AWS S3', 'TypeORM', 'Zod'],
 };
 
 // VERIFIED headline + production-scale numbers (safe to display as-is).
 const scaleMetrics = [
-  { value: '43', unit: '', label: 'Pull requests · 42 merged' },
+  { value: '59', unit: '', label: 'Pull requests · 56 merged' },
   { value: '20', unit: '+', label: 'Production REST APIs' },
   { value: '6,500', unit: '+', label: 'Published workout videos' },
   { value: '360', unit: '+', label: 'Strength movements' },
@@ -150,7 +150,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
           <span className="kicker reveal">Deep Dive — Backend Engineering</span>
           <h1 className="hs-title reveal">Building Hydrow’s<br />strength-training backend<span className="ast"> ✳</span></h1>
           <p className="hs-lead reveal">
-            A six-month backend internship on Hydrow’s connected-fitness platform — designing and
+            An eight-month backend internship on Hydrow’s connected-fitness platform — designing and
             shipping the APIs behind strength progress, gamification, and content delivery, every
             query profiled against production-scale data.
           </p>
@@ -173,10 +173,10 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
         <div className="wrap">
           <VisualSlot
             src="/hydrow/contribution-graph.png"
-            alt="GitHub contribution graph — 127 contributions over the Hydrow internship"
-            label="GitHub contribution graph — Jan–Jul 2026"
-            caption="43 PRs · 42 merged"
-            aspect="1100 / 200"
+            alt="GitHub profile — 160 contributions over the Hydrow internship"
+            label="GitHub contribution graph — Jan–Aug 2026"
+            caption="59 PRs · 56 merged · ~6,000+ lines across 7 product areas"
+            aspect="1100 / 620"
           />
         </div>
       </section>
@@ -222,8 +222,8 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
 
               <span className="mono-label orange reveal">Why it matters</span>
               <p className="hs-para reveal">
-                Before this, rowers had no way to see how their strength training was progressing over
-                time. These APIs power the progress screens where a rower tracks weight lifted per
+                Before this, users had no way to see how their strength training was progressing over
+                time. These APIs power the progress screens where a user tracks weight lifted per
                 movement, watches personal records climb, and sees a single HydroMetrics fitness score
                 trend upward — the feedback loop that keeps people coming back to train.
               </p>
@@ -234,7 +234,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
               <span className="mono-label orange reveal">What I built</span>
               <BuiltList items={[
                 { k: 'Movement Stats API', v: 'per-movement min/max/avg weight, reps and sets, with 7/30/90-day, 1-year and lifetime ranges resolved dynamically from a rower’s first workout' },
-                { k: 'Personal Records API', v: 'every movement with a PR, split by mode (Standard vs. Reactive), behind a clean PersonalRecordsService boundary' },
+                { k: 'Personal Records API', v: 'every movement with a PR, split by mode (Standard vs. Reactive)' },
                 { k: 'PR History API', v: 'day-bucketed PR progression per movement with max-per-day aggregation to keep graph payloads small' },
                 { k: 'Weights Used tracking', v: 'max weight per movement per workout, handling isotonic (maxWeight) and isokinetic (avgWeight) modes correctly' },
                 { k: 'HydroMetrics Score API', v: 'composite/power/endurance/precision summary plus a gap-filled historical chart endpoint' },
@@ -282,7 +282,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
               </div>
               <h2 className="hs-h2 reveal">Gamification / Badge System</h2>
               <p className="hs-oneliner reveal">
-                Built the badge-checking engine that awards achievements in real time as rowers
+                Built the badge-checking engine that awards achievements in real time as users
                 complete workouts.
               </p>
 
@@ -295,7 +295,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
               <span className="mono-label orange reveal">Why it matters</span>
               <p className="hs-para reveal">
                 Badges are a core engagement and motivation loop. The hard requirement: a badge unlocks
-                the moment a rower finishes the qualifying workout — not minutes later when background
+                the moment a user finishes the qualifying workout — not minutes later when background
                 stats jobs catch up. Getting that instant feedback right is what makes the reward feel earned.
               </p>
               {/* TODO ⚠️ business metric: badge unlock counts, % of users earning ≥1 badge,
@@ -308,6 +308,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
                 { k: 'Variety Streak', v: 'multiple modalities (row / strength / on-the-mat) across consecutive weeks' },
                 { k: 'X Workout Days', v: 'configurable N distinct days, with optional workout-type restriction for themed monthly challenges' },
                 { k: 'Def-5 completion caching', v: 'Redis cache (1-hr TTL) so fast-badge-checks resolve before background processing finishes' },
+                { k: 'Badge-definition schema API', v: 'a GET /schema endpoint that derives draft-07 JSON Schema straight from each badge checker’s Zod schema (toJSONSchema()), with x-entity metadata — so hyadmin (internal content management portal) renders a form for any of the 21 badge types with zero frontend changes' },
               ]} />
 
               <span className="mono-label orange reveal">Verified performance</span>
@@ -352,7 +353,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
               </p>
               <span className="mono-label orange reveal">What I built</span>
               <BuiltList items={[
-                { k: 'Pure-SQL gap-filling', v: 'generate_series + COUNT(...) OVER to form gap groups, then MAX(...) OVER (PARTITION BY grp) to forward-fill' },
+                { k: 'Pure-SQL gap-filling', v: 'used generate_series to lay down one row per day, then carried the last recorded weight forward to fill the days with no workout — so the chart has a value for every day, computed entirely in SQL' },
                 { k: 'Parameterized grain', v: 'daily / weekly resolution in the same query' },
               ]} />
               <div className="hs-metric-grid tight reveal">
@@ -390,7 +391,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
             <div>
               <span className="mono-label orange reveal">Why it matters</span>
               <p className="hs-para reveal">
-                A rower can scroll their entire history and drill into any past workout’s stats — so both
+                A user can scroll their entire history and drill into any past workout’s stats — so both
                 the scroll and the stored numbers have to stay correct. When a display bug had already
                 written wrong values into months of history, the forward fix wasn’t enough; the past data
                 had to be repaired too.
@@ -399,7 +400,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
               <BuiltList items={[
                 { k: 'Cursor-based pagination', v: 'Redis-backed opaque cursors + a canonical filter-key so JSON key-order never triggers spurious resets — reliable infinite scroll for power users with thousands of workouts' },
                 { k: 'ANALYZE after matview refresh', v: 'prevents stale planner stats from producing bad query plans (seq scans instead of index scans)' },
-                { k: 'One-time backfill (DAPI-2303)', v: 'repaired historical workout-stats records whose sum-of-cables personal records showed the raw per-cable weight (e.g. 24.5 lb instead of 49) because weightDisplay was never stored in the serialized PR map' },
+                { k: 'One-time backfill (DAPI-2303)', v: 'repaired historical workout-stats records whose sum-of-cables personal records showed the raw per-cable weight (e.g. 24.5 lb instead of 49) because weightDisplayMode(per-cable or sum-of-cables) was never stored in the serialized data' },
               ]} />
             </div>
             <div>
@@ -445,7 +446,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
             <div>
               <span className="mono-label orange reveal">Why it matters</span>
               <p className="hs-para reveal">
-                These banners are the first thing a rower sees before logging in — the surface for
+                These banners are the first thing a user sees before logging in — the surface for
                 promoting programs, collections, and new content. The system has to schedule banners by
                 effective date, serve the right one to unauthenticated tablets, and never leave orphaned
                 images in storage.
@@ -486,7 +487,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
           </div>
           <h2 className="hs-h2 reveal">Post-Workout Summary — sum-of-cables weight display</h2>
           <p className="hs-oneliner reveal" style={{ maxWidth: 760 }}>
-            Made completed-workout data read correctly for barbell movements — the weights a rower
+            Made completed-workout data read correctly for barbell movements — the weights a user
             actually sees the moment a session ends.
           </p>
 
@@ -494,7 +495,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
             <div>
               <span className="mono-label orange reveal">Why it matters</span>
               <p className="hs-para reveal">
-                Hydrow’s cable machine reports per-cable weights internally, but a rower doing barbell
+                Hydrow’s cable machine reports per-cable weights internally, but a user doing barbell
                 movements expects the combined (doubled) weight on their summary. Getting that display
                 right — and consistent across every screen that shows it — is what makes the numbers
                 trustworthy. The win here is <b>display correctness</b>, not query scale.
@@ -516,11 +517,147 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
         </div>
       </section>
 
+      {/* ============================ FEATURE 7 ============================ */}
+      <section id="hs-f7" className="hs-section hs-feature">
+        <div className="wrap">
+          <div className="hs-feature-head reveal">
+            <span className="hs-fnum">07</span>
+            <span className="hs-pill"><Filter className="w-3.5 h-3.5" /> Recommendation engine</span>
+          </div>
+          <h2 className="hs-h2 reveal">Strength Recommendation Engine — accessory & difficulty filtering</h2>
+          <p className="hs-oneliner reveal" style={{ maxWidth: 760 }}>
+            A 3-pass recommendation pipeline that only ever suggests workouts a user can actually do —
+            with the equipment they own, at a difficulty that fits.
+          </p>
+
+          <div className="hs-two-col">
+            <div>
+              <span className="mono-label orange reveal">Why it matters</span>
+              <p className="hs-para reveal">
+                A recommendation is worthless if it needs a bar the user doesn’t have, or sits at the wrong
+                difficulty. The engine has to respect owned equipment — including cases where one accessory
+                counts as another (owning the bar already gives you the pigtails that come with it) — and
+                map each user's Svexa experience estimate to the right difficulty tier, then progressively
+                relax those constraints so it never runs dry.
+              </p>
+              <span className="mono-label orange reveal">What I built</span>
+              <BuiltList items={[
+                { k: 'Progressive-relaxation pipeline', v: 'Pass 1 — unwatched at primary difficulty, oldest-first; Pass 2 — unwatched at the adjacent tier; Pass 3 — previously-watched, least-recently-completed' },
+                { k: 'Accessory filter', v: 'a NOT EXISTS subquery that drops videos needing gear the user doesn’t own — and counts gear that comes bundled with something they do own (owning the bar satisfies a pigtails requirement, via requiresOneOf)' },
+                { k: 'Difficulty filter', v: 'a second NOT EXISTS keyed on difficulty tags derived from the user’s Svexa experience estimate' },
+                { k: 'Smart-reco de-duplication', v: 'recently-done picks pushed to the bottom of the DoneThenRandom ordering so the same recommendation stops resurfacing' },
+              ]} />
+            </div>
+            <div>
+              <span className="mono-label orange reveal">The engineering story</span>
+              <p className="hs-para reveal">
+                The win here is expressing the whole eligibility model in SQL rather than post-filtering in
+                JavaScript — the two NOT EXISTS clauses and tag-key joins do the equipment and difficulty
+                gating in the database, so each pass returns a ready-to-serve candidate set. The same
+                accessory logic was then reused to gate the workout-video library, so browsing only shows
+                videos a rower has the gear for.
+              </p>
+              <div className="tags reveal" style={{ marginTop: 18 }}>
+                {['NestJS', 'PostgreSQL', 'NOT EXISTS subqueries', 'Tag joins'].map((t) => <span key={t} className="tag">{t}</span>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ FEATURE 8 ============================ */}
+      <section id="hs-f8" className="hs-section hs-feature">
+        <div className="wrap">
+          <div className="hs-feature-head reveal">
+            <span className="hs-fnum">08</span>
+            <span className="hs-pill"><LayoutGrid className="w-3.5 h-3.5" /> Experimentation</span>
+          </div>
+          <h2 className="hs-h2 reveal">A pluggable A/B experiment framework</h2>
+          <p className="hs-oneliner reveal" style={{ maxWidth: 780 }}>
+            Made it possible to show different users different content — and measure what actually works —
+            without hand-coding each test.
+          </p>
+
+          <span className="mono-label orange reveal">Experiments, in plain terms</span>
+          <p className="hs-para reveal" style={{ maxWidth: 820 }}>
+            An experiment shows different versions of a feature to different people to learn which one works
+            best. Each version is a <b>cell</b> (say, promo A vs. promo B). Users are sorted into <b>groups</b>
+            {' '}by traits like how likely they are to cancel (a churn score) or which behavioral segment they
+            fall into, and each group is <b>allocated</b> to a cell. The interesting part isn’t any single
+            test — it’s the architecture that lets any home-screen tile become experiment-driven with no
+            custom code.
+          </p>
+
+          <div className="hs-two-col">
+            <div>
+              <span className="mono-label orange reveal">The design — master/leaf</span>
+              <BuiltList items={[
+                { k: 'One mechanism, any number of variants', v: 'an enabled “master” tile resolves the experiment for a user, then swaps in a hidden “leaf” tile holding the content for that user’s cell — so adding a promo variant is data, not new code' },
+                { k: 'Cohort targeting by most-specific-wins', v: 'an exact behavioral-segment match (+2) beats a churn-score range (+1) beats a catch-all default (0), so the most specific rule decides the cell' },
+                { k: 'Pluggable checker + manager', v: 'a PromoTileChecker (Zod-validated config) and PromoTileManager resolve the experiment and map it to device type; 10 e2e tests cover the multi-cohort cases' },
+              ]} />
+            </div>
+            <div>
+              <span className="mono-label orange reveal">What I built to support it</span>
+              <BuiltList items={[
+                { k: 'Made the user model experiment-aware', v: 'added churn_score (numeric(4,3)) and behavioral_segment, with a dual-auth endpoint to set them — nullable-update semantics (absent = keep, null = clear, value = set) — and downstream sync to Iterable + SFDC so marketing tools share the same segments' },
+                { k: 'Exposed each user’s cell assignments', v: 'surfaced active allocations on the profile as [{ name: experiment_<key>, value: <cellLabel> }] for Amplitude, so analytics can slice every metric by cell' },
+                { k: 'Fail-open on the critical path', v: 'if the experiment service errors, allocations return empty rather than failing the profile request everyone depends on' },
+              ]} />
+              <div className="tags reveal" style={{ marginTop: 18 }}>
+                {['NestJS', 'PostgreSQL', 'Zod', 'Iterable', 'SFDC', 'Amplitude'].map((t) => <span key={t} className="tag">{t}</span>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================ FEATURE 9 ============================ */}
+      <section id="hs-f9" className="hs-section hs-feature">
+        <div className="wrap">
+          <div className="hs-feature-head reveal">
+            <span className="hs-fnum">09</span>
+            <span className="hs-pill flag"><Bot className="w-3.5 h-3.5" /> AI-assisted engineering</span>
+          </div>
+          <h2 className="hs-h2 reveal">An AI-assisted development workflow that learns from every review</h2>
+          <p className="hs-oneliner reveal" style={{ maxWidth: 780 }}>
+            Beyond shipping features, I built an AI workflow that automates the coding, testing, and self-review stages 
+            of the SDLC while keeping me in the loop for planning and final review, backed by a persistent knowledge 
+            base of accumulated review standards.
+          </p>
+          
+
+          <div className="hs-two-col">
+            <div>
+              <span className="mono-label orange reveal">The /start-jira-work flow</span>
+              <BuiltList items={[
+                { k: 'Plan (with me)', v: 'read the Jira ticket, load prior work, check for conflicts, propose a plan I approve before any code' },
+                { k: 'Execute (autonomous)', v: 'branch → implement → write tests → build-check, with model routing — scaffold, tests, then core logic on the strongest model' },
+                { k: 'Review (autonomous)', v: 'self-review against an accumulated NFR checklist, run e2e tests, fix within a bounded number of iterations' },
+                { k: 'Present & record', v: 'summary + diff for my approval, then /submit-pr, then update the work log and review standards' },
+              ]} />
+            </div>
+            <div>
+              <span className="mono-label orange reveal">The persistent knowledge system</span>
+              <BuiltList items={[
+                { k: 'pr-review-standards.md', v: 'an NFR checklist grown from real reviewer feedback (e.g. “DB ops before external calls — fail fast”, “single SQL over multi-pass JS”) that the agent self-reviews against before every submit' },
+                { k: 'work-log.md + issue summaries', v: 'a running index of completed tickets and per-ticket implementation notes, fed back in as context for future work' },
+                { k: 'Custom skills as commands', v: '/start-jira-work, /run-e2e, /submit-pr, /pr-feedback and /record-work automate the repetitive parts of the loop' },
+                { k: 'The payoff', v: 'generic feedback from one PR becomes a standing rule — so the same mistake doesn’t come back on the next one' },
+              ]} />
+              <div className="tags reveal" style={{ marginTop: 18 }}>
+                {['Claude Code', 'Custom skills', 'Jira', 'e2e tests', 'CI'].map((t) => <span key={t} className="tag">{t}</span>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ============================ LEARNINGS ============================ */}
       <section className="hs-section hs-feature">
         <div className="wrap">
           <div className="hs-feature-head reveal">
-            <span className="hs-fnum">07</span>
+            <span className="hs-fnum">10</span>
             <span className="hs-pill">Learnings</span>
           </div>
           <h2 className="hs-h2 reveal">What I took away</h2>
@@ -531,6 +668,7 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
               'Service boundaries',
               'Defensive coding',
               'Test depth',
+              'AI as a force multiplier',
             ].map((t) => <span key={t} className="hs-learn">{t}</span>)}
           </div>
         </div>
