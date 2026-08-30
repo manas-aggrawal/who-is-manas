@@ -200,7 +200,6 @@ const skills = {
 
 const sections = [
   { id: 'home', label: 'Home', primary: true },
-  { id: 'about', label: 'About', primary: true },
   { id: 'experience', label: 'Experience', primary: true },
   { id: 'opensource', label: 'Open Source', primary: true },
   { id: 'research', label: 'Research', primary: true },
@@ -317,43 +316,38 @@ const Portfolio = () => {
 
       <main className="stage">
 
-      {/* HOME */}
+      {/* HOME (intro + about combined) */}
       <section id="home" className={`hero pane ${activeSection === 'home' ? 'is-active' : ''}`}>
         <div className="splash splash-o splash-hero-1" />
         <div className="splash splash-g splash-hero-2" />
         <div className="wrap hero-inner">
-          <p className="kicker rise" style={{ animationDelay: '.05s' }}>Backend Software Engineer · Boston, MA</p>
-          <div className="avail rise" style={{ animationDelay: '.08s' }}>
-            <span className="avail-dot" /> Open to full-time SWE roles · January 2027
-          </div>
-          <h1 className="hero-title">
-            <span className="rise" style={{ animationDelay: '.12s' }}>MANAS</span>
-            <span className="rise line-2" style={{ animationDelay: '.2s' }}>AGGRAWAL<span className="ast">✳</span></span>
-          </h1>
-          <p className="hero-sub rise" style={{ animationDelay: '.3s' }}>
-            In the age of agentic AI, I've moved past just writing code — I learn systems deeply
-            and ship backends that scale securely, standing up production-grade APIs faster than ever.
-          </p>
-          <div className="hero-cta rise" style={{ animationDelay: '.4s' }}>
-            <Magnetic>
-              <a className="btn" href="/resume.pdf" download="Manas_Aggrawal_Resume.pdf">
-                <Download className="w-4 h-4" /> Download Résumé
-              </a>
-            </Magnetic>
-            <Magnetic>
-              <button className="btn-outline" onClick={() => goTo('contact')}>
-                Get in touch <ArrowRight className="w-4 h-4" />
-              </button>
-            </Magnetic>
-          </div>
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section id="about" className={`section light pane ${activeSection === 'about' ? 'is-active' : ''}`}>
-        <div className="wrap">
-          <SectionHead n="(01)" kicker="About" title="Hi, I'm Manas" />
-          <div className="about-grid">
+          <div className="home-top">
+            <div className="home-intro">
+              <p className="kicker rise" style={{ animationDelay: '.05s' }}>Backend Software Engineer · Boston, MA</p>
+              <div className="avail rise" style={{ animationDelay: '.08s' }}>
+                <span className="avail-dot" /> Open to full-time SWE roles · January 2027
+              </div>
+              <h1 className="hero-title">
+                <span className="rise" style={{ animationDelay: '.12s' }}>MANAS</span>
+                <span className="rise line-2" style={{ animationDelay: '.2s' }}>AGGRAWAL<span className="ast">✳</span></span>
+              </h1>
+              <p className="hero-sub rise" style={{ animationDelay: '.3s' }}>
+                In the age of agentic AI, I've moved past just writing code — I learn systems deeply
+                and ship backends that scale securely, standing up production-grade APIs faster than ever.
+              </p>
+              <div className="hero-cta rise" style={{ animationDelay: '.4s' }}>
+                <Magnetic>
+                  <a className="btn" href="/resume.pdf" download="Manas_Aggrawal_Resume.pdf">
+                    <Download className="w-4 h-4" /> Download Résumé
+                  </a>
+                </Magnetic>
+                <Magnetic>
+                  <button className="btn-outline" onClick={() => goTo('contact')}>
+                    Get in touch <ArrowRight className="w-4 h-4" />
+                  </button>
+                </Magnetic>
+              </div>
+            </div>
             <div className="about-photo reveal">
               <div className="splash splash-g splash-photo" />
               <div className="splash splash-o splash-photo-2" />
@@ -363,31 +357,32 @@ const Portfolio = () => {
                 <span className="corner corner-br" />
               </div>
             </div>
-            <div className="about-body">
-              <p className="lead reveal">
-                Backend software engineer with <b>3.5+ years</b> shipping scalable APIs, distributed systems, and
-                cloud infrastructure — most recently interned as a backend engineer at <b>Hydrow</b> while finishing
-                my MS in Computer Science at <b>Northeastern</b>.
-              </p>
-              <ul className="about-list reveal">
-                {[
-                  'Software Engineer Intern at Hydrow — performant data APIs and safe concurrency on a containerized backend.',
-                  'Forward Deployed Engineer & Scrum Master on a Northeastern research capstone — owning both the backend and the client.',
-                  'Author of open-source tooling other teams ship on: a NestJS boilerplate and a distributed-tracing npm package.',
-                  'Graduate TA for Software Engineering, and a researcher in programming languages and multi-agent LLM systems.',
-                ].map((p, i) => (
-                  <li key={i}><span className="li-mark">→</span>{p}</li>
-                ))}
-              </ul>
-            </div>
           </div>
-          <div className="stats reveal">
-            {stats.map((s) => (
-              <div key={s.label} className="stat">
-                <div className="stat-num">{s.value}<span className="u">{s.unit}</span></div>
-                <div className="stat-label">{s.label}</div>
-              </div>
-            ))}
+
+          <div className="home-about">
+            <p className="lead reveal">
+              Backend software engineer with <b>3.5+ years</b> shipping scalable APIs, distributed systems, and
+              cloud infrastructure — most recently interned as a backend engineer at <b>Hydrow</b> while finishing
+              my MS in Computer Science at <b>Northeastern</b>.
+            </p>
+            <ul className="about-list reveal">
+              {[
+                'Software Engineer Intern at Hydrow — performant data APIs and safe concurrency on a containerized backend.',
+                'Forward Deployed Engineer & Scrum Master on a Northeastern research capstone — owning both the backend and the client.',
+                'Author of open-source tooling other teams ship on: a NestJS boilerplate and a distributed-tracing npm package.',
+                'Graduate TA for Software Engineering, and a researcher in programming languages and multi-agent LLM systems.',
+              ].map((p, i) => (
+                <li key={i}><span className="li-mark">→</span>{p}</li>
+              ))}
+            </ul>
+            <div className="stats reveal">
+              {stats.map((s) => (
+                <div key={s.label} className="stat">
+                  <div className="stat-num">{s.value}<span className="u">{s.unit}</span></div>
+                  <div className="stat-label">{s.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -675,10 +670,10 @@ const Styles = () => (
     b { color: var(--ink); font-weight: 600; }
     .dim { color: var(--ink-3); }
     .mono-sm { font-family: var(--font-mono); font-size: 12.5px; line-height: 1.6; color: var(--ink-2); }
-    .mono-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); display: block; margin-bottom: 10px; }
+    .mono-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); display: block; margin-bottom: 10px; }
     .mono-label.orange { color: var(--accent); }
 
-    .kicker { font-family: var(--font-mono); font-size: 14px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); display: inline-flex; align-items: center; }
+    .kicker { font-family: var(--font-mono); font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); display: inline-flex; align-items: center; }
 
     /* NAV */
     .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 60; background: transparent; padding: 15px 0; }
@@ -722,7 +717,7 @@ const Styles = () => (
     .hero .wrap { max-width: 1360px; width: 100%; }
     .hero-inner { position: relative; z-index: 2; }
     .hero-title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; line-height: .9; letter-spacing: -.03em; margin: 14px 0 0; display: flex; flex-direction: column; }
-    .hero-title span { font-size: clamp(2.8rem, 9.5vw, 7.6rem); display: block; }
+    .hero-title span { font-size: clamp(2.2rem, 5.5vw, 3.4rem); display: block; }
     .hero-title .line-2 { color: var(--ink); }
     .hero-title .ast { color: var(--accent); font-size: .5em; vertical-align: super; }
     .hero-sub { max-width: 600px; font-size: clamp(14.5px, 1.8vw, 18px); color: var(--ink-2); margin: 22px 0 0; line-height: 1.55; }
@@ -747,7 +742,7 @@ const Styles = () => (
     .section { padding: 104px 0; scroll-margin-top: 80px; position: relative; }
     .section + .section, .marquee + .section { border-top: 1px solid var(--line); }
     .sec-head { margin-bottom: 52px; }
-    .sec-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.1rem, 5.5vw, 4.2rem); line-height: 1; letter-spacing: -.025em; margin: 16px 0 0; color: var(--ink); }
+    .sec-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.7rem, 3.4vw, 2.3rem); line-height: 1.05; letter-spacing: -.02em; margin: 14px 0 0; color: var(--ink); }
     .sec-title .ast { color: var(--accent); }
 
     /* ABOUT */
@@ -758,13 +753,13 @@ const Styles = () => (
     .corner { position: absolute; width: 28px; height: 28px; border: 2px solid var(--accent); }
     .corner-tl { top: 12px; left: 12px; border-right: none; border-bottom: none; }
     .corner-br { bottom: 12px; right: 12px; border-left: none; border-top: none; }
-    .lead { font-size: clamp(17px, 2.2vw, 22px); line-height: 1.55; color: var(--ink-2); }
+    .lead { font-size: clamp(16px, 1.5vw, 18px); line-height: 1.6; color: var(--ink-2); }
     .about-list { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-direction: column; gap: 16px; }
     .about-list li, .hl-list li { display: flex; gap: 12px; color: var(--ink-2); font-size: 15px; line-height: 1.55; }
     .li-mark { color: var(--accent); font-family: var(--font-mono); flex-shrink: 0; }
     .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 64px; padding-top: 44px; border-top: 1px solid var(--line); }
     .stat { text-align: center; }
-    .stat-num { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1; color: var(--ink); }
+    .stat-num { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.7rem, 3vw, 2.1rem); line-height: 1; color: var(--ink); }
     .stat-num .u { color: var(--accent); }
     .stat-label { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-top: 12px; }
 
@@ -774,11 +769,11 @@ const Styles = () => (
     .exp-row:last-child { border-bottom: 1px solid var(--line); }
     .exp-index { font-family: var(--font-mono); font-size: 13px; color: var(--ink-3); padding-top: 6px; }
     .exp-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
-    .exp-title { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.2rem, 2.4vw, 1.7rem); color: var(--ink); transition: color .2s; letter-spacing: -.01em; }
+    .exp-title { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.15rem, 1.8vw, 1.4rem); color: var(--ink); transition: color .2s; letter-spacing: -.01em; }
     .exp-company { color: var(--accent); font-size: 15px; margin-top: 2px; }
     .exp-meta { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-2); text-align: right; display: flex; flex-direction: column; }
     .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
-    .tag { font-family: var(--font-mono); font-size: 11px; padding: 4px 11px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-2); white-space: nowrap; }
+    .tag { font-family: var(--font-mono); font-size: 12px; padding: 4px 11px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-2); white-space: nowrap; }
     .tag-lg { font-size: 12.5px; padding: 6px 13px; transition: border-color .2s, color .2s; }
     .tag-lg:hover { border-color: var(--accent); color: var(--ink); }
     .hl-list { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-direction: column; gap: 10px; }
@@ -818,8 +813,8 @@ const Styles = () => (
     .card-idx { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); }
     .arr { color: var(--ink-3); transition: color .2s, transform .2s; }
     .card:hover .arr { color: var(--accent); transform: translate(2px,-2px) rotate(0); }
-    .card-title { font-family: var(--font-display); font-weight: 600; font-size: 1.4rem; color: var(--ink); letter-spacing: -.01em; }
-    .card-title.sm { font-size: 1.15rem; }
+    .card-title { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; color: var(--ink); letter-spacing: -.01em; }
+    .card-title.sm { font-size: 1.05rem; }
     .card-desc { color: var(--ink-2); font-size: 14.5px; line-height: 1.6; margin-top: 12px; }
     .os-card .card-desc, .art-card .card-desc { margin-bottom: 22px; }
     .os-stats { display: flex; gap: 40px; padding-top: 20px; border-top: 1px solid var(--line); margin-top: auto; }
@@ -842,8 +837,8 @@ const Styles = () => (
 
     /* CONTACT */
     .contact-grid { display: grid; grid-template-columns: 1fr; gap: 50px; align-items: center; }
-    .contact-lead { font-size: clamp(16px, 2vw, 20px); color: var(--ink-2); line-height: 1.6; max-width: 560px; }
-    .contact-email { display: inline-flex; align-items: center; gap: 12px; max-width: 100%; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.05rem, 3vw, 1.85rem); line-height: 1.2; color: var(--ink); text-decoration: none; margin: 30px 0 26px; letter-spacing: -.01em; transition: color .2s; word-break: normal; overflow-wrap: anywhere; }
+    .contact-lead { font-size: clamp(15.5px, 1.4vw, 17px); color: var(--ink-2); line-height: 1.6; max-width: 560px; }
+    .contact-email { display: inline-flex; align-items: center; gap: 12px; max-width: 100%; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.1rem, 2vw, 1.5rem); line-height: 1.2; color: var(--ink); text-decoration: none; margin: 30px 0 26px; letter-spacing: -.01em; transition: color .2s; word-break: normal; overflow-wrap: anywhere; }
     .contact-email svg { flex-shrink: 0; }
     .contact-email:hover { color: var(--accent); }
     .contact-row { display: flex; flex-wrap: wrap; gap: 24px; }
@@ -917,8 +912,17 @@ const Styles = () => (
        Centering lives on the inner .wrap so tall content stays scrollable from the top. */
     .stage .section { padding: 44px 0 52px; border-top: none; scroll-margin-top: 0; }
     .section.pane.is-active > .wrap { display: flex; flex-direction: column; justify-content: center; min-height: 100%; }
-    .stage .hero.pane { min-height: 0; height: 100%; padding: 24px 0; }
-    .hero.pane.is-active { display: flex; }
+    .stage .hero.pane { min-height: 0; height: 100%; padding: 40px 0 48px; }
+    .hero.pane.is-active { display: block; }
+    .hero.pane.is-active > .hero-inner { min-height: 100%; display: flex; flex-direction: column; justify-content: center; }
+
+    /* Combined home: intro + photo on top, about below */
+    .home-top { display: grid; grid-template-columns: 1fr; gap: 30px; align-items: center; }
+    .home-intro { position: relative; z-index: 2; }
+    .home-top .about-photo { max-width: 300px; }
+    .home-about { margin-top: 38px; max-width: 840px; }
+    .home-about .about-list { margin-top: 16px; }
+    .home-about .stats { margin-top: 26px; }
     .stage-credit { margin-top: 40px; text-align: center; opacity: .7; }
 
     /* No scroll observers anymore — content is shown; motion comes from the pane fade-in */
@@ -987,6 +991,10 @@ const Styles = () => (
       .skill-block { grid-template-columns: 200px 1fr; align-items: start; }
       .contact-grid { grid-template-columns: 1.3fr 1fr; }
       .exp-feat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 900px) {
+      .home-top { grid-template-columns: 1.25fr .75fr; gap: 48px; }
+      .home-top .about-photo { justify-self: end; }
     }
     @media (min-width: 960px) {
       .grid-3 { grid-template-columns: repeat(3, 1fr); }
