@@ -467,9 +467,10 @@ const HydrowCaseStudy = ({ onBack, target = null }) => {
                 correctness</b>, not query scale. The S3-then-DB ordering with rollback is what keeps
                 storage clean when a write fails midway.
               </p>
-              {/* TODO: Figma of the login-screen banner + a sequence diagram of the
-                  S3-upload-then-DB-save-with-rollback flow. */}
-              <VisualSlot label="Login-screen banner + S3→DB rollback sequence" caption="Transactional cleanup: upload to S3, roll back if the DB write fails" aspect="4 / 3" />
+              <p className="hs-callout reveal">
+                <b>Order of operations:</b> write the image to S3 first, then commit the row — and if the
+                DB write fails, delete the just-uploaded object so nothing is ever orphaned.
+              </p>
             </div>
           </div>
           <div className="tags reveal" style={{ marginTop: 18 }}>

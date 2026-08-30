@@ -13,7 +13,7 @@ const stats = [
   { value: '3.5', unit: '+', label: 'Years of experience' },
   { value: '2', unit: '', label: 'Open-source projects' },
   { value: '2', unit: '', label: 'Research experiences' },
-  { value: '3.83', unit: '', label: 'GPA · MS in CS' },
+  { value: '3.86', unit: '', label: 'GPA · MS in CS' },
 ];
 
 const experience = [
@@ -198,12 +198,8 @@ const skills = {
   Practices: ['REST APIs', 'Distributed Systems', 'Web Architecture', 'OpenTelemetry', 'Agile', 'SDLC'],
 };
 
-const marqueeItems = [
-  'PostgreSQL', 'NestJS', 'Node.js', 'AWS', 'Redis', 'Kubernetes', 'TypeScript',
-  'Distributed Systems', 'REST APIs', 'Docker', 'OpenTelemetry', 'Microservices',
-];
-
 const sections = [
+  { id: 'home', label: 'Home', primary: true },
   { id: 'about', label: 'About', primary: true },
   { id: 'experience', label: 'Experience', primary: true },
   { id: 'opensource', label: 'Open Source', primary: true },
@@ -244,23 +240,6 @@ const Magnetic = ({ children, className, ...props }) => {
   );
 };
 
-const Stamp = ({ text, size = 132 }) => (
-  <div className="stamp" style={{ width: size, height: size }} aria-hidden="true">
-    <svg viewBox="0 0 200 200" width={size} height={size}>
-      <defs>
-        <path id="stampPath" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0" />
-      </defs>
-      <g className="stamp-rotate">
-        <text>
-          <textPath href="#stampPath" startOffset="0">{text}</textPath>
-        </text>
-      </g>
-      <circle cx="100" cy="100" r="42" className="stamp-core" />
-    </svg>
-    <span className="stamp-icon"><ArrowUpRight className="w-6 h-6" strokeWidth={2.5} /></span>
-  </div>
-);
-
 const Kicker = ({ children }) => <span className="kicker">{children}</span>;
 
 const SectionHead = ({ n, kicker, title }) => (
@@ -273,11 +252,9 @@ const SectionHead = ({ n, kicker, title }) => (
 /* ------------------------------------------------------------------- app --- */
 
 const Portfolio = () => {
-  const [activeSection, setActiveSection] = useState('about');
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [activeSection, setActiveSection] = useState('home');
   const [showTranscript, setShowTranscript] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [view, setView] = useState('home'); // 'home' | 'hydrow' | 'carenexus'
   const [caseTarget, setCaseTarget] = useState(null); // feature-section id to scroll to
 
@@ -286,45 +263,14 @@ const Portfolio = () => {
     setView(studyId);
   }, []);
 
-  useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Reveal-on-scroll
-    let revealObs;
-    const revealEls = Array.from(document.querySelectorAll('.reveal'));
-    if (reduced) {
-      revealEls.forEach((el) => el.classList.add('reveal-in'));
-    } else {
-      revealObs = new IntersectionObserver(
-        (entries) => entries.forEach((e) => {
-          if (e.isIntersecting) { e.target.classList.add('reveal-in'); revealObs.unobserve(e.target); }
-        }),
-        { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
-      );
-      revealEls.forEach((el) => revealObs.observe(el));
-    }
-
-    // Scrollspy
-    const spy = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) setActiveSection(e.target.id); }),
-      { rootMargin: '-45% 0px -50% 0px' }
-    );
-    document.querySelectorAll('section[id]').forEach((s) => spy.observe(s));
-
-    const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 40);
-      document.documentElement.style.setProperty('--sy', String(y));
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    return () => { revealObs?.disconnect(); spy.disconnect(); window.removeEventListener('scroll', onScroll); };
-  }, []);
-
+  // Switch the visible section (tabbed single-window layout — no page scroll).
   const goTo = useCallback((id) => {
     setMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setActiveSection(id);
+    // Reset the active pane's internal scroll to the top on switch.
+    requestAnimationFrame(() => {
+      document.querySelector('.pane.is-active')?.scrollTo({ top: 0 });
+    });
   }, []);
 
   const primaryNav = sections.filter((s) => s.primary);
@@ -335,9 +281,9 @@ const Portfolio = () => {
       <Styles />
 
       {/* NAV */}
-      <header className={`nav ${scrolled ? 'nav-solid' : ''}`}>
+      <header className="nav nav-solid">
         <div className="wrap nav-inner">
-          <button className="brand" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <button className="brand" onClick={() => goTo('home')}>
             Manas Aggrawal<span className="brand-dot">.</span>
           </button>
           <nav className={`nav-links ${onLightSection ? 'cap-dark' : 'cap-light'}`}>
@@ -369,11 +315,12 @@ const Portfolio = () => {
         )}
       </header>
 
-      {/* HERO */}
-      <section id="top" className="hero">
-        <div className="orbit orbit-1" />
-        <div className="orbit orbit-2" />
-        <div className="orbit orbit-3 spin-slow" />
+      <main className="stage">
+
+      {/* HOME */}
+      <section id="home" className={`hero pane ${activeSection === 'home' ? 'is-active' : ''}`}>
+        <div className="splash splash-o splash-hero-1" />
+        <div className="splash splash-g splash-hero-2" />
         <div className="wrap hero-inner">
           <p className="kicker rise" style={{ animationDelay: '.05s' }}>Backend Software Engineer · Boston, MA</p>
           <div className="avail rise" style={{ animationDelay: '.08s' }}>
@@ -400,30 +347,16 @@ const Portfolio = () => {
             </Magnetic>
           </div>
         </div>
-        <div className="hero-stamp rise" style={{ animationDelay: '.5s' }}>
-          <div className="stamp-parallax">
-            <Stamp text="MANAS AGGRAWAL ✳ BACKEND ENGINEER ✳ " size={158} />
-          </div>
-        </div>
       </section>
 
-      {/* MARQUEE */}
-      <div className="marquee" aria-hidden="true">
-        <div className="marquee-track">
-          {[0, 1].map((k) => (
-            <span key={k} className="marquee-copy">
-              {marqueeItems.map((t) => (<span key={t} className="marquee-item">{t} <span className="marquee-star">✳</span></span>))}
-            </span>
-          ))}
-        </div>
-      </div>
-
       {/* ABOUT */}
-      <section id="about" className="section light">
+      <section id="about" className={`section light pane ${activeSection === 'about' ? 'is-active' : ''}`}>
         <div className="wrap">
           <SectionHead n="(01)" kicker="About" title="Hi, I'm Manas" />
           <div className="about-grid">
             <div className="about-photo reveal">
+              <div className="splash splash-g splash-photo" />
+              <div className="splash splash-o splash-photo-2" />
               <div className="photo-frame">
                 <img src="/profile.png" alt="Manas Aggrawal" style={{ objectPosition: '50% 12%' }} />
                 <span className="corner corner-tl" />
@@ -460,7 +393,7 @@ const Portfolio = () => {
       </section>
 
       {/* EXPERIENCE */}
-      <section id="experience" className="section">
+      <section id="experience" className={`section pane ${activeSection === 'experience' ? 'is-active' : ''}`}>
         <div className="wrap">
           <SectionHead n="(02)" kicker="Experience" title="Where I've built" />
           <div className="exp-list">
@@ -518,7 +451,7 @@ const Portfolio = () => {
                   </div>
                 </div>
               ) : (
-                <div key={idx} className="exp-row reveal" onClick={() => setSelectedItem(job)}>
+                <div key={idx} className="exp-row reveal">
                   <div className="exp-index">0{idx + 1}</div>
                   <div className="exp-main">
                     <div className="exp-top">
@@ -531,11 +464,11 @@ const Portfolio = () => {
                         <span className="dim">{job.location}</span>
                       </div>
                     </div>
+                    {job.details && <p className="exp-flagship-lead">{job.details}</p>}
                     <div className="tags">{job.stack.map((t) => <span key={t} className="tag">{t}</span>)}</div>
                     <ul className="hl-list">
-                      {job.highlights.slice(0, 2).map((h, i) => (<li key={i}><span className="li-mark">→</span>{h}</li>))}
+                      {job.highlights.map((h, i) => (<li key={i}><span className="li-mark">→</span>{h}</li>))}
                     </ul>
-                    <span className="link-orange">Read more <ArrowUpRight className="w-4 h-4" /></span>
                   </div>
                 </div>
               );
@@ -545,7 +478,7 @@ const Portfolio = () => {
       </section>
 
       {/* OPEN SOURCE */}
-      <section id="opensource" className="section light">
+      <section id="opensource" className={`section light pane ${activeSection === 'opensource' ? 'is-active' : ''}`}>
         <div className="wrap">
           <SectionHead n="(03)" kicker="Open Source" title="Tools I ship & maintain" />
           <div className="grid-2">
@@ -569,7 +502,7 @@ const Portfolio = () => {
       </section>
 
       {/* RESEARCH */}
-      <section id="research" className="section">
+      <section id="research" className={`section pane ${activeSection === 'research' ? 'is-active' : ''}`}>
         <div className="wrap">
           <SectionHead n="(04)" kicker="Research" title="Ideas I'm chasing" />
           <div className="stack-list">
@@ -602,7 +535,7 @@ const Portfolio = () => {
       </section>
 
       {/* EDUCATION */}
-      <section id="education" className="section light">
+      <section id="education" className={`section light pane ${activeSection === 'education' ? 'is-active' : ''}`}>
         <div className="wrap">
           <SectionHead n="(05)" kicker="Education" title="Foundations" />
           <div className="stack-list">
@@ -633,7 +566,7 @@ const Portfolio = () => {
       </section>
 
       {/* WRITING */}
-      <section id="writing" className="section">
+      <section id="writing" className={`section pane ${activeSection === 'writing' ? 'is-active' : ''}`}>
         <div className="wrap">
           <SectionHead n="(06)" kicker="Writing" title="Words on systems" />
           <div className="grid-2">
@@ -653,7 +586,7 @@ const Portfolio = () => {
       </section>
 
       {/* SKILLS */}
-      <section id="skills" className="section light">
+      <section id="skills" className={`section light pane ${activeSection === 'skills' ? 'is-active' : ''}`}>
         <div className="wrap">
           <SectionHead n="(07)" kicker="Skills" title="The toolbox" />
           <div className="skills-grid">
@@ -668,7 +601,7 @@ const Portfolio = () => {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="section contact">
+      <section id="contact" className={`section contact pane ${activeSection === 'contact' ? 'is-active' : ''}`}>
         <div className="wrap">
           <SectionHead n="(08)" kicker="Contact" title="Let's build something" />
           <div className="contact-grid">
@@ -692,57 +625,17 @@ const Portfolio = () => {
                 ))}
               </div>
             </div>
-            <div className="contact-stamp reveal"><Stamp text="GET IN TOUCH · SAY HELLO · " size={168} /></div>
+            <div className="contact-stamp reveal">
+              <div className="splash splash-o splash-contact-1" />
+              <div className="splash splash-g splash-contact-2" />
+            </div>
           </div>
+          <p className="mono-sm dim stage-credit">© 2026 Manas Aggrawal · Built with React</p>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="wrap footer-inner">
-          <span className="brand">Manas Aggrawal<span className="brand-dot">.</span></span>
-          <span className="mono-sm dim">© 2026 Manas Aggrawal · Built with React</span>
-          <button className="link-orange" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            Back to top <ArrowUpRight className="w-4 h-4" />
-          </button>
-        </div>
-      </footer>
+      </main>
 
-      {/* FLOATING BADGE */}
-      {scrolled && (
-        <button
-          className="float-badge"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          aria-label="Back to top"
-        >
-          <Stamp text="BACK TO TOP ✳ BACK TO TOP ✳ " size={104} />
-        </button>
-      )}
-
-      {/* DETAIL MODAL */}
-      {selectedItem && (
-        <div className="modal-bg" onClick={() => setSelectedItem(null)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setSelectedItem(null)}><X className="w-5 h-5" /></button>
-            <h2 className="modal-title">{selectedItem.name || selectedItem.title}</h2>
-            <p className="mono-sm dim modal-sub">
-              {selectedItem.company ? `${selectedItem.company} · ${selectedItem.period}` : selectedItem.tech}
-            </p>
-            <p className="card-desc modal-desc">{selectedItem.details}</p>
-            {selectedItem.highlights && (
-              <>
-                <span className="mono-label orange">Key Contributions</span>
-                <ul className="hl-list modal-hl">
-                  {selectedItem.highlights.map((h, i) => (<li key={i}><span className="li-mark">→</span>{h}</li>))}
-                </ul>
-              </>
-            )}
-            {selectedItem.link && selectedItem.link !== '#' && (
-              <a href={selectedItem.link} target="_blank" rel="noopener noreferrer" className="btn mt"><span>View Project</span> <ArrowUpRight className="w-4 h-4" /></a>
-            )}
-          </div>
-        </div>
-      )}
 
       {/* TRANSCRIPT MODAL */}
       {showTranscript && (
@@ -768,7 +661,16 @@ const Portfolio = () => {
 
 const Styles = () => (
   <style>{`
-    .app { position: relative; overflow-x: hidden; }
+    .app {
+      /* Light theme — white base, dark ink, orange as the single interactive accent.
+         Orange + green live as decorative paint splashes. */
+      --ink: #1a1712; --ink-2: #554e44; --ink-3: #938a7c;
+      --bg: #ffffff; --bg-elev: #ffffff; --bg-elev-2: #f7f4ef;
+      --line: rgba(20, 15, 10, 0.10); --line-strong: rgba(20, 15, 10, 0.20);
+      --accent: var(--orange); --accent-2: var(--orange-2); --accent-soft: var(--orange-soft); --accent-line: var(--orange-line);
+      background: var(--bg); color: var(--ink);
+      position: relative; overflow-x: hidden;
+    }
     .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
     b { color: var(--ink); font-weight: 600; }
     .dim { color: var(--ink-3); }
@@ -868,9 +770,8 @@ const Styles = () => (
 
     /* EXPERIENCE */
     .exp-list { display: flex; flex-direction: column; }
-    .exp-row { display: grid; grid-template-columns: 60px 1fr; gap: 20px; padding: 34px 0; border-top: 1px solid var(--line); cursor: pointer; transition: opacity .2s; }
+    .exp-row { display: grid; grid-template-columns: 60px 1fr; gap: 20px; padding: 34px 0; border-top: 1px solid var(--line); transition: opacity .2s; }
     .exp-row:last-child { border-bottom: 1px solid var(--line); }
-    .exp-row:hover .exp-title { color: var(--accent); }
     .exp-index { font-family: var(--font-mono); font-size: 13px; color: var(--ink-3); padding-top: 6px; }
     .exp-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
     .exp-title { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.2rem, 2.4vw, 1.7rem); color: var(--ink); transition: color .2s; letter-spacing: -.01em; }
@@ -983,22 +884,8 @@ const Styles = () => (
     .reveal-in { opacity: 1; transform: none; }
 
     /* LIGHT SECTIONS — cream background, green accent */
-    .light {
-      --ink: #16120d;
-      --ink-2: #4b453c;
-      --ink-3: #8b8173;
-      --bg: #f3eee4;
-      --bg-elev: #ffffff;
-      --bg-elev-2: #faf6ee;
-      --line: rgba(20, 15, 10, 0.12);
-      --line-strong: rgba(20, 15, 10, 0.24);
-      --accent: var(--green-deep);
-      --accent-2: #0fb374;
-      --accent-soft: var(--green-soft);
-      --accent-line: var(--green-line);
-      background: var(--bg);
-      color: var(--ink);
-    }
+    /* Every pane is white now; .light no longer inverts the palette. */
+    .light { background: var(--bg); color: var(--ink); }
 
     /* AVAILABILITY PILL */
     .avail { display: flex; width: fit-content; align-items: center; gap: 9px; margin-top: 18px; font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--green-bright); background: var(--green-soft); border: 1px solid var(--green-line); border-radius: 999px; padding: 8px 15px; }
@@ -1012,6 +899,85 @@ const Styles = () => (
     .float-badge .stamp-icon { color: var(--orange); }
     .float-badge:hover .stamp-icon { color: var(--orange-2); }
     @keyframes fadepop { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: scale(1); } }
+
+    /* ============================ SINGLE-WINDOW APP SHELL ============================ */
+    html, body, #root { height: 100%; overflow: hidden; }
+    .app { height: 100vh; overflow: hidden; }
+
+    /* Nav is always solid now (no scroll to react to) */
+    .nav-solid { background: rgba(10, 9, 8, .72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+
+    /* The fixed stage holds one section at a time, below the nav */
+    .stage { position: fixed; top: 66px; left: 0; right: 0; bottom: 0; overflow: hidden; background: var(--bg); }
+    .pane { display: none; height: 100%; overflow-y: auto; overflow-x: hidden; }
+    .pane.is-active { display: block; animation: paneIn .38s cubic-bezier(.2,.65,.3,1) both; }
+    @keyframes paneIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+    /* Sections fill the frame; the section itself is the scroll container.
+       Centering lives on the inner .wrap so tall content stays scrollable from the top. */
+    .stage .section { padding: 44px 0 52px; border-top: none; scroll-margin-top: 0; }
+    .section.pane.is-active > .wrap { display: flex; flex-direction: column; justify-content: center; min-height: 100%; }
+    .stage .hero.pane { min-height: 0; height: 100%; padding: 24px 0; }
+    .hero.pane.is-active { display: flex; }
+    .stage-credit { margin-top: 40px; text-align: center; opacity: .7; }
+
+    /* No scroll observers anymore — content is shown; motion comes from the pane fade-in */
+    .reveal { opacity: 1; transform: none; transition: none; }
+
+    /* ============================ LIGHT THEME + PAINT SPLASHES ============================ */
+    /* Soft blurred color blobs — the "splash of paint" behind content */
+    .splash { position: absolute; border-radius: 50%; filter: blur(48px); pointer-events: none; z-index: 0; opacity: .9; }
+    .splash-o { background: radial-gradient(circle at 50% 50%, rgba(255,90,31,.92), rgba(255,90,31,0) 68%); }
+    .splash-g { background: radial-gradient(circle at 50% 50%, rgba(18,192,122,.85), rgba(18,192,122,0) 68%); }
+    .hero-inner { position: relative; z-index: 2; }
+    .splash-hero-1 { width: 480px; height: 480px; top: -80px; left: -90px; }
+    .splash-hero-2 { width: 420px; height: 420px; bottom: 2%; right: 9%; opacity: .8; }
+    .about-photo { position: relative; }
+    .about-photo .photo-frame { position: relative; z-index: 1; }
+    .splash-photo { width: 320px; height: 320px; top: -46px; left: -52px; }
+    .splash-photo-2 { width: 260px; height: 260px; bottom: -40px; right: -34px; opacity: .75; }
+    .contact-stamp { position: relative; min-height: 260px; }
+    .splash-contact-1 { width: 300px; height: 300px; top: 0; right: 6%; }
+    .splash-contact-2 { width: 240px; height: 240px; bottom: -10px; right: 26%; opacity: .75; }
+
+    /* Nav on white */
+    .nav-solid { background: rgba(255,255,255,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    /* Plain links — no capsule background, border, or shadow */
+    .nav-links, .nav-links.cap-light, .nav-links.cap-dark { padding: 0; gap: 26px; background: none; border: none; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+    .nav-links .navlink { color: var(--ink-2); }
+    .nav-links .navlink:hover, .nav-links .navlink.active { color: var(--orange); }
+    .mobile-menu { background: rgba(255,255,255,.97); border-bottom: 1px solid var(--line); }
+
+    /* Cards get a soft shadow so white-on-white still reads */
+    .card, .exp-feat-card { box-shadow: 0 2px 12px rgba(20,15,10,.05); }
+    .exp-contrib { background: #fff; }
+
+    /* Availability pill: green reads darker on white */
+    .avail { color: var(--green-deep); border-width: 2px; }
+    .avail-dot { background: var(--green-deep); }
+
+    /* ============================ CARTOON POLISH ============================ */
+    /* Chunky dark outlines + hard offset "sticker" shadows, bouncy hovers */
+    .app { --toon: #1a1712; --toon-sh: 4px 4px 0 var(--toon); --toon-sh-lg: 6px 6px 0 var(--toon); }
+
+    .btn { border: 2px solid var(--toon); box-shadow: var(--toon-sh); transition: transform .12s ease, box-shadow .12s ease, background .2s; }
+    .btn:hover { transform: translate(-2px, -2px); box-shadow: var(--toon-sh-lg); }
+    .btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--toon); }
+    .btn-outline { border: 2px solid var(--toon); box-shadow: var(--toon-sh); transition: transform .12s ease, box-shadow .12s ease, color .2s, border-color .2s; }
+    .btn-outline:hover { transform: translate(-2px, -2px); box-shadow: var(--toon-sh-lg); border-color: var(--toon); color: var(--ink); }
+    .btn-sm { box-shadow: 3px 3px 0 var(--toon); }
+
+    .card, .exp-feat-card, .exp-contrib { border: 2px solid var(--toon); box-shadow: var(--toon-sh); border-radius: 16px; }
+    .card:hover, .exp-feat-card:hover { transform: translate(-2px, -2px); box-shadow: var(--toon-sh-lg); border-color: var(--toon); background: var(--bg-elev-2); }
+
+    .stat { background: var(--bg-elev-2); border: 2px solid var(--toon); box-shadow: var(--toon-sh); border-radius: 14px; padding: 16px 14px; }
+
+    .tag { border: 1.5px solid var(--toon); }
+    .pill { border: 1.5px solid var(--accent); }
+
+    /* Photo: framed sticker with a playful tilt that straightens on hover */
+    .photo-frame { border: 3px solid var(--toon); box-shadow: 8px 8px 0 var(--toon); border-radius: 18px; transform: rotate(-2deg); transition: transform .25s ease; }
+    .about-photo:hover .photo-frame { transform: rotate(0deg); }
 
     /* RESPONSIVE */
     @media (min-width: 720px) {

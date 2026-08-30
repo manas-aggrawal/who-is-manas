@@ -5,6 +5,12 @@ import React from 'react';
 const CaseStudyStyles = () => (
   <style>{`
     .cs-study {
+      /* Self-contained dark theme so deep-dives keep their look regardless of
+         the (now light) home-page theme they render inside. */
+      --bg: #0a0908; --bg-elev: #131110; --bg-elev-2: #1b1917;
+      --line: rgba(245, 241, 234, 0.1); --line-strong: rgba(245, 241, 234, 0.2);
+      --ink: #f5f1ea; --ink-2: #b0a99f; --ink-3: #726b62;
+      --accent: var(--orange); --accent-2: var(--orange-2); --accent-soft: var(--orange-soft); --accent-line: var(--orange-line);
       position: fixed; inset: 0; z-index: 200;
       background: var(--bg); color: var(--ink);
       overflow-y: auto; overflow-x: hidden;
