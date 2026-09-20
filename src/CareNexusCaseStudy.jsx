@@ -13,11 +13,11 @@ import CaseStudyStyles from './CaseStudyStyles.jsx';
  * ========================================================================== */
 
 const overview = {
-  role: 'Backend Owner · Technical Lead · Team Lead',
+  role: 'Owned Backend · Team/Technical Lead',
   program: 'CS7980 Research Capstone · Northeastern University · Partner: canAssist',
-  period: 'through the Aug 2026 client handoff',
+  period: 'delivered & handed off · Aug 2026',
   client: 'Client: Jodie Gawryluk',
-  stack: ['NestJS 11', 'Prisma 7', 'PostgreSQL + PostGIS', 'Zod / nestjs-zod', 'React Native / Expo', 'AWS Fargate', 'Terraform', 'OpenTelemetry'],
+  stack: ['NestJS 11', 'Prisma 7', 'PostgreSQL + PostGIS', 'Zod / nestjs-zod', 'React Native / Expo', 'AWS S3 / SES', 'AWS Fargate', 'Terraform', 'OpenTelemetry'],
 };
 
 /* ============================================================== components ===*/
@@ -108,12 +108,7 @@ const CareNexusCaseStudy = ({ onBack, target = null }) => {
       <header className="hs-header">
         <div className="wrap">
           <span className="kicker reveal">Deep Dive — Product & Backend</span>
-          <h1 className="hs-title reveal">Care<span className="ast"> +</span></h1>
-          <p className="hs-lead reveal">
-            A community-powered mobile platform helping families navigating dementia discover, share, and
-            validate local support — resources and recurring groups in Victoria, BC. I owned the entire
-            backend and drove architecture, API, and product design across three repos.
-          </p>
+          <h1 className="hs-title reveal">CareNexus</h1>
           <div className="hs-meta reveal">
             <span>{overview.role}</span>
             <span className="hs-dot">·</span>
@@ -125,16 +120,6 @@ const CareNexusCaseStudy = ({ onBack, target = null }) => {
           <div className="tags reveal" style={{ marginTop: 18 }}>
             {overview.stack.map((t) => <span key={t} className="tag">{t}</span>)}
           </div>
-
-          <div className="reveal" style={{ marginTop: 26 }}>
-            <span className="mono-label orange">Role & scope — what I owned vs. directed</span>
-            <BuiltList items={[
-              { k: 'Backend — owned end-to-end', v: 'designed and built the care-api service: data model, APIs, engineering conventions, and observability' },
-              { k: 'Architecture, product & API design', v: 'drove the technical decisions across all three repos' },
-              { k: 'Infrastructure direction', v: 'set the stack — ECS Fargate, Terraform-in-repo, CloudFront/S3, SES' },
-              { k: 'Project, team & client lead', v: 'ran ceremonies and the backlog for a five-person team, and was primary client contact' },
-            ]} />
-          </div>
         </div>
       </header>
 
@@ -144,7 +129,7 @@ const CareNexusCaseStudy = ({ onBack, target = null }) => {
           <div className="hs-feature-head reveal">
             <span className="hs-fnum">01</span>
             <span className="hs-pill flag"><Layers className="w-3.5 h-3.5" /> Architecture — directed</span>
-            <Status s="dev" />
+            <Status s="shipped" />
           </div>
           <h2 className="hs-h2 reveal">System architecture — three repos</h2>
           <p className="hs-oneliner reveal" style={{ maxWidth: 760 }}>
@@ -188,7 +173,7 @@ const CareNexusCaseStudy = ({ onBack, target = null }) => {
           <div className="hs-feature-head reveal">
             <span className="hs-fnum">02</span>
             <span className="hs-pill"><Database className="w-3.5 h-3.5" /> Data model</span>
-            <Status s="dev" />
+            <Status s="shipped" />
           </div>
           <h2 className="hs-h2 reveal">Data model & schema design</h2>
           <p className="hs-oneliner reveal" style={{ maxWidth: 760 }}>
@@ -239,7 +224,7 @@ const CareNexusCaseStudy = ({ onBack, target = null }) => {
           <div className="hs-feature-head reveal">
             <span className="hs-fnum">03</span>
             <span className="hs-pill flag"><Boxes className="w-3.5 h-3.5" /> Core product</span>
-            <Status s="dev" />
+            <Status s="shipped" />
           </div>
           <h2 className="hs-h2 reveal">Resources & Communities</h2>
           <p className="hs-oneliner reveal" style={{ maxWidth: 760 }}>
@@ -261,6 +246,12 @@ const CareNexusCaseStudy = ({ onBack, target = null }) => {
                 { k: 'Plain-text schedule', v: 'free-form date_time and an optional event_link straight from the add-community form — no structured schedule entity' },
                 { k: 'Same endpoints', v: 'browse, detail, submit, edit, owner/admin soft-delete — shared DTO minus likes and verification' },
               ]} />
+              <span className="mono-label orange reveal">Photos & media</span>
+              <BuiltList items={[
+                { k: 'Direct-to-S3 uploads', v: 'the API mints a short-lived presigned-POST policy per file (content-type + count validated); the client uploads straight to S3, then saves the returned keys onto the listing — bytes never pass through the API' },
+                { k: 'Galleries on both types', v: 'resources and communities carry multiple photos (photo_keys), served via CloudFront; owners add and remove them when editing' },
+                { k: 'Orphan sweep', v: 'a scheduled sweep reclaims objects that were uploaded but never attached, so storage never leaks' },
+              ]} />
             </div>
             <div>
               <VisualSlot src="/care/list-view.png" label="Community list" caption="Browse — nearest-first, save / flag inline" w="58%" />
@@ -275,7 +266,7 @@ const CareNexusCaseStudy = ({ onBack, target = null }) => {
           <div className="hs-feature-head reveal">
             <span className="hs-fnum">04</span>
             <span className="hs-pill flag"><ShieldCheck className="w-3.5 h-3.5" /> Trust & moderation</span>
-            <Status s="dev" />
+            <Status s="shipped" />
           </div>
           <h2 className="hs-h2 reveal">Trust, verification & moderation</h2>
           <p className="hs-oneliner reveal" style={{ maxWidth: 760 }}>
@@ -290,6 +281,7 @@ const CareNexusCaseStudy = ({ onBack, target = null }) => {
                 { k: 'Communities stay distinct', v: 'no likes, no verification — admin oversight is soft-delete only' },
                 { k: 'Flag → soft-delete', v: 'on both types once the flag threshold is crossed; items leave list/map but remain in the owner’s Contributions and savers’ Saved, labeled “deleted”' },
                 { k: 'Documented precedence', v: 'soft-delete overrides verification' },
+                { k: 'One-way & self-proof', v: 'thresholds only ever promote or remove (never demote), and you can’t like or flag your own submission — no self-endorsement skewing the counts' },
               ]} />
             </div>
             <div>
@@ -310,27 +302,36 @@ const CareNexusCaseStudy = ({ onBack, target = null }) => {
         <div className="wrap">
           <div className="hs-feature-head reveal">
             <span className="hs-fnum">05</span>
-            <span className="hs-pill"><KeyRound className="w-3.5 h-3.5" /> Auth & access</span>
-            <Status s="dev" />
+            <span className="hs-pill flag"><KeyRound className="w-3.5 h-3.5" /> Accounts & access</span>
+            <Status s="shipped" />
           </div>
-          <h2 className="hs-h2 reveal">Authentication & access</h2>
+          <h2 className="hs-h2 reveal">Accounts, authentication & access</h2>
           <p className="hs-oneliner reveal" style={{ maxWidth: 760 }}>
-            Passwordless, app-wide-authenticated access with admin RBAC.
+            Two audiences, two auth models — plus the profile, onboarding, and account-lifecycle machinery
+            behind them.
           </p>
           <div className="hs-two-col">
             <div>
-              <span className="mono-label orange reveal">What I built</span>
+              <span className="mono-label orange reveal">Authentication — two audiences</span>
               <BuiltList items={[
-                { k: 'Passwordless magic-link', v: 'email login with JWT sessions; refresh tokens in httpOnly cookies, access tokens never logged' },
-                { k: 'App-wide authentication', v: 'every endpoint requires a JWT except the login / magic-link routes — even browse and detail are authenticated' },
-                { k: 'Admin auth + RBAC', v: 'admins sign in with email / password + TOTP MFA; @Roles(\'admin\') gates the /admin/* surface (soft-delete-only management of users, resources, communities)' },
+                { k: 'Mobile — passwordless', v: 'magic-link (email via SES) or Sign in with Apple / Google; every endpoint requires a JWT except the auth and health routes — even browse and detail are authenticated' },
+                { k: 'Admin — password + 2FA', v: 'email / password + TOTP MFA (a privileged account shouldn’t collapse to a single email factor); @Roles gates the /admin/* surface' },
+                { k: 'Rotating, sliding sessions', v: 'access + refresh JWTs on every sign-in (mobile 15 min / 60-day, admin 1 h / 12 h); /auth/refresh mints a brand-new pair each call — the window slides, so an active user is never logged out' },
+                { k: 'Login tokens stay out of traces', v: 'reduced OTel head-sampling so sign-in URLs carrying magic-link tokens are no longer captured at 100%' },
               ]} />
               <div className="tags reveal" style={{ marginTop: 4 }}>
-                {['JWT', 'AWS SES', 'RBAC', 'httpOnly cookies'].map((t) => <span key={t} className="tag">{t}</span>)}
+                {['JWT rotation', 'Apple / Google', 'TOTP MFA', 'AWS SES', 'httpOnly cookies'].map((t) => <span key={t} className="tag">{t}</span>)}
               </div>
             </div>
             <div>
-              <VisualSlot src="/care/passwordless-signin.png" label="Passwordless sign-in" caption="Magic-link login via SES" w="58%" />
+              <span className="mono-label orange reveal">Profile, onboarding & lifecycle</span>
+              <BuiltList items={[
+                { k: 'Onboarding & personas', v: 'persona options with plain-language explanations (who the user is caring for / seeking support for), editable any time after onboarding' },
+                { k: 'Emergency contact', v: 'stored as a name plus a dialable phone with country code — not one free-text blob' },
+                { k: 'Reversible account deletion', v: 'DELETE /users/me soft-deletes with a 30-day restore window (just sign back in); a daily purge cron hard-deletes only once the window lapses' },
+                { k: 'Clean revocation', v: 'a removed admin loses back-office access immediately, and deleting an account corrects the like / flag counts it had contributed' },
+              ]} />
+              <VisualSlot src="/care/passwordless-signin.png" label="Passwordless sign-in" caption="Magic-link / Apple / Google login" w="58%" />
             </div>
           </div>
         </div>
@@ -341,21 +342,27 @@ const CareNexusCaseStudy = ({ onBack, target = null }) => {
         <div className="wrap">
           <div className="hs-feature-head reveal">
             <span className="hs-fnum">06</span>
-            <span className="hs-pill flag"><MapPin className="w-3.5 h-3.5" /> Geospatial</span>
-            <Status s="dev" />
+            <span className="hs-pill flag"><MapPin className="w-3.5 h-3.5" /> Search & geospatial</span>
+            <Status s="shipped" />
           </div>
-          <h2 className="hs-h2 reveal">Geolocation & discovery</h2>
+          <h2 className="hs-h2 reveal">Search, geolocation & discovery</h2>
           <p className="hs-oneliner reveal" style={{ maxWidth: 760 }}>
-            A shared geolocation layer with geocode-on-input and nearest-first pagination.
+            One search layer behind every search box, over a shared geolocation model with
+            geocode-on-input and nearest-first results.
           </p>
           <div className="hs-two-col">
             <div>
-              <span className="mono-label orange reveal">What I built</span>
+              <span className="mono-label orange reveal">Search & discovery</span>
+              <BuiltList items={[
+                { k: 'One endpoint, every search box', v: 'a single search API powers browse, map, Contributions and Saved — text query plus category filters, nearest-first, the map showing exactly what the list shows' },
+                { k: '“Near me / Victoria, BC” toggle', v: 'out-of-area users get sensible results instead of an empty screen; no hard distance cap' },
+                { k: 'Cursor pagination', v: 'distance ASC with an id tiebreaker (cursor keyed on distance + id), 20/page; newest-first fallback when location is absent' },
+              ]} />
+              <span className="mono-label orange reveal">Geolocation model</span>
               <BuiltList items={[
                 { k: 'Three representations stored', v: 'place_id + geocoded GEOGRAPHY(Point,4326) coordinates + human-readable address text' },
                 { k: 'Geocode on input', v: 'client geocodes the typed address (Places Autocomplete / map pick) and sends address + lat/lng + place_id; backend persists text + coordinates' },
                 { k: 'Users see text, map shows pins', v: 'the raw geoloc numbers are never displayed' },
-                { k: 'Nearest-first cursor pagination', v: 'distance ASC with an id tiebreaker (cursor keyed on distance + id), 20/page; newest-first fallback when location is absent; no user-facing sort toggle' },
               ]} />
               <div className="tags reveal" style={{ marginTop: 4 }}>
                 {['PostGIS', 'Raw SQL', 'Cursor pagination', 'Google Places'].map((t) => <span key={t} className="tag">{t}</span>)}
@@ -390,9 +397,14 @@ const CareNexusCaseStudy = ({ onBack, target = null }) => {
                 { k: 'Thin controllers', v: 'no business logic or direct Prisma calls; centralized config (no process.env access); Prisma errors never leaked' },
                 { k: 'Complete OpenAPI', v: '@ApiTags / @ApiOperation / @ApiResponse on every route' },
               ]} />
+              <span className="mono-label orange reveal">Security hardening</span>
+              <BuiltList items={[
+                { k: 'Helmet + CORS allowlist', v: 'Helmet sets 15+ security headers (CSP, HSTS, X-Frame-Options…); CORS is driven by an env-configured origin allowlist' },
+                { k: 'Rate limiting + body cap', v: 'per-endpoint Throttler guards (tighter on auth routes) and a 10 mb request-body cap to blunt large-payload DoS' },
+              ]} />
               <span className="mono-label orange reveal">Observability</span>
               <BuiltList items={[
-                { k: 'OpenTelemetry + Honeycomb', v: 'spans on every public service method; telemetry wired and verified' },
+                { k: 'OpenTelemetry + Honeycomb', v: 'spans on every public service method; telemetry wired and verified, head-sampled so login tokens in URLs stay out of traces' },
                 { k: 'No console.*', v: 'logging exclusively via NestJS Logger / otelLogger; failures logged, never silently swallowed' },
               ]} />
             </div>
