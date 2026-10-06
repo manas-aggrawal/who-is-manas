@@ -177,12 +177,12 @@ const StylesWarm = () => (
     .card-title { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; color: var(--ink); letter-spacing: -.01em; }
     .card-title.sm { font-size: 1.05rem; }
     .card-desc { color: var(--ink-2); font-size: 14.5px; line-height: 1.6; margin-top: 12px; }
-    .os-card .card-desc, .art-card .card-desc { margin-bottom: 22px; }
-    .os-stats { display: flex; gap: 40px; padding-top: 20px; border-top: 1px solid var(--line); margin-top: auto; }
-    .os-num { font-family: var(--font-display); font-weight: 700; font-size: 1.9rem; color: var(--ink); display: block; }
-    .os-num .u { color: var(--accent); }
-    .os-lbl { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
-    .os-card, .art-card, .proj-card { display: flex; flex-direction: column; }
+    .project-card .card-desc, .art-card .card-desc { margin-bottom: 22px; }
+    .project-stats { display: flex; gap: 40px; padding-top: 20px; border-top: 1px solid var(--line); margin-top: auto; }
+    .project-num { font-family: var(--font-display); font-weight: 700; font-size: 1.9rem; color: var(--ink); display: block; }
+    .project-num .u { color: var(--accent); }
+    .project-lbl { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+    .project-card, .art-card { display: flex; flex-direction: column; }
     .pill { font-family: var(--font-mono); font-size: 11.5px; padding: 5px 12px; border-radius: 999px; background: var(--accent-soft); border: 1px solid var(--accent-line); color: var(--accent); white-space: nowrap; }
     .res-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; margin-bottom: 10px; }
     .mb { margin-bottom: 14px; }
