@@ -13,7 +13,7 @@ import StylesWarm from './styles/StylesWarm.jsx';
 
 const stats = [
   { value: '3', unit: '', label: 'Years of experience' },
-  { value: '2', unit: '', label: 'Open-source projects' },
+  { value: '2', unit: '', label: 'Projects' },
   { value: '2', unit: '', label: 'Research experiences' },
   { value: '3.86', unit: '', label: 'GPA · MS in CS' },
 ];
@@ -131,7 +131,7 @@ const experience = [
   },
 ];
 
-const openSourceProjects = [
+const projects = [
   {
     name: 'Node.js Observability Toolkit',
     tech: 'Node.js · TypeScript · OpenTelemetry · AWS X-Ray · CloudWatch · Jaeger · Prometheus',
@@ -218,7 +218,7 @@ const skills = {
 const sections = [
   { id: 'home', label: 'Home', primary: true },
   { id: 'experience', label: 'Experience', primary: true },
-  { id: 'opensource', label: 'Open Source', primary: true },
+  { id: 'projects', label: 'Projects', primary: true },
   { id: 'research', label: 'Research', primary: true },
   { id: 'education', label: 'Education', primary: true },
   { id: 'writing', label: 'Writing', primary: true },
@@ -348,7 +348,7 @@ const Portfolio = () => {
   }, []);
 
   const primaryNav = sections.filter((s) => s.primary);
-  const onLightSection = ['about', 'opensource', 'education', 'skills'].includes(activeSection);
+  const onLightSection = ['about', 'projects', 'education', 'skills'].includes(activeSection);
 
   return (
     <div className="app">
@@ -541,13 +541,13 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* OPEN SOURCE */}
-      <section id="opensource" className={`section light pane ${activeSection === 'opensource' ? 'is-active' : ''}`}>
+      {/* PROJECTS */}
+      <section id="projects" className={`section light pane ${activeSection === 'projects' ? 'is-active' : ''}`}>
         <div className="wrap">
-          <SectionHead n="(03)" kicker="Open Source" title="Tools I ship & maintain" />
+          <SectionHead n="(03)" kicker="Projects" title="Tools I ship & maintain" />
           <div className="grid-2">
-            {openSourceProjects.map((p, idx) => (
-              <a key={idx} href={p.link} target="_blank" rel="noopener noreferrer" className="card os-card reveal">
+            {projects.map((p, idx) => (
+              <a key={idx} href={p.link} target="_blank" rel="noopener noreferrer" className="card project-card reveal">
                 <div className="card-top">
                   <span className="card-idx">0{idx + 1}</span>
                   <ArrowUpRight className="w-6 h-6 arr" />
@@ -555,9 +555,9 @@ const Portfolio = () => {
                 <h3 className="card-title">{p.name}</h3>
                 <p className="mono-sm dim">{p.tech}</p>
                 <p className="card-desc">{p.description}</p>
-                <div className="os-stats">
-                  <div><span className="os-num">{p.stat}<span className="u">+</span></span><span className="os-lbl">{p.statLabel}</span></div>
-                  {p.stat2 && <div><span className="os-num">{p.stat2}</span><span className="os-lbl">{p.stat2Label}</span></div>}
+                <div className="project-stats">
+                  <div><span className="project-num">{p.stat}<span className="u">+</span></span><span className="project-lbl">{p.statLabel}</span></div>
+                  {p.stat2 && <div><span className="project-num">{p.stat2}</span><span className="project-lbl">{p.stat2Label}</span></div>}
                 </div>
               </a>
             ))}
