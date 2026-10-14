@@ -143,7 +143,6 @@ const featuredProject = {
   ],
   video: '/huddle/huddle-demo.mp4',
   poster: '/huddle/huddle-poster.jpg',
-  link: 'https://github.com/manas-aggrawal/huddle',
 };
 
 const projects = [
@@ -559,7 +558,7 @@ const Portfolio = () => {
       {/* PROJECTS */}
       <section id="projects" className={`section light pane ${activeSection === 'projects' ? 'is-active' : ''}`}>
         <div className="wrap">
-          <SectionHead n="(03)" kicker="Projects" title="Tools I ship & maintain" />
+          <SectionHead n="(03)" kicker="Projects" title="Things I've built" />
           <div className="card feature-card reveal">
             <div className="feature-body">
               <div className="card-top">
@@ -573,9 +572,6 @@ const Portfolio = () => {
                 {featuredProject.stats.map((st) => (
                   <div key={st.label}><span className="project-num">{st.value}</span><span className="project-lbl">{st.label}</span></div>
                 ))}
-                <a href={featuredProject.link} target="_blank" rel="noopener noreferrer" className="btn-outline sm feature-link">
-                  <Github className="w-4 h-4" /> View on GitHub
-                </a>
               </div>
             </div>
             <div className="feature-media">
