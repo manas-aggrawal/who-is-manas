@@ -183,6 +183,22 @@ const StylesWarm = () => (
     .project-num .u { color: var(--accent); }
     .project-lbl { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
     .project-card, .art-card { display: flex; flex-direction: column; }
+    .feature-card { display: grid; grid-template-columns: 1fr; gap: 22px; margin-bottom: 16px; cursor: default; }
+    .feature-body { display: flex; flex-direction: column; }
+        .feature-link { margin-left: auto; align-self: center; }
+    .feature-media { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #111; align-self: center; }
+    .feature-media video { display: block; width: 100%; aspect-ratio: 1280 / 664; }
+    #projects .card-title, #projects .mono-sm { margin: 0; }
+    #projects .card-title { margin-bottom: 6px; }
+    #projects .card-top { margin-bottom: 10px; }
+    #projects .card-desc { margin-top: 10px; margin-bottom: 16px; }
+    #projects .project-stats { padding-top: 14px; }
+    #projects .project-stats > div { display: flex; align-items: baseline; gap: 8px; }
+    #projects .project-num { font-size: 1.6rem; display: inline; }
+    #projects .feature-body { justify-content: center; }
+    #projects .feature-body .project-stats { gap: 24px; }
+    #projects .project-lbl, .feature-link { white-space: nowrap; }
+    #projects .card { padding: 20px 22px; }
     .pill { font-family: var(--font-mono); font-size: 11.5px; padding: 5px 12px; border-radius: 999px; background: var(--accent-soft); border: 1px solid var(--accent-line); color: var(--accent); white-space: nowrap; }
     .res-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; margin-bottom: 10px; }
     .mb { margin-bottom: 14px; }
@@ -402,6 +418,9 @@ const StylesWarm = () => (
       .menu-btn { display: none; }
     }
 
+    @media (min-width: 900px) {
+      .feature-card { grid-template-columns: 1fr 1fr; gap: 28px; }
+    }
     @media (prefers-reduced-motion: reduce) {
       .rise, .reveal { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
       .marquee-track, .stamp-rotate, .spin-slow, .float-badge { animation: none !important; }

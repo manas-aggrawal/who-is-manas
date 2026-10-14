@@ -13,7 +13,7 @@ import StylesWarm from './styles/StylesWarm.jsx';
 
 const stats = [
   { value: '3', unit: '', label: 'Years of experience' },
-  { value: '2', unit: '', label: 'Projects' },
+  { value: '3', unit: '', label: 'Projects' },
   { value: '2', unit: '', label: 'Research experiences' },
   { value: '3.86', unit: '', label: 'GPA · MS in CS' },
 ];
@@ -130,6 +130,21 @@ const experience = [
     ],
   },
 ];
+
+const featuredProject = {
+  name: 'Huddle — Multiplayer AI Agents',
+  tech: 'TypeScript · NestJS · React · Yjs · Socket.IO · PostgreSQL · AI SDK',
+  description:
+    'Google Docs for agent sessions. A team and an AI agent research and co-write a live CRDT document — teammates watch it work, edit alongside it, steer it mid-run, approve its important moves, and hand off with an AI-drafted briefing.',
+  stats: [
+    { value: '203', label: 'e2e tests' },
+    { value: '43', label: 'merged PRs' },
+    { value: '$0', label: 'model cost' },
+  ],
+  video: '/huddle/huddle-demo.mp4',
+  poster: '/huddle/huddle-poster.jpg',
+  link: 'https://github.com/manas-aggrawal/huddle',
+};
 
 const projects = [
   {
@@ -545,11 +560,33 @@ const Portfolio = () => {
       <section id="projects" className={`section light pane ${activeSection === 'projects' ? 'is-active' : ''}`}>
         <div className="wrap">
           <SectionHead n="(03)" kicker="Projects" title="Tools I ship & maintain" />
+          <div className="card feature-card reveal">
+            <div className="feature-body">
+              <div className="card-top">
+                <span className="card-idx">01</span>
+                <span className="pill">Demo · 4× speed</span>
+              </div>
+              <h3 className="card-title">{featuredProject.name}</h3>
+              <p className="mono-sm dim">{featuredProject.tech}</p>
+              <p className="card-desc">{featuredProject.description}</p>
+              <div className="project-stats">
+                {featuredProject.stats.map((st) => (
+                  <div key={st.label}><span className="project-num">{st.value}</span><span className="project-lbl">{st.label}</span></div>
+                ))}
+                <a href={featuredProject.link} target="_blank" rel="noopener noreferrer" className="btn-outline sm feature-link">
+                  <Github className="w-4 h-4" /> View on GitHub
+                </a>
+              </div>
+            </div>
+            <div className="feature-media">
+              <video src={featuredProject.video} poster={featuredProject.poster} controls muted playsInline preload="metadata" />
+            </div>
+          </div>
           <div className="grid-2">
             {projects.map((p, idx) => (
               <a key={idx} href={p.link} target="_blank" rel="noopener noreferrer" className="card project-card reveal">
                 <div className="card-top">
-                  <span className="card-idx">0{idx + 1}</span>
+                  <span className="card-idx">0{idx + 2}</span>
                   <ArrowUpRight className="w-6 h-6 arr" />
                 </div>
                 <h3 className="card-title">{p.name}</h3>
